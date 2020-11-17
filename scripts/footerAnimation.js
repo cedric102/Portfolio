@@ -214,6 +214,9 @@ $(window).scroll(function() {
    if( wS > 50 ) {
      animate = true
    }
+   if( wS > 200 ) {
+     document.getElementById('fixedMenu').style.display = "block";
+   }
    if( wS > 600 ) {
      animate2 = true
    }
