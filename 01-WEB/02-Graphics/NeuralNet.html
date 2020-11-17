@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+</style>
+</head>
+<body onload="startGame()">
+
+		<table position="Absolute" style="width:800px; border:1px; margin-top:10px;">
+			<tr>
+				<th style="width:250px;">Overview</th>
+				<th>General</th>
+				<th>Coordinates</th>
+			</tr>
+			<tr style="idth:30px;" width="300px" border="1px">
+				<td style="vertical-align: top;"  width="500px">
+					<div position="Absolute" style="color: ffffff;" id="counter"></div>
+					<div class="Bar1of3"><div class="Bar2of3"><div class="Bar3of3"></div></div></div>
+					<div id="windowWidth"></div>
+					<div id="mouse">UP</div>
+					<div id="mouseCoord"></div>
+					<div id="mouseCoordCanvas"></div>
+					<div position="Absolute" style="color: ffffff;" id="window"></div>
+					<div id="scene"></div>
+					<button id="renderImage">Press</button>
+					<div id="renderCount">0</div>
+					<div id="arrayLength"></div>
+					<div id="mouseCanvas">0</div>
+					<div id="FPS">FPS: </div>
+				</td>
+
+				<td style="vertical-align: top;">
+					<table width="100px">
+						<tr>
+							<td style="vertical-align: top;"><div id="1z%" class="greenZ"></div></td>
+							<td style="vertical-align: top;"><div id="2z%" class="redZ"></div></td>
+							<td style="vertical-align: top;"><div id="3z%" class="blueZ"></div></td>
+						</tr>
+					</table>
+				</td>
+
+				<td style="vertical-align: top;">
+					<div style="width:400px;">
+						<table style="width:100%; horizontal-align:center; border:1px; vertical-align: top;" id="myTable">
+							<tr style="width:30px;" width="30px;">
+								<td><div id="1x" class="divType"></div></td>
+								<td><div id="1y" class="divType"></div></td>
+								<td><div id="1z" class="divType"></div></td>
+							</tr>
+							<tr style="width:30px;" width="30px;">
+								<td><div id="2x" class="divType"></div></td>
+								<td><div id="2y" class="divType"></div></td>
+								<td><div id="2z" class="divType"></div></td>
+							</tr>
+							<tr style="idth:30px;" width="30px;">
+								<td><div id="3x" class="divType"></div></td>
+								<td><div id="3y" class="divType"></div></td>
+								<td><div id="3z" class="divType"></div></td>
+							</tr>
+							<tr style="idth:30px;" width="30px;">
+								<td><div id="camX" class="divType"></div></td>
+								<td><div id="camY" class="divType"></div></td>
+								<td><div id="camZ" class="divType"></div></td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+
+<script>
+
+	var Piece;
+	var Piece1;
+
+	var angle2;
+	var inside;
+	var myObstacles = [];
+
+	var curve = [];
+	var gaussian1 = [];
+	var gaussian2 = [];
+	var center = [];
+
+	var myScore;
+	var trueStuff;
+
+	var TRIAL = 0.0;
+	var angle = 0;
+	var JUMP = false;
+	var PRESS = false;
+	var inside2 = 0;
+	var angle4 = 0.0;
+
+
+	var weight00=0.0;
+	var weight10=100;
+	var weight20=100;
+	var weight01=0.0;
+	var weight11=100;
+	var weight21=100;
+
+	
+		var sigma = 1;
+		var height2 = 1;
+		var mu_1 = 1;
+		var mu_2 = 1;
+
+	var areaPoints = [];			
+
+					var sigma=1;
+					var mu=10;
+					var denom = sigma * Math.sqrt(2*3.14);
+
+
+					for(let yGaussian2=-10; yGaussian2<20; yGaussian2+=0.02) {
+						let topExponent2 = - ( yGaussian2 - mu) * ( yGaussian2 - mu)
+						xGaussian2 = 10 / denom * Math.exp( topExponent2 / ( 2*sigma*sigma) )
+						gaussian2.push( new component_2(2, 2, "purple", yGaussian2, xGaussian2) );
+/*
+						pGaussian2.push( new particle( 0, yGaussian2, 1, curveMaterial2) );
+						cGaussian2.push( new THREE.Mesh( geometry4, curveMaterial2 ) );
+						scene.add( cGaussian2[cGaussian2.length-1] );
+*/
+						var table = document.getElementById("myTable");
+						var row = table.insertRow(gaussian2.length-1);
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+
+						var indent = gaussian2.length;
+						cell1.innerHTML = '<div id="2_' + indent + 'x" class="divType">' + indent + '</div>';
+						cell2.innerHTML = '<div id="2_' + indent + 'y" class="divType">' + indent + '</div>';
+						cell3.innerHTML = '<div id="2_' + indent + 'z" class="divType">' + indent + '</div>';
+
+					}
+
+					for(let xGaussian2=-10; xGaussian2<20; xGaussian2+=0.02) {
+						let topExponent = - ( xGaussian2 - mu) * ( xGaussian2 - mu)
+						yGaussian2 = 10 / denom * Math.exp( topExponent / ( 2*sigma*sigma) )
+						gaussian1.push( new component_2(2, 2, "purple", xGaussian2, yGaussian2) );
+/*
+						pGaussian.push( new particle( xGaussian2 + xOffset, yGaussian2, 1, curveMaterial2) );
+						cGaussian.push( new THREE.Mesh( geometry4, curveMaterial2 ) );
+						scene.add( cGaussian[cGaussian.length-1] );
+*/
+						var table = document.getElementById("myTable");
+						var row = table.insertRow(gaussian1.length-1);
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+
+						var indent = gaussian1.length;
+						cell1.innerHTML = '<div id="1_' + indent + 'x" class="divType">' + indent + '</div>';
+						cell2.innerHTML = '<div id="1_' + indent + 'y" class="divType">' + indent + '</div>';
+						cell3.innerHTML = '<div id="1_' + indent + 'z" class="divType">' + indent + '</div>';
+
+					}
+
+	function startGame() {
+		
+	    			let curveMaterial;
+				let xPoint;
+				let yPoint;
+				let xRef1 = 100;
+				let yRef1 = 100;
+				let xRef2 = 400;
+				let yRef2 = 400;
+				for(let i=0; i<1300; i++) { // 15000
+					xPoint = Math.random()*550;
+					yPoint = Math.random()*550;
+					var xDiff1 = xPoint - xRef1;
+					var yDiff1 = yPoint - yRef1;
+					var xDiff2 = xPoint - xRef2;
+					var yDiff2 = yPoint - yRef2;
+				//	var color = NeuralNet( xPoint , yPoint );
+					areaPoints.push( new component_2(5, 5, NeuralNet3( xPoint , yPoint ), xPoint, yPoint))
+					
+				}
+
+	   	Area.start();
+	}
+
+	function NeuralNet( x , y ) {
+		
+		var bias = 1;
+
+		var weight000 = -275.0;
+		var weight100 = 1;
+		var weight200 = 0;
+
+		var weight010 = 275.0;
+		var weight110 = 0;
+		var weight210 = -1;
+
+		var weight001 = 0.5;
+		var weight101 = -1;
+		var weight201 = -1;
+
+		hyp000 = weight000 * bias;
+		hyp100 = weight100 * x;
+		hyp200 = weight200 * y;
+
+		hyp010 = weight010 * bias;
+		hyp110 = weight110 * x;
+		hyp210 = weight210 * y;
+
+		var act01 = 0;
+//		act01 = ( 1 / ( 1 + Math.exp( - ( hyp000 + hyp100 + hyp200 ) ) ) > 0.5 ) ? 1 : 0;
+
+		if( 1 / ( 1 + Math.exp( - ( hyp000 + hyp100 + hyp200 ) ) ) > 0.5 ) {
+			act01 = 1;
+		} else {
+			act01 = 0;
+		}
+
+		var act11 = 0;
+//		act11 = ( 1 + Math.exp( - ( hyp010 + hyp110 + hyp210 ) ) ) > 0.5 ) ? 1 : 0;
+
+		if( 1 / ( 1 + Math.exp( - ( hyp010 + hyp110 + hyp210 ) ) ) > 0.5 ) {
+			act11 = 1;
+		} else {
+			act11 = 0;
+		}
+
+		hyp001 = weight001 * bias;
+		hyp101 = weight101 * act01;
+		hyp201 = weight201 * act11;
+
+		var act02 = 1 / ( 1 + Math.exp( - ( hyp001 + hyp101 + hyp201 ) ) );
+		
+//		return ( act02 > 0.5 ) ? "blue" : "red";
+		
+
+		if(act02 > 0.5) {
+			return "blue";
+		} else {
+			return "red";
+		}
+
+
+	}
+
+
+	function NeuralNet3( x , y ) {
+		
+		var bias = 1;
+
+		var weight000 = -275.0 - 550 + weight00;
+		var weight100 = weight10 / 100;
+		var weight200 = weight20 / 100;
+
+		var weight010 = 275.0 + weight01;
+		var weight110 = -weight11 / 100;
+		var weight210 = -weight21 / 100;
+
+		var weight001 = -0.5;
+		var weight101 = 1;
+		var weight201 = 1;
+
+		hyp000 = weight000 * bias;
+		hyp100 = weight100 * x;
+		hyp200 = weight200 * y;
+
+		hyp010 = weight010 * bias;
+		hyp110 = weight110 * x;
+		hyp210 = weight210 * y;
+
+		var act01 = 0;
+//		act01 = ( 1 / ( 1 + Math.exp( - ( hyp000 + hyp100 + hyp200 ) ) ) > 0.5 ) ? 1 : 0;
+
+		if( 1 / ( 1 + Math.exp( - ( hyp000 + hyp100 + hyp200 ) ) ) > 0.5 ) {
+			act01 = 1;
+		} else {
+			act01 = 0;
+		}
+
+		var act11 = 0;
+//		act11 = ( 1 + Math.exp( - ( hyp010 + hyp110 + hyp210 ) ) ) > 0.5 ) ? 1 : 0;
+
+		if( 1 / ( 1 + Math.exp( - ( hyp010 + hyp110 + hyp210 ) ) ) > 0.5 ) {
+			act11 = 1;
+		} else {
+			act11 = 0;
+		}
+
+		hyp001 = weight001 * bias;
+		hyp101 = weight101 * act01;
+		hyp201 = weight201 * act11;
+
+		var act02 = 1 / ( 1 + Math.exp( - ( hyp001 + hyp101 + hyp201 ) ) );
+		
+//		return ( act02 > 0.5 ) ? "blue" : "red";
+		
+
+		if(act02 > 0.5) {
+			return "blue";
+		} else {
+			return "red";
+		}
+
+
+	}
+
+	function NeuralNet2( x , y ) {
+		
+		var bias = 1;
+
+		var weight000 = 275.0;
+		var weight100 = -1;
+		var weight200 = -1;
+
+		hyp000 = weight000 * bias;
+		hyp100 = weight100 * x;
+		hyp200 = weight200 * y;
+
+		act02 = 1 / ( 1 + Math.exp( - ( hyp000 + hyp100 + hyp200 ) ) );
+		
+		return (act02 > 0.5) ? "blue" : "red";
+		
+/*
+		if(act02 == 1) {
+			return "blue";
+		} else {
+			return "red";
+		}
+*/
+
+	}
+
+	var Area = {
+	    	canvas : document.createElement("canvas"),
+	    	start : function() {
+			this.canvas.width = 550;
+			this.canvas.height = 550;
+			this.context = this.canvas.getContext("2d");
+			document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+			this.frameNo = 0;
+			this.interval = setInterval(updateGameArea, 20);
+		},
+	    	clear : function() {
+			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	    	}
+	}
+
+	function component_2(width, height, color, x, y, type) {
+	    	this.type = type;
+	    	this.score = 0;
+	    	this.width = width;
+	    	this.height = height;
+	    	this.speedX = 0.0;
+	    	this.speedY = 0.0;    
+	    	this.x = x;
+	    	this.y = y;
+	    	this.gravity = 0;
+	    	this.gravitySpeed = 0;
+	    	this.updatePoly = function() {
+			ctx = Area.context;
+
+			if (this.type == "text") {
+		    		ctx.font = this.width + " " + this.height;
+		    		ctx.fillStyle = color;
+		    		ctx.fillText(this.text, this.x, this.y);
+			} else {
+		    		ctx.fillStyle = color;
+		    		ctx.fillRect(this.x, this.y, this.width, this.height);
+			}
+	    	} 
+
+	    	this.newPosPoly = function(x , y) {
+		//	updateRanges();
+			this.x = 25 + x;
+			var tempX = x/500;
+			var Polynom = sigma + height2*Math.pow(tempX,1);
+			this.y = 240 + Polynom / 3;
+	    	}
+
+	    	this.newPosGauss2 = function(x , y) {
+			this.x = 25 + x;
+			var tempX = x/500;
+			var Polynom = sigma + height2*Math.pow(tempX,1);
+			this.y = 240 + Polynom / 3;
+	    	}
+
+	    	this.update = function() {
+			ctx = Area.context;
+			if (this.type == "text") {
+		    		ctx.font = this.width + " " + this.height;
+		    		ctx.fillStyle = color;
+		    		ctx.fillText(this.text, this.x, this.y);
+			} else {
+		    		ctx.fillStyle = color;
+		    		ctx.fillRect(this.x, this.y, this.width, this.height);
+			}
+	    	} 
+
+	    	this.newPos = function() {
+			this.gravitySpeed += this.gravity;
+			this.x += this.speedX;
+			this.y += this.speedY + this.gravitySpeed;
+			this.hitBottom();
+	    	}
+	    	this.hitBottom = function() {
+			var rockbottom = Area.canvas.height - this.height;
+			if (this.y > rockbottom) {
+		    		this.y = rockbottom;
+		    		this.gravitySpeed = 0;
+			}
+	    	}
+
+	    	this.jumpHigh = function() {
+			var angle3 = 0.0;
+			angle3=angle*Math.PI/180;
+			this.speedX = 30.0*Math.cos(angle3);
+			this.speedY = -30.0*Math.sin(angle3);
+			TRIAL = -30.0 * Math.sin(angle3);
+
+			inside2=1;
+	    	}
+
+	    	this.crashWith = function(otherobj) {
+			var myleft = this.x;
+			var myright = this.x + (this.width);
+			var mytop = this.y;
+			var mybottom = this.y + (this.height);
+			var otherleft = otherobj.x;
+			var otherright = otherobj.x + (otherobj.width);
+			var othertop = otherobj.y;
+			var otherbottom = otherobj.y + (otherobj.height);
+			var crash = false; // true
+			if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+			    	crash = false;
+			}
+			return crash;
+	    	}
+
+	    	this.newPosGauss1 = function(xOffset, yOffset, xGaussian, height , mu, sigma) {
+
+			this.x = xOffset + Math.round(xGaussian);
+
+			var denom = sigma * Math.sqrt(2*3.14);
+			var topExponent = - Math.pow( ( xGaussian - mu) , 2);
+
+			this.y = yOffset - ( height / denom * Math.exp( topExponent / ( 2*sigma*sigma) ) );
+
+	    	}
+
+	    	this.newPosGauss2 = function(xOffset, yOffset, yGaussian, height , mu, sigma) {
+			this.y = yOffset + Math.round(yGaussian);
+
+			var denom = sigma * Math.sqrt(2*3.14);
+			var topExponent = - Math.pow( ( yGaussian - mu) , 2);
+
+			this.x = xOffset - ( height / denom * Math.exp( topExponent / ( 2*sigma*sigma) ) );
+	    	}
+
+	}
+
+	var Area = {
+	    	canvas : document.createElement("canvas"),
+	    	start : function() {
+			this.canvas.width = 550;
+			this.canvas.height = 550;
+			this.context = this.canvas.getContext("2d");
+			document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+			this.frameNo = 0;
+			this.interval = setInterval(updateGameArea, 20);
+		},
+	    	clear : function() {
+			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	    	}
+	}
+
+
+	function updateGameArea() {
+
+		updateRanges();
+
+	    	Area.clear();
+
+
+		ctx = Area.context;
+
+
+		ctx.fillStyle = 'rgba(0, 100, 0, 1)';
+
+		var denom = sigma * Math.sqrt(2*3.14);
+		let topExponent2 = 0;
+		var output = 20;
+		maximum = height2 / denom * Math.exp( topExponent2 / ( 2*sigma*sigma) );
+		
+		var Dist = 0;
+		var Stay = 1;
+		while ( Stay == 1 ) {
+			let topExponent3 = - Dist * Dist;
+			output = height2 / denom * Math.exp( topExponent3 / ( 2*sigma*sigma) );
+
+			for(var dat=0; dat<2*3.14*Dist; dat++) {
+
+				ctx.fillStyle = 'rgba(0, ' + output * 255 /maximum + ', 0, 1)';
+				ctx.fillRect(mu_1 + Dist*Math.cos(dat), mu_2 + Dist*Math.sin(dat), 5, 5);
+				if( output / maximum < 0.4 ) {
+					Stay = 0;
+				}
+			}
+			Dist = Dist + 5;
+		}
+
+		ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+		ctx.fillRect(mu_1, mu_2, 5, 5);
+
+
+	    	for (i = 0; i < areaPoints.length; i += 1) {
+			areaPoints[i] = new component_2(5, 5, NeuralNet3( areaPoints[i].x , areaPoints[i].y ), areaPoints[i].x, areaPoints[i].y)
+	   		areaPoints[i].updatePoly();
+	    	}
+	    	for (i = 0; i < gaussian1.length; i += 1) {
+			gaussian1[i].newPosGauss1(25, 520, i * 0.32, height2 , mu_1, sigma);
+	   		gaussian1[i].updatePoly();
+	    	}
+	    	for (i = 0; i < gaussian2.length; i += 1) {
+			gaussian2[i].newPosGauss2(520, 20, i * 0.32, height2 , mu_2, sigma);
+	   		gaussian2[i].updatePoly();
+	    	}
+
+/*
+		ctx.fillStyle = 'rgba(0, 100, 0, 1)';
+		for(var dat=0; dat<2*3.14*sigma; dat++) {
+			ctx.fillRect(mu_1 + sigma*Math.cos(dat) / 2, mu_2 + sigma*Math.sin(dat) / 2, 5, 5);
+		}
+		ctx.fillStyle = 'rgba(0, 255, 0, 1)';
+	//	ctx.fillRect(mu_1, mu_2, 50, 50);
+		for(var dat=0; dat<2*3.14*sigma; dat++) {
+			ctx.fillRect(mu_1 + sigma*Math.cos(dat), mu_2 + sigma*Math.sin(dat), 5, 5);
+		}
+*/
+	//	center = new component_2(20, 20, "purple", mu_1, mu_2);
+
+
+		for(var dat=0; dat<(gaussian1.length); dat++) {
+			var dat1 = dat + 1;
+			document.getElementById("1_" + dat1 + "x").innerHTML = "1_" + dat1 + "x: " + Math.round(gaussian1[dat].x);
+			document.getElementById("1_" + dat1 + "y").innerHTML = "1_" + dat1 + "y: " + Math.round(gaussian1[dat].y);
+			document.getElementById("2_" + dat1 + "x").innerHTML = "2_" + dat1 + "x: " + Math.round(gaussian2[dat].x);
+			document.getElementById("2_" + dat1 + "y").innerHTML = "2_" + dat1 + "y: " + Math.round(gaussian2[dat].y);
+		}
+
+
+	}
+
+	function updateRanges() {
+		sigma=parseInt(document.getElementById("sigma").value);
+		height2=parseInt(document.getElementById("height").value);
+		mu_1=parseInt(document.getElementById("mu_1").value);
+		mu_2=parseInt(document.getElementById("mu_2").value);
+
+		document.getElementById("sigmaDiv").innerHTML = "Sigma : " + sigma + "";
+		document.getElementById("heightDiv").innerHTML = "Height : " + height2 + "";
+		document.getElementById("mu_1_Div").innerHTML = "mu_1 : " + mu_1 + "";
+		document.getElementById("mu_2_Div").innerHTML = "mu_2 : " + mu_2 + "";
+
+
+
+
+		weight00=parseInt(document.getElementById("weight00").value);
+		weight10=parseInt(document.getElementById("weight10").value);
+		weight20=parseInt(document.getElementById("weight20").value);
+		weight01=parseInt(document.getElementById("weight01").value);
+		weight11=parseInt(document.getElementById("weight11").value);
+		weight21=parseInt(document.getElementById("weight21").value);
+
+		document.getElementById("weight00Div").innerHTML = "weight00 : " + weight00 + "";
+		document.getElementById("weight10Div").innerHTML = "weight10 : " + weight10 + "";
+		document.getElementById("weight20Div").innerHTML = "weight20 : " + weight20 + "";
+		document.getElementById("weight01Div").innerHTML = "weight01 : " + weight01 + "";
+		document.getElementById("weight11Div").innerHTML = "weight11 : " + weight11 + "";
+		document.getElementById("weight21Div").innerHTML = "weight21 : " + weight21 + "";
+	}
+
+	setInterval(updateGameArea, 0.05);
+
+</script>
+
+<input type="range" min="-240" max="240" value="40" class="slider" id="sigma" style="position: absolute; left: 600px; top: 0px;"><div id="sigmaDiv"style="position: absolute; left: 750px; top: 0px;">1</div>
+
+<input type="range" min="-20000" max="20000" value="10000" class="slider" id="height" style="position: absolute; left: 600px; top: 30px;"><div id="heightDiv"style="position: absolute; left: 750px; top: 30px;">1</div>
+
+<input type="range" min="0" max="550" value="250" class="slider" id="mu_1" style="position: absolute; left: 600px; top: 60px;"><div id="mu_1_Div"style="position: absolute; left: 750px; top: 60px;">1</div>
+
+<input type="range" min="0" max="550" value="250" class="slider" id="mu_2" style="position: absolute; left: 600px; top: 90px;"><div id="mu_2_Div"style="position: absolute; left: 750px; top: 90px;">1</div>
+
+
+
+<input type="range" min="-240" max="240" value="0" class="slider" id="weight00" style="position: absolute; left: 600px; top: 140px;"><div id="weight00Div"style="position: absolute; left: 750px; top: 140px;">1</div>
+<input type="range" min="-240" max="240" value="100" class="slider" id="weight10" style="position: absolute; left: 600px; top: 190px;"><div id="weight10Div"style="position: absolute; left: 750px; top: 190px;">1</div>
+<input type="range" min="-240" max="240" value="100" class="slider" id="weight20" style="position: absolute; left: 600px; top: 240px;"><div id="weight20Div"style="position: absolute; left: 750px; top: 240px;">1</div>
+
+<input type="range" min="-240" max="240" value="0" class="slider" id="weight01" style="position: absolute; left: 600px; top: 290px;"><div id="weight01Div"style="position: absolute; left: 750px; top: 290px;">1</div>
+<input type="range" min="-240" max="240" value="100" class="slider" id="weight11" style="position: absolute; left: 600px; top: 340px;"><div id="weight11Div"style="position: absolute; left: 750px; top: 340px;">1</div>
+<input type="range" min="-240" max="240" value="100" class="slider" id="weight21" style="position: absolute; left: 600px; top: 390px;"><div id="weight21Div"style="position: absolute; left: 750px; top: 390px;">1</div>
+
+<br>
+<button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
+<p>Use the ACCELERATE button to stay in the air</p>
+<p>How long can you stay alive?</p>
+<div id="thinggy"></div>
+
+
+
+</body>
+</html>
+

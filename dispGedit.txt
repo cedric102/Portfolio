@@ -1,0 +1,1 @@
+gedit 03_PortfolioWithContent3.html style/styleExtra.css style/styleAltered2.css scripts/perso2.js scripts/perso.js scripts/footerScript.js

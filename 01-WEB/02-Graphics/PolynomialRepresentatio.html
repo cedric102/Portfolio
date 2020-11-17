@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+</style>
+</head>
+<body onload="startApp()">
+
+
+
+<script>
+
+	var curve = [];
+
+	var zero;
+	var one;
+	var two;
+	var three;
+	var four;
+	var five;
+	var six;
+	var seven;
+	var eight;
+	var nine;
+	var ten;			
+
+	function startApp() {
+		
+		for (let i = 0; i < 500; i++) {
+	    		curve.push( new component(5, 5, "blue", 150+i*2, 110));
+		}
+
+	     	Area.start(window.innerWidth);
+	}
+
+	var Area = {
+	    	canvas : document.createElement("canvas"),
+	    	start : function(wW) {
+			console.log(wW)
+			if( wW < 958 ) {
+  				var doc = document.getElementsByClassName("slider");
+				for( var inner=0; inner < doc.length ; inner++ ) {
+				  doc[inner].style.left = "50px";
+				  doc[inner].style.top = ( wW + inner * 30 - 60 ) + "px";
+				}
+
+  				doc = document.getElementsByClassName("divInInput");
+				for( var inner=0; inner < doc.length ; inner++ ) {
+				  doc[inner].style.left = "250px";
+				  doc[inner].style.top = ( wW + inner * 30 - 70 ) + "px";
+				}
+
+				this.canvas.width = wW-0.1*wW;
+				this.canvas.height = wW*3/4;
+			} else {
+  				var doc = document.getElementsByClassName("slider");
+				for( var inner=0; inner < doc.length ; inner++ )
+				  doc[inner].style.left = (wW - 380) + "px";
+
+  				doc = document.getElementsByClassName("divInInput");
+				for( var inner=0; inner < doc.length ; inner++ )
+				  doc[inner].style.left = (wW - 180) + "px";
+
+				this.canvas.width = wW-400;
+				this.canvas.height = ( wW - 400 )*3/4;
+			}
+			this.context = this.canvas.getContext("2d");
+			document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+			this.frameNo = 0;
+			this.interval = setInterval(updateGameArea, 20);
+		},
+	    	clear : function(wW) {
+			if( wW < 958 ) {
+  				var doc = document.getElementsByClassName("slider");
+				for( var inner=0; inner < doc.length ; inner++ ) {
+				  doc[inner].style.left = "50px";
+				  doc[inner].style.top = ( wW + inner * 40 - 65 ) + "px";
+				}
+
+  				doc = document.getElementsByClassName("divInInput");
+				for( var inner=0; inner < doc.length ; inner++ ) {
+				  doc[inner].style.left = "250px";
+				  doc[inner].style.top = ( wW + inner * 40 - 70 ) + "px";
+				}
+
+				this.canvas.width = wW-0.1*wW;
+				this.canvas.height = wW*3/4;
+			} else {
+				wW = 958
+  				var doc = document.getElementsByClassName("slider");
+				for( var inner=0; inner < doc.length ; inner++ ) {
+				  doc[inner].style.top = 25+inner*40+"px";
+				  doc[inner].style.left = (wW - 380) + "px";
+				}
+
+  				doc = document.getElementsByClassName("divInInput");
+				for( var inner=0; inner < doc.length ; inner++ ) {
+				  doc[inner].style.top = 20+inner*40+"px";
+				  doc[inner].style.left = (wW - 180) + "px";
+				}
+
+				this.canvas.width = wW-400;
+				this.canvas.height = ( wW - 400 )*3/4;
+			}
+
+			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	    	}
+	}
+
+	function component(width, height, color, x, y, type) {
+	    	this.type = type;
+	    	this.score = 0;
+	    	this.width = width;
+	    	this.height = height;
+	    	this.speedX = 0.0;
+	    	this.speedY = 0.0;    
+	    	this.x = x;
+	    	this.y = y;
+	    	this.gravity = 0;
+	    	this.gravitySpeed = 0;
+	    	this.updatePoly = function() {
+			ctx = Area.context;
+
+			if (this.type == "text") {
+		    		ctx.font = this.width + " " + this.height;
+		    		ctx.fillStyle = color;
+		    		ctx.fillText(this.text, this.x, this.y);
+			} else {
+		    		ctx.fillStyle = color;
+		    		ctx.fillRect(this.x, this.y, this.width, this.height);
+			}
+	    	} 
+
+	    	this.newPosPoly = function(x , y) {
+			updateRanges();
+			this.x = 25 + x;
+			var tempX = x/500;
+			var Polynom = zero + one*Math.pow(tempX,1) + two*Math.pow(tempX,2) + three*Math.pow(tempX,3) + four*Math.pow(tempX,4) + five*Math.pow(tempX,5) + six*Math.pow(tempX,6) + seven*Math.pow(tempX,7) + eight*Math.pow(tempX,8) + nine*Math.pow(tempX,9) + ten*Math.pow(tempX,10);
+			this.y = 240 + Polynom / 3;
+	    	}
+
+	    	this.update = function() {
+			ctx = Area.context;
+			if (this.type == "text") {
+		    		ctx.font = this.width + " " + this.height;
+		    		ctx.fillStyle = color;
+		    		ctx.fillText(this.text, this.x, this.y);
+			} else {
+		    		ctx.fillStyle = color;
+		    		ctx.fillRect(this.x, this.y, this.width, this.height);
+			}
+	    	} 
+
+	    	this.newPos = function() {
+			this.gravitySpeed += this.gravity;
+			this.x += this.speedX;
+			this.y += this.speedY + this.gravitySpeed;
+			this.hitBottom();
+	    	}
+	    	this.hitBottom = function() {
+			var rockbottom = Area.canvas.height - this.height;
+			if (this.y > rockbottom) {
+		    		this.y = rockbottom;
+		    		this.gravitySpeed = 0;
+			}
+	    	}
+
+	    	this.crashWith = function(otherobj) {
+			var myleft = this.x;
+			var myright = this.x + (this.width);
+			var mytop = this.y;
+			var mybottom = this.y + (this.height);
+			var otherleft = otherobj.x;
+			var otherright = otherobj.x + (otherobj.width);
+			var othertop = otherobj.y;
+			var otherbottom = otherobj.y + (otherobj.height);
+			var crash = false; // true
+			if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+			    	crash = false;
+			}
+			return crash;
+	    	}
+	}
+
+	function updateGameArea() {
+	    	var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+
+	    	Area.clear(window.innerWidth);
+	    	Area.frameNo += 1;
+	    	if (Area.frameNo == 1 || everyinterval(150)) {
+			x = Area.canvas.width;
+			minHeight = 20;
+			maxHeight = 200;
+			height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+			minGap = 50;
+			maxGap = 200;
+			gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+	    	}
+
+
+	    	for (let i = 0; i < curve.length; i++) {
+			curve[i].newPosPoly(i, i);
+	   		curve[i].updatePoly();
+	    	}
+
+
+	}
+
+	function updateRanges() {
+		zero=parseInt(document.getElementById("zero").value);
+		one=parseInt(document.getElementById("one").value);
+		two=parseInt(document.getElementById("two").value);
+		three=parseInt(document.getElementById("three").value);
+		four=parseInt(document.getElementById("four").value);
+		five=parseInt(document.getElementById("five").value);
+		six=parseInt(document.getElementById("six").value);
+		seven=parseInt(document.getElementById("seven").value);
+		eight=parseInt(document.getElementById("eight").value);
+		nine=parseInt(document.getElementById("nine").value);
+		ten=parseInt(document.getElementById("ten").value);
+
+		document.getElementById("zeroDiv").innerHTML = "Zero : " + zero;
+		document.getElementById("oneDiv").innerHTML = "One : " + one + "x";
+		document.getElementById("twoDiv").innerHTML = "Two : " + two + "x" + "2".sup();
+		document.getElementById("threeDiv").innerHTML = "Three : " + three + "x" + "3".sup();
+		document.getElementById("fourDiv").innerHTML = "Four : " + four + "x" + "4".sup();
+		document.getElementById("fiveDiv").innerHTML = "Five : " + five + "x" + "5".sup();
+		document.getElementById("sixDiv").innerHTML = "Six : " + six + "x" + "6".sup();
+		document.getElementById("sevenDiv").innerHTML = "Seven : " + seven + "x" + "7".sup();
+		document.getElementById("eightDiv").innerHTML = "Eight : " + eight + "x" + "8".sup();
+		document.getElementById("nineDiv").innerHTML = "Nine : " + nine + "x" + "9".sup();
+		document.getElementById("tenDiv").innerHTML = "Ten : " + ten + "x" + "10".sup();
+	}
+
+	function everyinterval(n) {
+		if ((Area.frameNo / n) % 1 == 0) {return true;}
+
+		return false;
+	}
+
+</script>
+
+<input type="range" min="-240" max="240" value="0" class="slider" id="zero" style="top: 0px;">
+  <div id="zeroDiv" class="divInInput" style="top: 0px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="one" style="top: 30px;">
+  <div id="oneDiv" class="divInInput" style="top: 30px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="two" style="top: 60px;">
+  <div id="twoDiv" class="divInInput" style="top: 60px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="three" style="top: 90px;">
+  <div id="threeDiv" class="divInInput" style="top: 90px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="four" style="top: 120px;">
+  <div id="fourDiv" class="divInInput" style="top: 120px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="five" style="top: 150px;">
+  <div id="fiveDiv" class="divInInput" style="top: 150px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="six" style="top: 180px;">
+  <div id="sixDiv" class="divInInput" style="top: 180px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="seven" style="top: 210px;">
+  <div id="sevenDiv" class="divInInput" style="top: 210px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="eight" style="top: 240px;">
+  <div id="eightDiv" class="divInInput" style="top: 240px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="nine" style="top: 270px;">
+  <div id="nineDiv" class="divInInput" style="top: 270px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="ten" style="top: 300px;">
+  <div id="tenDiv" class="divInInput" style="top: 300px;">1</div>
+
+
+<style>
+  .divInInput { position: absolute; left: 800px; }
+  .slider { position: absolute; left: 600px; }
+</style>
+
+</body>
+</html>
+

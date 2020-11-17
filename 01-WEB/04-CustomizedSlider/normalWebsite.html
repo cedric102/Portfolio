@@ -1,0 +1,304 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>Journey Album</title>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="rotating-slider.css">
+<style>
+body {
+  background: #333;
+  font-family: 'Roboto Slab', sans-serif;
+  font-weight: 300;
+}
+
+.HorizontalMotion {
+width: 200px;
+height: 50px;
+display: block;
+left: 1050px;
+border: 1px solid orange;
+position: absolute;
+top: 540px;
+background-color : orange;
+color: black;
+float: center;
+}
+
+.imageSlide {
+display: block;
+max-width:100%;
+float: center;
+align: center;
+margin-left: auto;
+margin-right: auto;
+cursor: pointer;
+}
+
+.divSlide {
+border: 1px solid green;
+max-width: 300px;
+max-height: 300px;
+position: absolute;
+top:476px;
+left: 500px;
+display: block;
+width:300px;z-index: 2;
+background-color: rgba(0,0,100,255);
+}
+
+.buttonStyle {
+height: 50px;
+width: 500px;
+display: inline-block;
+text-align: center;
+}
+
+</style>
+
+
+</head>
+
+<body translate="no" style="width: 1750px;" onresize="resize()" id="bodyId">
+
+<h1 style="text-align: center; color: #95a5a6; margin-top:20px">Gallery</h1>
+
+
+<div style="border: 1px solid green; width: 100%;">
+  <div id="imageDisplay" style="float: center; display: block; border: 1px solid yellow; height: 550px; color: orange; background: linear-gradient(180deg, blue,purple);">
+
+    <div id="xLoc"> p </div>
+    <div id="yLoc"> l </div>
+    <div id="click"> l </div>
+    <div id="init"> l </div>
+    <div id="current"> l </div>
+    <div id="new"> l </div>
+    <div id="ySquare1"> l </div>
+
+
+    <!--	document.getElementById('Selection').onclick='window.open('threeD_1.html')'	-->
+    <!--	../../Downloads/Katathlon-20190330T170911Z-001/Katathlon/	-->
+    <!-- ------------------------------------------  -->
+    <div id="squareMotion1_1" class="divSlide" alt="BEAR !!!">
+      <img class="imageSlide" src="Bear.jpg" onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src;">
+    </div>
+    <div id="squareMotion1_2" class="divSlide" >
+      <img class="imageSlide" src="fish_two_o.png" onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src;  window.open('threeD_1.html'); return false;">
+    </div>
+    <div id="squareMotion1_3" class="divSlide" >
+      <img class="imageSlide" src="0156_Penguin.png" onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src; window.open('/home/cedric/objJavascriptProject/mainBody.html');">
+    </div>
+    <div id="squareMotion1_4" class="divSlide">
+      <img class="imageSlide" src="~/Downloads/Katathlon-20190330T170911Z-001/Katathlon/threeD_1.html" onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src;" >
+    </div>
+    <div id="squareMotion1_5" class="divSlide">
+      <img class="imageSlide" src="Sqwidgy.apk"  onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src;" >
+    </div>
+    <input id="slider1" type="range" orient="vertical" min="1" max="360" value="50" style="position:absolute; top:100px; left:800px; height: 480px; box-orient: vertical;">
+    <Button id="move1" class="HorizontalMotion">1) MOVE IT SIDEWAYS</Button>
+    <!-- ------------------------------------------  -->
+
+  </div>
+
+  <input id="mainSlider" type="range" orient="horizontal" min="1" max="100" value="50" style="width: 100%; position: relative; bottom: 40px;">
+
+  <div id="SelectionWrapper" style="border: 1px solid blue; display: block; max-width:100%; float: center; align: center; margin-left: auto; margin-right: auto; height: 300px;">
+    <img id="Selection" style="display: block; max-width:100%; height: 300px; float: center; align: center; margin-left: auto; margin-right: auto;" src="" onclick="">
+  </div>
+  <Button id="plusButton" class="buttonStyle"  style="border: 1px solid green; background-color: blue; color: black; font-size: 20px;" onmousedown="increment=increment+1;">PLUS</Button>
+  <Button id="minusButton" class="buttonStyle"  style="border: 1px solid green; background-color: blue; color: black; font-size: 20px;" onmousedown="increment=increment-1;">MINUS</Button>
+  <Button id="plusSelectionButton" class="buttonStyle" style="border: 1px solid green; background-color: red; color: black; font-size: 20px;" onmousedown="incrementSelect=incrementSelect+1;">PLUS SELECT</Button>
+  <Button id="minusSelectionButton" class="buttonStyle"  style="border: 1px solid green; background-color: red; color: black; font-size: 20px;" onmousedown="incrementSelect=incrementSelect-1;">MINUS SELECT</Button>
+  <div id="box2" class="divType"></div>
+</div>
+
+
+<div id="box" class="divType"></div>
+
+<Button id="testButton" style="border: 1px solid green; height: 50px; width: 500px; background-color: blue; display: inline-block; text-align: center; color: black; font-size: 20px;">DISP</Button>
+
+<script type="text/javascript">
+
+  var choice="None";
+
+  var xSquare1=document.getElementById("squareMotion1_1").style.left;
+  var init_mouse2D_x1=0;
+  var current_mouse2D_x1=0;
+
+  var ySquare1=document.getElementById("squareMotion1_1").style.top;
+  var current_mouse2D_y1=0;
+  var xSquareInit1;
+
+  var mouseDown="false";
+  var yMotion_New1_1;
+  var yMotion_New1_2;
+  var yMotion_New1_3;
+  var yMotion_New1_4;
+  var yMotion_New1_5;
+
+  var bTemp;
+
+  var ordered = [ "xSquare1" , "xSquare2" , "xSquare3" ];
+
+  var increment=0;
+  var incrementSelect=0;
+  var sliding;
+  var prevSliding;
+  var reSizeSwitch="1";
+
+  document.onmouseup = function(event){
+    mouseDown="false";
+    choice="None";
+  }
+
+  document.onmousedown = function(event){
+    mouseDown="true";
+  }
+
+  window.onload = function() {
+    yMotion_New1_1 = document.getElementById("slider1").value*3;//*10;
+    yMotion_New1_2=yMotion_New1_1-250;
+
+    document.getElementById("squareMotion1_1").style.top = parseInt(Math.cos(yMotion_New1_1*6.28/360)*80 + 200) + "px";
+    document.getElementById("squareMotion1_2").style.top = parseInt(Math.cos(yMotion_New1_2*6.28/360)*80 + 200)  + "px";
+    resize();
+  }
+
+  setInterval(function () {
+    sliding=(parseInt(document.getElementById('mainSlider').value)-50)*5;
+    
+  } , 50);
+
+  function resize() {
+	xSquare1 = window.innerWidth/2-330;
+
+    	document.getElementById("slider1").style.left = parseInt(xSquare1) + 300 + "px";
+    	document.getElementById("move1").style.left = parseInt(xSquare1) + 50 + "px";
+
+        reset();
+  }
+
+  function reset() {
+
+      document.getElementById("bodyId").style.width=window.innerWidth-50 + "px";
+      document.getElementById("SelectionWrapper").style.width=window.innerWidth + "px";
+      document.getElementById("init").innerHTML=xSquare1;
+      yMotion_New1_1 = document.getElementById("slider1").value*3;//*10;
+      yMotion_New1_2=yMotion_New1_1-75;
+      yMotion_New1_3=yMotion_New1_1-150;
+      yMotion_New1_4=yMotion_New1_1-225;
+      yMotion_New1_5=yMotion_New1_1-300;
+
+    	document.getElementById("slider1").style.left = parseInt(xSquare1) + 300 + "px";
+    	document.getElementById("move1").style.left = parseInt(xSquare1) + 50 + "px";
+
+
+        for(var resizeInc=1; resizeInc<6; resizeInc++){
+        	document.getElementById("squareMotion1_"+resizeInc).style.left = xSquare1 + "px";
+	}
+        document.getElementById("squareMotion1_1").style.top = parseInt(Math.cos(yMotion_New1_1 *6.28/360)*80 + 200)  + "px";
+        document.getElementById("squareMotion1_2").style.top = parseInt(Math.cos(yMotion_New1_2*6.28/360)*80 + 200)  + "px";
+        document.getElementById("squareMotion1_3").style.top = parseInt(Math.cos(yMotion_New1_3*6.28/360)*80 + 200)  + "px";
+        document.getElementById("squareMotion1_4").style.top = parseInt(Math.cos(yMotion_New1_4*6.28/360)*80 + 200)  + "px";
+        document.getElementById("squareMotion1_5").style.top = parseInt(Math.cos(yMotion_New1_5*6.28/360)*80 + 200)  + "px";
+
+
+
+     for(var yInc=0; yInc<5; yInc++) {
+       if( Math.sin((yMotion_New1_1-(yInc*75))*6.28/360) > 0 ) {
+         if( Math.abs(Math.cos((yMotion_New1_1-(yInc*75))*6.28/360) ) > 0.75 ) {
+           document.getElementById("squareMotion1_"+parseInt(yInc+1)).style.opacity = 4 - ( Math.abs(Math.cos((yMotion_New1_1-(yInc*75))*6.28/360) ) * 4 );
+         } else {
+           document.getElementById("squareMotion1_"+parseInt(yInc+1)).style.opacity = 1;
+         }
+       } else {
+         document.getElementById("squareMotion1_"+parseInt(yInc+1)).style.opacity = 0;
+       }
+     }
+
+
+
+      document.getElementById("squareMotion1_1").style.zIndex = "" + Math.round(Math.sin(yMotion_New1_1*6.28/360)*360);
+      document.getElementById("squareMotion1_2").style.zIndex = "" + Math.round(Math.sin(yMotion_New1_2*6.28/360)*360);
+      document.getElementById("squareMotion1_3").style.zIndex = "" + Math.round(Math.sin(yMotion_New1_3*6.28/360)*360);
+      document.getElementById("squareMotion1_4").style.zIndex = "" + Math.round(Math.sin(yMotion_New1_4*6.28/360)*360);
+      document.getElementById("squareMotion1_5").style.zIndex = "" + Math.round(Math.sin(yMotion_New1_5*6.28/360)*360);
+
+    if(mouseDown == "true" ) {
+//    	document.getElementById("box").innerHTML = '<div id="box" class="divType">'
+    	document.getElementById("box").innerHTML = '<div style="border: 5px solid blue; width: 500px; height: 200px; display: inline-block; position: absolute; top:' + parseInt(Math.cos(yMotion_New1_1 *6.28/360)*80 + 200) + 'px;"></div>'
+
+	for( var incr=0 ; incr<increment ; incr++ ) {
+    		document.getElementById("box").innerHTML = document.getElementById("box").innerHTML + '<div style="border: 5px solid blue; width: 500px; height: 200px; display: inline-block; position: absolute; top:' + parseInt(Math.cos(yMotion_New1_1 * 6.28/360) * 80 + 200 + incr * 50 ) + 'px;"></div>'
+	}
+	for( var incr=0 ; incr<increment ; incr++ ) {
+    		document.getElementById("box").innerHTML = document.getElementById("box").innerHTML + '<div style="border: 5px solid red; width: 500px; height: 200px; display: inline-block; position: absolute; left: 1500px; top:' + parseInt(Math.cos(yMotion_New2_1 * 6.28/360) * 80 + 200 + incr * 50 ) + 'px;"></div>'
+	}
+    	document.getElementById("init").innerHTML = "Increment: " + incrementSelect;
+
+   	document.getElementById("box").innerHTML = document.getElementById("box").innerHTML + '<div style="border: 5px solid green; width: 500px; height: 200px; display: inline-block;"></div>'
+    	document.getElementById("box").innerHTML = document.getElementById("box").innerHTML + '<div style="border: 5px solid red; width: 500px; height: 200px; display: inline-block;"></div>'
+//    	document.getElementById("box").innerHTML = document.getElementById("box").innerHTML + '</div>';
+	if( choice == "Scroll1" ) {
+      		current_mouse2D_x1 = event.clientX;
+		xSquare1=parseInt(xSquareInit1)-init_mouse2D_x1+current_mouse2D_x1;
+	}
+
+    } else {
+    	document.getElementById("box").innerHTML = '<div id="box" class="divType"></div>';
+    }
+
+  }
+
+  document.onmousemove = function(event){
+
+    sliding=(parseInt(document.getElementById('mainSlider').value)-50)*5;
+    prevSliding=sliding;
+
+    document.getElementById("xLoc").innerHTML = event.clientX;
+    document.getElementById("yLoc").innerHTML = event.clientY;
+    document.getElementById("current").innerHTML = init_mouse2D_x1;
+    document.getElementById("new").innerHTML = document.getElementById("imageDisplay").style.width;
+    document.getElementById("init").innerHTML = "INIT: " + xSquare1;
+    document.getElementById("ySquare1").innerHTML = choice;
+
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+
+    var something = document.getElementById('move1');
+    something.style.cursor = 'pointer';
+    something.onmousedown = function() {
+
+    	mouseDown="true";
+    	init_mouse2D_x1 = event.clientX;
+
+    	var str=document.getElementById("squareMotion1_1").style.left;
+    	xSquareInit1 = str.slice(0, str.lastIndexOf("p"));
+
+    	choice="Scroll1";
+
+    }
+
+
+    	document.getElementById("slider1").style.left = parseInt(xSquare1) + 300 + "px";
+    	document.getElementById("move1").style.left = parseInt(xSquare1) + 50 + "px";
+        for(var resizeInc=1; resizeInc<6; resizeInc++){
+        	document.getElementById("squareMotion1_"+resizeInc).style.left = xSquare1 + "px";
+        	document.getElementById("squareMotion2_"+resizeInc).style.left = xSquare2 + "px";
+	}
+	if( choice == "Scroll1" ) {
+      		current_mouse2D_x1 = event.clientX;
+		xSquare1=parseInt(xSquareInit1)-init_mouse2D_x1+current_mouse2D_x1;
+	}
+
+      reset();
+
+  }
+
+  
+</script>
+
+</body>
+</html>

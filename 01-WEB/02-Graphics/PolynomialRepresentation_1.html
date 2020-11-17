@@ -1,0 +1,340 @@
+<html>
+	<head>
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width:300px; height:300px; position: absolute; top:0px; left:20px; background: white; opacity:1;}
+			.divType {background: linear-gradient(90deg, blue,green); border-radius:10px; padding: 5px 10px 5px 10px; color: white;}
+
+			.greenZ {background: linear-gradient(180deg, green,yellow); border-radius:10px; padding: 5px 10px 5px 10px; color: white;}
+			.redZ {background: linear-gradient(180deg, red,orange); border-radius:10px; padding: 5px 10px 5px 10px; color: white;}
+			.blueZ {background: linear-gradient(180deg, blue,purple); border-radius:10px; padding: 5px 10px 5px 10px; color: white;}
+
+			.Bar1of3 { background-color: green; height:20px; width:200px; border:1px solid black; } 
+			.Bar2of3 { background-color: blue; height:20px; width:150px; position: relative; bottom:1px; border:1px solid black; }
+			.Bar3of3 { background-color: orange; height:20px; width:100px; position: relative; bottom:1px; border:1px solid black; }
+
+
+			#canvas{}
+		</style>
+		<link rel="stylesheet" type="text/cs" media="all" href="css/reset.css" />
+		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	</head>
+	<body>
+		
+
+
+		<div>
+			<div style="color:#ff0000; position: absolute;">Hello !!!</div>	
+			<canvas width='200' height='200' id="canvas2" >
+				Your browser does not support canvas - go get Chrome !!!
+			</canvas>
+		</div>
+
+		<script src="three.js"></script>		
+		
+ 		<input type="range" min="-100" max="100" value="0" class="slider" id="zero" style="position: absolute; left: 900px; top: 40px;"><div id="zeroDiv"style="position: absolute; left: 1100px; top: 40px;">1</div>
+ 		<input type="range" min="-100" max="100" value="0" class="slider" id="one" style="position: absolute; left: 900px; top: 70px;"><div id="oneDiv"style="position: absolute; left: 1100px; top: 70px;">1</div>
+ 		<input type="range" min="-100" max="100" value="0" class="slider" id="two" style="position: absolute; left: 900px; top: 100px;"><div id="twoDiv"style="position: absolute; left: 1100px; top: 100px;">1</div>
+ 		<input type="range" min="-100" max="100" value="0" class="slider" id="three" style="position: absolute; left: 900px; top: 130px;"><div id="threeDiv"style="position: absolute; left: 1100px; top: 130px;">1</div>
+ 		<input type="range" min="-100" max="100" value="0" class="slider" id="four" style="position: absolute; left: 900px; top: 160px;"><div id="fourDiv" style="position: absolute; left: 1100px; top: 160px;">1</div>
+ 		<input type="range" min="-100" max="100" value="0" class="slider" id="five" style="position: absolute; left: 900px; top: 190px;"><div id="fiveDiv" style="position: absolute; left: 1100px; top: 190px;">1</div>
+ 		<input type="range" min="-100" max="100" value="0" class="slider" id="six" style="position: absolute; left: 900px; top: 220px;"><div id="sixDiv" style="position: absolute; left: 1100px; top: 220px;">1</div>
+ 		<input type="range" min="-100" max="100" value="0" class="slider" id="seven" style="position: absolute; left: 900px; top: 250px;"><div id="sevenDiv" style="position: absolute; left: 1100px; top: 250px;">1</div>
+ 		<input type="range" min="-100" max="100" value="0" class="slider" id="eight" style="position: absolute; left: 900px; top: 280px;"><div id="eightDiv" style="position: absolute; left: 1100px; top: 280px;">1</div>
+ 		<input type="range" min="-100" max="100" value="0" class="slider" id="nine" style="position: absolute; left: 900px; top: 310px;"><div id="nineDiv" style="position: absolute; left: 1100px; top: 310px;">1</div>
+ 		<input type="range" min="-100" max="100" value="0" class="slider" id="ten" style="position: absolute; left: 900px; top: 340px;"><div id="tenDiv" style="position: absolute; left: 1100px; top: 340px;">1</div>
+
+
+		<table position="Absolute" style="width:800px; border:1px; margin-top:610px;">
+			<tr>
+				<th style="width:250px;">Overview</th>
+				<th>General</th>
+				<th>Coordinates</th>
+			</tr>
+			<tr style="idth:30px;" width="300px" border="1px">
+				<td style="vertical-align: top;"  width="500px">
+					<div position="Absolute" style="color: ffffff;" id="counter"></div>
+					<div class="Bar1of3"><div class="Bar2of3"><div class="Bar3of3"></div></div></div>
+					<div id="windowWidth"></div>
+					<div id="mouse">UP</div>
+					<div id="mouseCoord"></div>
+					<div id="mouseCoordCanvas"></div>
+					<div position="Absolute" style="color: ffffff;" id="window"></div>
+					<div id="scene"></div>
+					<button id="renderImage">Press</button>
+					<div id="renderCount">0</div>
+					<div id="arrayLength"></div>
+					<div id="mouseCanvas">0</div>
+					<div id="FPS">FPS: </div>
+				</td>
+
+				<td style="vertical-align: top;">
+					<table width="100px">
+						<tr>
+							<td style="vertical-align: top;"><div id="1z%" class="greenZ"></div></td>
+							<td style="vertical-align: top;"><div id="2z%" class="redZ"></div></td>
+							<td style="vertical-align: top;"><div id="3z%" class="blueZ"></div></td>
+						</tr>
+					</table>
+				</td>
+
+				<td style="vertical-align: top;">
+					<div style="width:400px;">
+						<table style="width:100%; horizontal-align:center; border:1px; vertical-align: top;" id="myTable">
+							<tr style="width:30px;" width="30px;">
+								<td><div id="1x" class="divType"></div></td>
+								<td><div id="1y" class="divType"></div></td>
+								<td><div id="1z" class="divType"></div></td>
+							</tr>
+							<tr style="width:30px;" width="30px;">
+								<td><div id="2x" class="divType"></div></td>
+								<td><div id="2y" class="divType"></div></td>
+								<td><div id="2z" class="divType"></div></td>
+							</tr>
+							<tr style="idth:30px;" width="30px;">
+								<td><div id="3x" class="divType"></div></td>
+								<td><div id="3y" class="divType"></div></td>
+								<td><div id="3z" class="divType"></div></td>
+							</tr>
+							<tr style="idth:30px;" width="30px;">
+								<td><div id="camX" class="divType"></div></td>
+								<td><div id="camY" class="divType"></div></td>
+								<td><div id="camZ" class="divType"></div></td>
+							</tr>
+						</table>
+					</div>
+				</td>
+					<div>
+
+		<script>
+
+			function particle(posX, posY, posZ, type) {
+				this.posX = posX;
+				this.posY = posY;
+				this.posZ = posZ;
+				this.type = type
+			}
+
+			var renderCount = 0;
+			var canvas = document.getElementById("canvas2");
+
+			var scene = new THREE.Scene();
+			scene.background = new THREE.Color ( 0xeeeeee );
+
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+			document.onmousedown = function(event){
+				document.getElementById("mouse").innerHTML = "DOWN";
+				generateObjectsAutomatically(); //generateObjectsAutomatically(); // addObjectManually();
+			}
+
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+
+			document.body.appendChild( renderer.domElement );
+
+			renderer.setSize( 800, 600 );
+
+			document.getElementById("window").innerHTML = "Width: " + renderer.domElement.style.width + "; y: " + renderer.domElement.style.height; //.style.top; //document.clientX;
+
+			var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+			var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+			var geometry1 = new THREE.BoxGeometry( 1, 1, 1 );
+			var material1 = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+			var geometry2 = new THREE.BoxGeometry( 1, 1, 1 );
+			var material2 = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+			var geometry3 = new THREE.BoxGeometry( 1, 1, 1 );
+			var material3 = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+			var geometry4 = new THREE.BoxGeometry( 5, 5, 5 );
+			var material4 = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+
+			var c=[];
+			c.push(new THREE.Mesh( geometry, material ));
+			c.push(new THREE.Mesh( geometry1, material1 ));
+			c.push(new THREE.Mesh( geometry2, material2 ));
+
+			scene.add( c[0] );
+			scene.add( c[1] );
+			scene.add( c[2] );
+
+			document.getElementById("scene").innerHTML = scene.position.y;
+
+			var cube = new THREE.Mesh( geometry, material );
+			var cube1 = new THREE.Mesh( geometry1, material1 );
+			var cube2 = new THREE.Mesh( geometry2, material2 );
+
+			camera.position.z = 20;
+
+			cube.position.x = 1.5;
+			cube.position.y = 2;
+			cube.position.z = 3;
+			cube2.position.x = 1;
+			cube2.position.y = 4;
+			cube2.position.z = 6;
+
+			var cubeVelX = 2;
+			var cube1VelX = 0.2;
+			var cube2VelX = 3;
+
+			var cubeVelY = 1;
+			var cube1VelY = 2;
+			var cube2VelY = 1.5;
+
+			var cubeVelZ = -6;
+			var cube1VelZ = 4;
+			var cube2VelZ = 0.5;
+			
+			var cubeForce = 0;
+			var cube1Force = 0;
+			var cube2Force = 0;
+
+			var distX = 0;
+			var distY = 0;
+			var distZ = 0;
+
+			var inc=0;
+
+			p=[];
+			p.push(new particle(1,2,3,1));
+			p.push(new particle(2,3,1,2));
+			p.push(new particle(3,1,2,3));
+
+			p1 = new particle(1,2,3,4);
+			p2 = new particle(1,2,3,4);
+			p3 = new particle(1,2,3,4);
+
+			var count=0;
+
+				let curveMaterial;
+				let xPoint;
+				let yPoint;
+				let xRef1 = 10;
+				let yRef1 = 10;
+				let xRef2 = -10;
+				let yRef2 = -10;
+				for(let i=0; i<1; i+=0.001) {
+					curveMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+	
+					renderCount = renderCount + 1;
+					document.getElementById("renderCount").innerHTML = renderCount;
+					p.push( new particle( i, 0, 1, curveMaterial) );
+					c.push( new THREE.Mesh( geometry4, curveMaterial ) );
+					scene.add( c[c.length-1] );
+
+				    	var table = document.getElementById("myTable");
+				    	var row = table.insertRow(c.length-1);
+				    	var cell1 = row.insertCell(0);
+				    	var cell2 = row.insertCell(1);
+				    	var cell3 = row.insertCell(2);
+
+				    	var indent = c.length;
+				    	cell1.innerHTML = '<div id="' + indent + 'x" class="divType"></div>';
+				    	cell2.innerHTML = '<div id="' + indent + 'y" class="divType"></div>';
+				    	cell3.innerHTML = '<div id="' + indent + 'z" class="divType"></div>';
+				}
+			
+
+
+			var render2 = function() {
+
+				document.getElementById("arrayLength").innerHTML = p.length;
+
+				var xCam=0;
+				var yCam=0;
+				var zCam=700;
+				var count2=0;
+
+/////	*************************************************************************************************
+				let curveMaterial2 = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
+/////	*************************************************************************************************
+				
+				var zero=parseInt(document.getElementById("zero").value);
+				var one=parseInt(document.getElementById("one").value);
+				var two=parseInt(document.getElementById("two").value);
+				var three=parseInt(document.getElementById("three").value);
+				var four=parseInt(document.getElementById("four").value);
+				var five=parseInt(document.getElementById("five").value);
+				var six=parseInt(document.getElementById("six").value);
+				var seven=parseInt(document.getElementById("seven").value);
+				var eight=parseInt(document.getElementById("eight").value);
+				var nine=parseInt(document.getElementById("nine").value);
+				var ten=parseInt(document.getElementById("ten").value);
+
+				document.getElementById("zeroDiv").innerHTML = "Zero : " + zero;
+				document.getElementById("oneDiv").innerHTML = "One : " + one;
+				document.getElementById("twoDiv").innerHTML = "Two : " + two;
+				document.getElementById("threeDiv").innerHTML = "Three : " + three;
+				document.getElementById("fourDiv").innerHTML = "Four : " + four;
+				document.getElementById("fiveDiv").innerHTML = "Five : " + five;
+				document.getElementById("sixDiv").innerHTML = "Six : " + six;
+				document.getElementById("sevenDiv").innerHTML = "Seven : " + seven;
+				document.getElementById("eightDiv").innerHTML = "Eight : " + eight;
+				document.getElementById("nineDiv").innerHTML = "Nine : " + nine;
+				document.getElementById("tenDiv").innerHTML = "Ten : " + ten;
+
+				for(var k=3; k<(p.length); k++) {
+/*
+//					var zCam = 0;
+					if(k===0) {
+						zCam = p[k].posZ;
+					}
+					if(zCam < p[k].tempZ) {
+						zCam = p[k].posZ;
+					}
+*/
+					xCam += p[k].posX;
+					yCam += p[k].posY;
+					count2++;
+/////	*************************************************************************************************
+					var PolynomialResult = ten*Math.pow(p[k].posX, 10) + nine*Math.pow(p[k].posX , 9) + eight*Math.pow(p[k].posX , 8) + seven*Math.pow(p[k].posX , 7) + six*Math.pow(p[k].posX , 6) + five*Math.pow(p[k].posX , 5) + four*Math.pow(p[k].posX , 4) + three*Math.pow(p[k].posX , 3) + two*Math.pow(p[k].posX , 2) + one*p[k].posX + zero
+
+/////	*************************************************************************************************
+					var xGraphOffset = -500;
+					var yGraphOffset = 0;
+					p[k].posY = PolynomialResult;
+					c[k].position.x = p[k].posX *k + xGraphOffset;
+					c[k].position.y = p[k].posY + yGraphOffset; // +yOffset2/10
+					c[k].position.z = p[k].posZ;
+				}
+
+				camera.position.x = xCam / count2;
+				camera.position.y = yCam / count2;
+				camera.position.z = zCam + 20;
+
+				count++;
+
+
+				for(var dat=0; dat<(p.length); dat++) {
+					var dat1 = dat + 1;
+					document.getElementById(dat1 + "x").innerHTML = dat1 + "x: " + p[dat].posX;
+					document.getElementById(dat1 + "y").innerHTML = dat1 + "y: " + p[dat].posY;
+					document.getElementById(dat1 + "z").innerHTML = dat1 + "z: " + p[dat].posZ;
+				}
+
+				renderer.render(scene, camera);
+
+			};
+
+			setInterval(render2, 20);
+
+		</script>
+</div>
+</td>
+			</tr>
+		</table>
+
+
+
+<!--
+		<table position="Absolute" style="width:50px; border:1px;">
+			<tr style="idth:30px;" width="30px;">
+				<td><div id="1z%" class="greenZ"></div></td>
+				<td><div id="2z%" class="redZ"></div></td>
+				<td><div id="3z%" class="blueZ"></div></td>
+			</tr>
+		</table>
+-->
+
+
+	</body>
+</html>

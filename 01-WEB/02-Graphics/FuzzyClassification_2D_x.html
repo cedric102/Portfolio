@@ -1,0 +1,589 @@
+<html>
+	<head>
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width:300px; height:300px; position: absolute; top:0px; left:20px; background: white; opacity:1;}
+			.divType {background: linear-gradient(90deg, blue,green); border-radius:10px; padding: 5px 10px 5px 10px; color: white;}
+
+			.greenZ {background: linear-gradient(180deg, green,yellow); border-radius:10px; padding: 5px 10px 5px 10px; color: white;}
+			.redZ {background: linear-gradient(180deg, red,orange); border-radius:10px; padding: 5px 10px 5px 10px; color: white;}
+			.blueZ {background: linear-gradient(180deg, blue,purple); border-radius:10px; padding: 5px 10px 5px 10px; color: white;}
+
+			.Bar1of3 { background-color: green; height:20px; width:200px; border:1px solid black; } 
+			.Bar2of3 { background-color: blue; height:20px; width:150px; position: relative; bottom:1px; border:1px solid black; }
+			.Bar3of3 { background-color: orange; height:20px; width:100px; position: relative; bottom:1px; border:1px solid black; }
+
+			canvas {
+ 			    border:1px solid #d3d3d3;
+			    background-color: #f1f1f1;
+			}
+			.slider{
+				position: absolute; left: 900px; top: 40px;
+			}
+			.sliderDiv {
+				position: absolute; left: 1100px;
+			}
+		</style>
+		<link rel="stylesheet" type="text/cs" media="all" href="css/reset.css" />
+		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	</head>
+
+	<body onload="startGame()">
+
+		<div>
+			<div style="color:#ff0000; position: absolute;">Hello !!!</div>	
+			<canvas width='200' height='300' id="canvas2" >
+				Your browser does not support canvas - go get Chrome !!!
+			</canvas>
+		</div>
+		
+ 		<input type="range" min="1" max="100" value="3" class="slider" id="sigma" style="top: 40px;"><div id="sigmaDiv" class="sliderDiv" style="top: 40px;">1</div>
+ 		<input type="range" min="1" max="100" value="30" class="slider" id="yOffset" style="top: 70px;"><div id="yOffsetDiv" class="sliderDiv" style="top: 70px;">1</div>
+ 		<input type="range" min="1" max="100" value="30" class="slider" id="xOffset" style="top: 100px;"><div id="xOffsetDiv" class="sliderDiv" style="top: 100px;">1</div>
+ 		<input type="range" min="1" max="100" value="40" class="slider" id="height" style="top: 130px;"><div id="heightDiv" class="sliderDiv" style="top: 130px;">1</div>
+ 		<input type="range" min="1" max="100" value="10" class="slider" id="mu_1" style="top: 160px;"><div id="mu1Div" class="sliderDiv" style="top: 160px;">1</div>
+ 		<input type="range" min="1" max="100" value="10" class="slider" id="mu_2" style="top: 190px;"><div id="mu2Div" class="sliderDiv" style="top: 190px;">1</div>
+
+
+		<table position="Absolute" style="width:800px; border:1px; margin-top:610px;">
+			<tr>
+				<th style="width:250px;">Overview</th>
+				<th>General</th>
+				<th>Coordinates</th>
+			</tr>
+			<tr style="idth:30px;" width="300px" border="1px">
+				<td style="vertical-align: top;"  width="500px">
+					<div position="Absolute" style="color: ffffff;" id="counter"></div>
+					<div class="Bar1of3"><div class="Bar2of3"><div class="Bar3of3"></div></div></div>
+					<div id="windowWidth"></div>
+					<div id="mouse">UP</div>
+					<div id="mouseCoord"></div>
+					<div id="mouseCoordCanvas"></div>
+					<div position="Absolute" style="color: ffffff;" id="window"></div>
+					<div id="scene"></div>
+					<button id="renderImage">Press</button>
+					<div id="renderCount">0</div>
+					<div id="arrayLength"></div>
+					<div id="mouseCanvas">0</div>
+					<div id="FPS">FPS: </div>
+				</td>
+
+				<td style="vertical-align: top;">
+					<table width="100px">
+						<tr>
+							<td style="vertical-align: top;"><div id="1z%" class="greenZ"></div></td>
+							<td style="vertical-align: top;"><div id="2z%" class="redZ"></div></td>
+							<td style="vertical-align: top;"><div id="3z%" class="blueZ"></div></td>
+						</tr>
+					</table>
+				</td>
+
+				<td style="vertical-align: top;">
+					<div style="width:400px;">
+						<table style="width:100%; horizontal-align:center; border:1px; vertical-align: top;" id="myTable">
+							<tr style="width:30px;" width="30px;">
+								<td><div id="1x" class="divType"></div></td>
+								<td><div id="1y" class="divType"></div></td>
+								<td><div id="1z" class="divType"></div></td>
+							</tr>
+							<tr style="width:30px;" width="30px;">
+								<td><div id="2x" class="divType"></div></td>
+								<td><div id="2y" class="divType"></div></td>
+								<td><div id="2z" class="divType"></div></td>
+							</tr>
+							<tr style="idth:30px;" width="30px;">
+								<td><div id="3x" class="divType"></div></td>
+								<td><div id="3y" class="divType"></div></td>
+								<td><div id="3z" class="divType"></div></td>
+							</tr>
+							<tr style="idth:30px;" width="30px;">
+								<td><div id="camX" class="divType"></div></td>
+								<td><div id="camY" class="divType"></div></td>
+								<td><div id="camZ" class="divType"></div></td>
+							</tr>
+						</table>
+					</div>
+				</td>
+					<div>
+
+		<script>
+
+			function particle(posX, posY, posZ, type) {
+				this.posX = posX;
+				this.posY = posY;
+				this.posZ = posZ;
+				this.type = type
+			}
+
+			var renderCount = 0;
+			var canvas = document.getElementById("canvas2");
+
+//			var scene = new THREE.Scene();
+//			scene.background = new THREE.Color ( 0xeeeeee );
+
+//			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+			document.onmousedown = function(event){
+				document.getElementById("mouse").innerHTML = "DOWN";
+				generateObjectsAutomatically(); //generateObjectsAutomatically(); // addObjectManually();
+			}
+
+//			var renderer = new THREE.WebGLRenderer();
+//			renderer.setSize( window.innerWidth, window.innerHeight );
+
+//			document.body.appendChild( renderer.domElement );
+
+//			renderer.setSize( 10000, 600 );
+
+			document.getElementById("window").innerHTML = "Width: " + renderer.domElement.style.width + "; y: " + renderer.domElement.style.height; //.style.top; //document.clientX;
+
+//			var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+//			var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+//			var geometry1 = new THREE.BoxGeometry( 1, 1, 1 );
+//			var material1 = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+//			var geometry2 = new THREE.BoxGeometry( 1, 1, 1 );
+//			var material2 = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+//			var geometry3 = new THREE.BoxGeometry( 1, 1, 1 );
+//			var material3 = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+//			var geometry4 = new THREE.BoxGeometry( 0.15, 0.15, 0.15 );
+//			var material4 = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+
+			var pGaussian=[];
+			var cGaussian=[];
+
+			var pCluster=[];
+			var cCluster=[];
+
+			var pGaussian2=[];
+			var cGaussian2=[];
+
+//			var c=[];
+//			c.push(new THREE.Mesh( geometry, material ));
+//			c.push(new THREE.Mesh( geometry1, material1 ));
+//			c.push(new THREE.Mesh( geometry2, material2 ));
+
+//			scene.add( c[0] );
+//			scene.add( c[1] );
+//			scene.add( c[2] );
+
+			document.getElementById("scene").innerHTML = scene.position.y;
+
+//			var cube = new THREE.Mesh( geometry, material );
+//			var cube1 = new THREE.Mesh( geometry1, material1 );
+//			var cube2 = new THREE.Mesh( geometry2, material2 );
+
+//			camera.position.z = 20;
+
+			cube.position.x = 1.5;
+			cube.position.y = 2;
+//			cube.position.z = 3;
+			cube2.position.x = 1;
+			cube2.position.y = 4;
+//			cube2.position.z = 6;
+
+			var cubeVelX = 2;
+			var cube1VelX = 0.2;
+			var cube2VelX = 3;
+
+			var cubeVelY = 1;
+			var cube1VelY = 2;
+			var cube2VelY = 1.5;
+
+			var cubeVelZ = -6;
+			var cube1VelZ = 4;
+			var cube2VelZ = 0.5;
+			
+			var cubeForce = 0;
+			var cube1Force = 0;
+			var cube2Force = 0;
+
+			var distX = 0;
+			var distY = 0;
+			var distZ = 0;
+
+			var inc=0;
+
+//			p=[];
+//			p.push(new particle(1,2,3,1));
+//			p.push(new particle(2,3,1,2));
+//			p.push(new particle(3,1,2,3));
+
+//			p1 = new particle(1,2,3,4);
+//			p2 = new particle(1,2,3,4);
+//			p3 = new particle(1,2,3,4);
+
+			var count=0;
+
+		//	var generateObjectsAutomatically = function() {
+		//	window.onload() {
+				let curveMaterial;
+				let xPoint;
+				let yPoint;
+				let xRef1 = 10;
+				let yRef1 = 10;
+				let xRef2 = -10;
+				let yRef2 = -10;
+				for(let i=0; i<1500; i++) {
+					xPoint = Math.random()*20-10;
+					yPoint = Math.random()*20-10;
+					xDiff1 = xPoint - xRef1;
+					yDiff1 = yPoint - yRef1;
+					xDiff2 = xPoint - xRef2;
+					yDiff2 = yPoint - yRef2;
+					if(Math.sqrt(xDiff1*xDiff1 + yDiff1*yDiff1) < 10 )
+						curveMaterial = new THREE.MeshBasicMaterial( { color: 0x000000 } );
+					else if(Math.sqrt(xDiff2*xDiff2 + yDiff2*yDiff2) < 10 )
+						curveMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+					else
+						curveMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+	
+					renderCount = renderCount + 1;
+					document.getElementById("renderCount").innerHTML = renderCount;
+					p.push( new particle( xPoint, yPoint, 1, curveMaterial) );
+					c.push( new THREE.Mesh( geometry4, curveMaterial ) );
+					scene.add( c[c.length-1] );
+
+					var table = document.getElementById("myTable");
+					var row = table.insertRow(c.length-1);
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					var cell3 = row.insertCell(2);
+
+					var indent = c.length;
+					cell1.innerHTML = '<div id="' + indent + 'x" class="divType"></div>';
+					cell2.innerHTML = '<div id="' + indent + 'y" class="divType"></div>';
+					cell3.innerHTML = '<div id="' + indent + 'z" class="divType"></div>';
+				}
+		//	}
+			
+
+					let curveMaterial2 = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+					renderCount = renderCount + 1;
+					document.getElementById("renderCount").innerHTML = renderCount;
+					let xOffset = 12;
+					let yOffset = 800;
+					let yGaussian;
+
+/*
+					for(let xGaussian=-10; xGaussian<20; xGaussian+=0.2) {
+						yGaussian = 10 / ( 1 + Math.exp( xGaussian ) )
+						p.push( new particle( xGaussian + xOffset, -yGaussian, 1, curveMaterial2) );
+						c.push( new THREE.Mesh( geometry4, curveMaterial2 ) );
+						scene.add( c[c.length-1] );
+
+						var table = document.getElementById("myTable");
+						var row = table.insertRow(c.length-1);
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+
+						var indent = c.length;
+						cell1.innerHTML = '<div id="' + indent + 'x" class="divType"></div>';
+						cell2.innerHTML = '<div id="' + indent + 'y" class="divType"></div>';
+						cell3.innerHTML = '<div id="' + indent + 'z" class="divType"></div>';
+					}
+
+*/
+
+					var sigma=1;
+					var mu=10;
+					var denom = sigma * Math.sqrt(2*3.14);
+
+					for(let xGaussian2=-10; xGaussian2<20; xGaussian2+=0.02) {
+						let topExponent = - ( xGaussian2 - mu) * ( xGaussian2 - mu)
+						yGaussian2 = 10 / denom * Math.exp( topExponent / ( 2*sigma*sigma) )
+						pGaussian.push( new particle( xGaussian2 + xOffset, yGaussian2, 1, curveMaterial2) );
+						cGaussian.push( new THREE.Mesh( geometry4, curveMaterial2 ) );
+						scene.add( cGaussian[cGaussian.length-1] );
+
+						var table = document.getElementById("myTable");
+						var row = table.insertRow(cGaussian.length-1);
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+
+						var indent = cGaussian.length;
+						cell1.innerHTML = '<div id="' + indent + 'x" class="divType"></div>';
+						cell2.innerHTML = '<div id="' + indent + 'y" class="divType"></div>';
+						cell3.innerHTML = '<div id="' + indent + 'z" class="divType"></div>';
+					}
+
+					for(let yGaussian2=-10; yGaussian2<20; yGaussian2+=0.02) {
+						let topExponent2 = - ( yGaussian2 - mu) * ( yGaussian2 - mu)
+						xGaussian2 = 10 / denom * Math.exp( topExponent2 / ( 2*sigma*sigma) )
+						pGaussian2.push( new particle( 0, yGaussian2, 1, curveMaterial2) );
+						cGaussian2.push( new THREE.Mesh( geometry4, curveMaterial2 ) );
+						scene.add( cGaussian2[cGaussian2.length-1] );
+
+						var table = document.getElementById("myTable");
+						var row = table.insertRow(cGaussian2.length-1);
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+
+						var indent = cGaussian2.length;
+						cell1.innerHTML = '<div id="' + indent + 'x" class="divType"></div>';
+						cell2.innerHTML = '<div id="' + indent + 'y" class="divType"></div>';
+						cell3.innerHTML = '<div id="' + indent + 'z" class="divType"></div>';
+					}
+
+					for(let temp=-20; temp<20; temp+=0.02) {
+						pCluster.push( new particle( temp, 0, 0, curveMaterial2) );
+						cCluster.push( new THREE.Mesh( geometry4, curveMaterial2 ) );
+						scene.add( cCluster[cCluster.length-1] );
+					}
+			
+
+			var addObjectManually = function() {
+				var curveMaterial = new THREE.MeshBasicMaterial( { color: 0x000000 } );
+				if ( document.getElementById("mouse").innerHTML == "DOWN" ) {
+				    renderCount = renderCount + 1;
+				    document.getElementById("renderCount").innerHTML = renderCount;
+				    p.push( new particle( inc+=1, Math.random()*10-5, Math.random()*4-2, curveMaterial) );
+				    c.push( new THREE.Mesh( geometry3, curveMaterial ) );
+				    scene.add( c[c.length-1] );
+
+				    var table = document.getElementById("myTable");
+				    var row = table.insertRow(c.length-1);
+				    var cell1 = row.insertCell(0);
+				    var cell2 = row.insertCell(1);
+				    var cell3 = row.insertCell(2);
+
+				    var indent = c.length;
+				    cell1.innerHTML = '<div id="' + indent + 'x" class="divType"></div>';
+				    cell2.innerHTML = '<div id="' + indent + 'y" class="divType"></div>';
+				    cell3.innerHTML = '<div id="' + indent + 'z" class="divType"></div>';
+				}
+			}
+
+			var addObjectautonatically = function() {
+				renderCount = renderCount + 1;
+				document.getElementById("renderCount").innerHTML = renderCount;
+				p.push( new particle(Math.random()*4-2, Math.random()*4-2, Math.random()*4-2, Math.random()*4-2 ) );
+
+				var randomized=Math.random()*3;
+				if(randomized > 2)
+					c.push( new THREE.Mesh( geometry, material ) );
+				if(randomized > 1 && randomized < 2 )
+					c.push( new THREE.Mesh( geometry1, material1 ) );
+				if(randomized < 1 )
+					c.push( new THREE.Mesh( geometry2, material2 ) );
+
+				scene.add( c[renderCount+2] );
+
+				var table = document.getElementById("myTable");
+			        var row = table.insertRow(renderCount+2);
+				var cell1 = row.insertCell(0);
+				var cell2 = row.insertCell(1);
+				var cell3 = row.insertCell(2);
+
+			   	var indent = renderCount+3;
+				cell1.innerHTML = '<div id="' + indent + 'x" class="divType"></div>';
+				cell2.innerHTML = '<div id="' + indent + 'y" class="divType"></div>';
+				cell3.innerHTML = '<div id="' + indent + 'z" class="divType"></div>';
+
+				currentDate = new Date();
+				diffDate = currentDate - prevDate;
+				prevDate=currentDate;
+				document.getElementById("FPS").innerHTML = "FPS : " + diffDate;
+
+			}
+
+			var render2 = function() {
+//				renderer.setClearColorHex( 0xffff00 , 1)
+				document.getElementById("arrayLength").innerHTML = p.length;
+//				requestAnimationFrame( render );
+				var xCam=0;
+				var yCam=0;
+				var zCam;
+				var count2=0;
+				for(var j=0; j<(p.length); j++) {
+					if(j===0) {
+						zCam = p[j].posZ;
+					}
+					if(zCam < p[j].tempZ) {
+						zCam = p[j].posZ;
+					}
+					xCam += p[j].posX;
+					yCam += p[j].posY;
+					count2++;
+					c[j].position.x = p[j].posX;
+					c[j].position.y = p[j].posY;
+					c[j].position.z = p[j].posZ;
+				}
+
+/////	*************************************************************************************************
+				let curveMaterial2 = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
+//				renderCount = renderCount + 1;
+				document.getElementById("renderCount").innerHTML = renderCount;
+				let xOffset = 12;
+				let yGaussian;
+/////	*************************************************************************************************
+				
+				var sigma2=parseInt(document.getElementById("sigma").value);
+				var mu_1=parseInt(document.getElementById("mu_1").value);
+				var mu_2=parseInt(document.getElementById("mu_2").value);
+				var height2=parseInt(document.getElementById("height").value);
+				var yOffset2=parseInt(document.getElementById("yOffset").value);
+				var xOffset2=parseInt(document.getElementById("xOffset").value);
+
+				document.getElementById("mu1Div").innerHTML = "mu 1 : " + mu_1;
+				document.getElementById("mu2Div").innerHTML = "mu 2 : " + mu_2;
+				document.getElementById("sigmaDiv").innerHTML = "sigma : " + sigma2;
+				document.getElementById("yOffsetDiv").innerHTML = "yOffset : " + yOffset2;
+				document.getElementById("xOffsetDiv").innerHTML = "xOffset : " + xOffset2;
+				document.getElementById("heightDiv").innerHTML = "height : " + height2;
+
+				var denom2 = sigma2 * Math.sqrt(2*3.14);
+
+// cGaussian=undefined;
+// pGaussian=undefined;
+// cGaussian=[];
+// pGaussian=[];
+
+				for(var k=0; k<(pGaussian.length); k++) {
+/*
+					if(k===0) {
+						zCam = pGaussian[k].posZ;
+					}
+					if(zCam < p[k].tempZ) {
+						zCam = pGaussian[k].posZ;
+					}
+*/
+					xCam += pGaussian[k].posX;
+					yCam += pGaussian[k].posY;
+					count2++;
+/////	*************************************************************************************************
+					var topExponent2 = - ( k/20 - mu_1) * ( k/20 - mu_1)
+					yGaussian2 = height2 / denom2 * Math.exp( topExponent2 / ( 2*sigma2*sigma2) )
+/////	*************************************************************************************************
+					cGaussian[k].position.x = pGaussian[k].posX - 15;
+//					cGaussian[k].position.y = pGaussian[k].posY;
+					cGaussian[k].position.y = yGaussian2 - 15; // +yOffset2/10
+					cGaussian[k].position.z = pGaussian[k].posZ;
+				}
+
+
+				for(var k=0; k<(pGaussian2.length); k++) {
+/*
+					if(k===0) {
+						zCam = pGaussian2[k].posZ;
+					}
+					if(zCam < p[k].tempZ) {
+						zCam = pGaussian2[k].posZ;
+					}
+
+					xCam += pGaussian2[k].posX;
+					yCam += pGaussian2[k].posY;
+*/
+					count2++;
+/////	*************************************************************************************************
+					var topExponent2 = - ( k/20 - mu_2) * ( k/20 - mu_2)
+					xGaussian2 = height2 / denom2 * Math.exp( topExponent2 / ( 2*sigma2*sigma2) )
+/////	*************************************************************************************************
+					cGaussian2[k].position.x = xGaussian2 - 15; //+xOffset2/10;
+//					cGaussian[k].position.y = pGaussian[k].posY;
+					cGaussian2[k].position.y = pGaussian2[k].posY;
+					cGaussian2[k].position.z = pGaussian2[k].posZ;
+				}
+
+				for(var k=0; k<(pCluster.length); k++) {
+					cCluster[k].position.x = mu_1/2.5 - 13;
+					cCluster[k].position.y = mu_2/2.5 - 50 + k*0.02;
+					cCluster[k].position.z = pGaussian2[0].posZ;
+				}
+
+				cCluster[0].position.x = mu_1/2.5 - 13;
+				cCluster[0].position.y = mu_2/2.5 - 10;
+				cCluster[0].position.z = pGaussian2[0].posZ;
+
+				for(var k=1; k<(pCluster.length); k++) {
+					cCluster[k].position.x = mu_1/2.5 - 13 + height2/10*Math.cos(k);
+					cCluster[k].position.y = mu_2/2.5 - 10 + height2/10*Math.sin(k);
+					cCluster[k].position.z = pGaussian2[0].posZ;
+				}
+
+ 
+/*
+					for(let xGaussian2=-10; xGaussian2<20; xGaussian2+=0.02) {
+						let topExponent = - ( xGaussian2 - mu) * ( xGaussian2 - mu)
+						yGaussian2 = 10 / denom * Math.exp( topExponent / ( 2*sigma*sigma) )
+						pGaussian.push( new particle( xGaussian2 + xOffset, yGaussian2, 1, curveMaterial2) );
+						cGaussian.push( new THREE.Mesh( geometry4, curveMaterial2 ) );
+						scene.add( cGaussian[cGaussian.length-1] );
+
+						var table = document.getElementById("myTable");
+						var row = table.insertRow(cGaussian.length-1);
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+
+						var indent = cGaussian.length;
+						cell1.innerHTML = '<div id="' + indent + 'x" class="divType"></div>';
+						cell2.innerHTML = '<div id="' + indent + 'y" class="divType"></div>';
+						cell3.innerHTML = '<div id="' + indent + 'z" class="divType"></div>';
+					if(i===0) {
+						zCam = pGaussian[i].posZ;
+					}
+					if(zCam < p[i].tempZ) {
+						zCam = pGaussian[i].posZ;
+					}
+					xCam += pGaussian[i].posX;
+					yCam += pGaussian[i].posY;
+					count2++;
+					}
+*/
+
+				camera.position.x = xCam / count2;
+				camera.position.y = yCam / count2;
+				camera.position.z = zCam + 20;
+
+				count++;
+				document.getElementById("counter").innerHTML = count;
+				document.getElementById("1z%").style.height = 20 + camera.position.z - c[0].position.z;
+				document.getElementById("2z%").style.height = 20 + camera.position.z - c[1].position.z;
+				document.getElementById("3z%").style.height = 20 + camera.position.z - c[2].position.z;
+
+				for(var dat=0; dat<(p.length); dat++) {
+					var dat1 = dat + 1;
+					document.getElementById(dat1 + "x").innerHTML = dat1 + "x: " + Math.round(p[dat].posX);
+					document.getElementById(dat1 + "y").innerHTML = dat1 + "y: " + Math.round(p[dat].posY);
+					document.getElementById(dat1 + "z").innerHTML = dat1 + "z: " + Math.round(p[dat].posZ);
+				}
+
+				document.getElementById("camX").innerHTML = "camX: " + Math.round(camera.position.x);
+				document.getElementById("camY").innerHTML = "camY: " + Math.round(camera.position.y);
+				document.getElementById("camZ").innerHTML = "camZ: " + Math.round(camera.position.z);
+
+				document.getElementById("windowWidth").innerHTML = window.innerWidth/2;
+
+
+
+				renderer.render(scene, camera);
+
+			};
+
+			setInterval(render2, 20);
+		//	setInterval(addObjectManually, 20);
+		//	setInterval(addObjectManually, 20);
+		</script>
+</div>
+</td>
+			</tr>
+		</table>
+
+
+
+<!--
+		<table position="Absolute" style="width:50px; border:1px;">
+			<tr style="idth:30px;" width="30px;">
+				<td><div id="1z%" class="greenZ"></div></td>
+				<td><div id="2z%" class="redZ"></div></td>
+				<td><div id="3z%" class="blueZ"></div></td>
+			</tr>
+		</table>
+-->
+
+
+	</body>
+</html>

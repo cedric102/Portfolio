@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+</style>
+</head>
+<body onload="startGame()">
+
+
+
+<script>
+
+	var Piece;
+	var Piece1;
+//	var Piece;
+	var angle2;
+	var inside;
+	var myObstacles = [];
+	var curve = [];
+	var myScore;
+	var trueStuff;
+
+	var TRIAL = 0.0;
+	var angle = 0;
+	var JUMP = false;
+	var PRESS = false;
+	var inside2 = 0;
+	var angle4 = 0.0;
+
+
+	
+		var zero;
+		var one;
+		var two;
+		var three;
+		var four;
+		var five;
+		var six;
+		var seven;
+		var eight;
+		var nine;
+		var ten;			
+
+	function startGame() {
+	    	Piece = new component(30, 30, "red", 200, 180);
+	    	Piece1 = new component(30, 30, "orange", 200, 180);
+	   	Canon = new component(30, 30, "blue", 200, 240);
+	    	Block = new component(50, 50, "green", 300, 50);
+	    	Bolder = new component(50, 50, "grey", 300, 220);
+		
+		for (let i = 0; i < 500; i++) {
+	    		curve.push( new component(5, 5, "blue", 150+i*2, 110));
+		}
+	    	Piece.gravity = 0.05;
+	    	Piece1.gravity = 0.05;
+
+	    	myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+	    	inside = new component("30px", "Consolas", "black", 280, 160, "text");
+	    	trueStuff = new component("30px", "Consolas", "black", 280, 80, "text");
+	    	angle2 = new component("30px", "Consolas", "black", 280, 120, "text");
+	   	Area.start();
+	}
+
+	var Area = {
+	    	canvas : document.createElement("canvas"),
+	    	start : function() {
+			this.canvas.width = 550;
+			this.canvas.height = 1000;
+			this.context = this.canvas.getContext("2d");
+			document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+			this.frameNo = 0;
+			this.interval = setInterval(updateGameArea, 20);
+		},
+	    	clear : function() {
+			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	    	}
+	}
+
+	function component(width, height, color, x, y, type) {
+	    	this.type = type;
+	    	this.score = 0;
+	    	this.width = width;
+	    	this.height = height;
+	    	this.speedX = 0.0;
+	    	this.speedY = 0.0;    
+	    	this.x = x;
+	    	this.y = y;
+	    	this.gravity = 0;
+	    	this.gravitySpeed = 0;
+	    	this.updatePoly = function() {
+			ctx = Area.context;
+
+			if (this.type == "text") {
+		    		ctx.font = this.width + " " + this.height;
+		    		ctx.fillStyle = color;
+		    		ctx.fillText(this.text, this.x, this.y);
+			} else {
+		    		ctx.fillStyle = color;
+		    		ctx.fillRect(this.x, this.y, this.width, this.height);
+			}
+	    	} 
+
+	    	this.newPosPoly = function(x , y) {
+			updateRanges();
+			this.x = 25 + x;
+			var tempX = x/500;
+			var Polynom = zero + one*Math.pow(tempX,1) + two*Math.pow(tempX,2) + three*Math.pow(tempX,3) + four*Math.pow(tempX,4) + five*Math.pow(tempX,5) + six*Math.pow(tempX,6) + seven*Math.pow(tempX,7) + eight*Math.pow(tempX,8) + nine*Math.pow(tempX,9) + ten*Math.pow(tempX,10);
+			this.y = 500 + Polynom;
+	    	}
+
+	    	this.update = function() {
+			ctx = Area.context;
+			if (this.type == "text") {
+		    		ctx.font = this.width + " " + this.height;
+		    		ctx.fillStyle = color;
+		    		ctx.fillText(this.text, this.x, this.y);
+			} else {
+		    		ctx.fillStyle = color;
+		    		ctx.fillRect(this.x, this.y, this.width, this.height);
+			}
+	    	} 
+
+	    	this.newPos = function() {
+			this.gravitySpeed += this.gravity;
+			this.x += this.speedX;
+			this.y += this.speedY + this.gravitySpeed;
+			this.hitBottom();
+	    	}
+	    	this.hitBottom = function() {
+			var rockbottom = Area.canvas.height - this.height;
+			if (this.y > rockbottom) {
+		    		this.y = rockbottom;
+		    		this.gravitySpeed = 0;
+			}
+	    	}
+
+	    	this.jumpHigh = function() {
+			var angle3 = 0.0;
+			angle3=angle*Math.PI/180;
+			this.speedX = 30.0*Math.cos(angle3);
+			this.speedY = -30.0*Math.sin(angle3);
+			TRIAL = -30.0 * Math.sin(angle3);
+
+			inside2=1;
+	    	}
+
+	    	this.crashWith = function(otherobj) {
+			var myleft = this.x;
+			var myright = this.x + (this.width);
+			var mytop = this.y;
+			var mybottom = this.y + (this.height);
+			var otherleft = otherobj.x;
+			var otherright = otherobj.x + (otherobj.width);
+			var othertop = otherobj.y;
+			var otherbottom = otherobj.y + (otherobj.height);
+			var crash = false; // true
+			if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+			    	crash = false;
+			}
+			return crash;
+	    	}
+	}
+
+	function updateGameArea() {
+	    	var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+	    	for (i = 0; i < myObstacles.length; i += 1) {
+			if (Piece.crashWith(myObstacles[i])) {
+		    	return;
+			} 
+	   	}
+	    	Area.clear();
+	    	Area.frameNo += 1;
+	    	if (Area.frameNo == 1 || everyinterval(150)) {
+			x = Area.canvas.width;
+			minHeight = 20;
+			maxHeight = 200;
+			height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+			minGap = 50;
+			maxGap = 200;
+			gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+			myObstacles.push(new component(10, height, "green", x, 0));
+			myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
+	    	}
+
+		document.onkeydown = function(event){
+		
+			if(event.keyCode === 68) {	//d
+				Piece.x += 2;
+			}
+
+			else if(event.keyCode === 65) {	//a
+	    			Piece.x -= 2;
+			}
+			
+		}
+
+
+		document.onmousedown = function(event){
+				JUMP = true;
+				PRESS = true;
+
+				var x = event.clientX - Piece.x - 10;
+				var y = -(event.clientY - Piece.y) + 10;
+				angle = Math.atan2(y,x) / Math.PI * 180;
+
+				Piece.y -= 1;
+				var dx = Piece.x - Canon.x;
+				var dy = Piece.y - Canon.y;
+
+				if( ( Math.abs(dx) < Canon.width ) && ( Math.abs(dy) < Canon.height ) )
+					Piece.jumpHigh();
+
+		}
+		document.onmouseup = function(event){
+		//	if(JUMP === false) {
+			PRESS = false;
+		//	}
+		}
+		document.onmousemove = function(event){
+			var x = event.clientX - Piece.x - 10;
+			var y = -(event.clientY - Piece.y) + 10;
+			angle = Math.atan2(y,x) / Math.PI * 180;
+		}
+
+	    	for (let i = 0; i < curve.length; i++) {
+//			let y = document.getElementById('').innerHTML;
+			curve[i].newPosPoly(i, i);
+	   		curve[i].updatePoly();
+	    	}
+
+	    	for (i = 0; i < myObstacles.length; i += 1) {
+	   		myObstacles[i].update();
+	    	}
+
+	    	trueStuff.text="Jump: " + JUMP;
+	    	trueStuff.update();
+
+	    	inside.text="Inside: " + inside2;
+	    	inside.update();
+
+	    	angle2.text="Angle: " + angle4;
+	    	angle2.update();
+
+	    	myScore.text="SCORE: " + Area.frameNo;
+	    	myScore.update();
+
+	    	Canon.newPos();
+	    	Canon.update();
+
+	    	Piece.newPos();
+	    	Piece.update();
+
+	    	Piece1.newPos();
+	    	Piece1.update();
+
+	    	Bolder.newPos();
+	    	Bolder.update();
+
+	    	Block.newPos();
+	    	Block.update();
+
+	}
+
+	function updateRanges() {
+		zero=parseInt(document.getElementById("zero").value);
+		one=parseInt(document.getElementById("one").value);
+		two=parseInt(document.getElementById("two").value);
+		three=parseInt(document.getElementById("three").value);
+		four=parseInt(document.getElementById("four").value);
+		five=parseInt(document.getElementById("five").value);
+		six=parseInt(document.getElementById("six").value);
+		seven=parseInt(document.getElementById("seven").value);
+		eight=parseInt(document.getElementById("eight").value);
+		nine=parseInt(document.getElementById("nine").value);
+		ten=parseInt(document.getElementById("ten").value);
+
+		document.getElementById("zeroDiv").innerHTML = "Zero : " + zero;
+		document.getElementById("oneDiv").innerHTML = "One : " + one + "x";
+		document.getElementById("twoDiv").innerHTML = "Two : " + two + "x" + "2".sup();
+		document.getElementById("threeDiv").innerHTML = "Three : " + three + "x" + "3".sup();
+		document.getElementById("fourDiv").innerHTML = "Four : " + four + "x" + "4".sup();
+		document.getElementById("fiveDiv").innerHTML = "Five : " + five + "x" + "5".sup();
+		document.getElementById("sixDiv").innerHTML = "Six : " + six + "x" + "6".sup();
+		document.getElementById("sevenDiv").innerHTML = "Seven : " + seven + "x" + "7".sup();
+		document.getElementById("eightDiv").innerHTML = "Eight : " + eight + "x" + "8".sup();
+		document.getElementById("nineDiv").innerHTML = "Nine : " + nine + "x" + "9".sup();
+		document.getElementById("tenDiv").innerHTML = "Ten : " + ten + "x" + "10".sup();
+	}
+
+	function everyinterval(n) {
+		if ((Area.frameNo / n) % 1 == 0) {return true;}
+
+		var dVelX;
+		var dVelY;
+	
+		dVelX = (Piece.speedX * Piece.speedX) / 100;
+
+		if(Piece.speedX <= 0)
+			dVelX = -dVelX;
+
+		dVelY = (Piece.speedY * Piece.speedY) / 100;
+
+		if(Piece.y >= (Area.canvas.height - Piece.height) ) {
+			Piece.speedX = 0;
+			Piece.speedY = 0;
+			dVelX = 0;
+			dVelY = 0;
+			JUMP = false;
+		}
+
+		Piece.speedX -= dVelX;
+		Piece.speedY += dVelY;
+
+		if(JUMP === true && PRESS === false ) {
+
+			var d2x = 0.0;
+			var d2y = 0.0;
+			d2x = Piece.x - Canon.x;
+			d2y = Piece.y - Canon.y;
+
+			if(Piece.y < Canon.y) {
+
+				if( ( Math.abs(d2x) > Canon.width ) || ( Math.abs(d2y) > Canon.height ) ) {
+					var d1x = 0.0;
+					var d1y = 0.0;
+					d1x = Bolder.x - Piece.x;
+					d1y = - ( Bolder.y - Piece.y );
+
+					var dist1 = 0.0;
+					dist1 = Math.sqrt( (d1y*d1y) + (d1x*d1x) );
+					angle4 = Math.acos(d1x / dist1);
+
+					if( d1y > 0.0 )
+						angle4 = -angle4;
+
+					angle4 = angle4 + 0.01;
+					var newX = (Math.cos(angle4) * dist1) + Piece.x;
+					Bolder.speedX = newX - Bolder.x;
+					Bolder.speedY = ((Math.sin(angle4) * dist1) + Piece.y) -  Bolder.y;
+					Bolder.y = (Math.sin(angle4) * dist1) + Piece.y;
+					Bolder.x = newX;
+			
+				}
+
+			}
+
+		} else {
+
+			if(Bolder.y < (Area.canvas.height - Bolder.height) ) {
+				Bolder.x += Bolder.speedX;
+				Bolder.y += Bolder.speedY;
+				Bolder.gravity=0.01;
+				Bolder.speedY += Bolder.gravity;
+			} else {
+				Bolder.speedX = 0;
+				Bolder.speedY = 0;
+			}
+
+		}
+
+		var avgX = 10+Bolder.x - Block.x;
+		var avgY = 10+Bolder.y - Block.y;
+
+		if( ( Math.abs(avgX) < (Bolder.width-20) ) && ( Math.abs(avgY) < (Bolder.height-20) ) ) {
+			Bolder.gravity = 0;
+			Bolder.speedX = 0;
+			Bolder.speedY = 0;
+			JUMP = false;
+		}
+			
+
+		return false;
+	}
+
+	function accelerate(n) {
+	    	Piece.gravity = n;
+	}
+</script>
+
+<input type="range" min="-480" max="480" value="0" class="slider" id="zero" style="position: absolute; left: 0px; top: 400px;"><div id="zeroDiv"style="position: absolute; left: 150px; top: 400px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="one" style="position: absolute; left: 0px; top: 430px;"><div id="oneDiv"style="position: absolute; left: 150px; top: 430px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="two" style="position: absolute; left: 0px; top: 460px;"><div id="twoDiv"style="position: absolute; left: 150px; top: 460px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="three" style="position: absolute; left: 0px; top: 490px;"><div id="threeDiv"style="position: absolute; left: 150px; top: 490px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="four" style="position: absolute; left: 0px; top: 520px;"><div id="fourDiv"style="position: absolute; left: 150px; top: 520px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="five" style="position: absolute; left: 0px; top: 550px;"><div id="fiveDiv"style="position: absolute; left: 150px; top: 550px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="six" style="position: absolute; left: 0px; top: 580px;"><div id="sixDiv"style="position: absolute; left: 150px; top: 580px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="seven" style="position: absolute; left: 0px; top: 610px;"><div id="sevenDiv"style="position: absolute; left: 150px; top: 610px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="eight" style="position: absolute; left: 0px; top: 640px;"><div id="eightDiv"style="position: absolute; left: 150px; top: 640px;">1</div>
+
+<input type="range" min="-100" max="100" value="0" class="slider" id="nine" style="position: absolute; left: 0px; top: 670px;"><div id="nineDiv"style="position: absolute; left: 150px; top: 670px;">1</div>
+<input type="range" min="-100" max="100" value="0" class="slider" id="ten" style="position: absolute; left: 0px; top: 700px;"><div id="tenDiv"style="position: absolute; left: 150px; top: 700px;">1</div>
+
+<br>
+<button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
+<p>Use the ACCELERATE button to stay in the air</p>
+<p>How long can you stay alive?</p>
+<div id="thinggy"></div>
+
+
+
+</body>
+</html>
+

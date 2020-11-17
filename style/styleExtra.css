@@ -1,0 +1,261 @@
+
+.fixedRightTabs { 
+  background-color: blue;
+  width: 120px;
+  height: 50px;
+  border-radius: 25px 0px 0px 25px;
+  border: 1px solid black;
+  font-size: 2em;
+  padding-top: 10px;
+  cursor: pointer; }
+
+@media only screen and (max-width: 900px) {
+	.container {
+	  display: inline-block;
+	  cursor: pointer;
+	  position: relative;
+	  left: 10px;
+	  bottom: 5px;
+	}
+
+	.bar1, .bar2, .bar3 {
+	  background-color: white;
+	  width: 35px;
+	  height: 5px;
+	  margin: 6px 0;
+	  transition: 0.4s;
+	}
+
+	.change .bar1 {
+	  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+	  transform: rotate(-45deg) translate(-9px, 6px);
+	}
+
+	.change .bar2 {opacity: 0;}
+
+	.change .bar3 {
+	  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+	  transform: rotate(45deg) translate(-8px, -8px);
+	}
+}
+
+  #slide-text { height: 200px; font-size: 50px; display: inline-block; left: 0px; }
+  #slide-text2 { font-size: 50px; display: inline-block; left: 0px; }
+  #inner-text { display: inline-block; font-size: 20px; position: relative; vertical-align: middle; }
+
+
+    #inHidding0 { display: none; border-radius: 25px 25px 25px 25px; padding-bottom: 3px; padding-top: 3px; font-size: 20px; top: -5px; } 
+    #inHidding0 { display: block; color: white; background-color: Transparent; position: relative; left: 10px; bottom: 2px; border: Transparent; }
+
+  #headerTitle1 { position: relative; top: 35%; }
+  #headerTitle2 { position: relative; top: 40%; }
+  #innerImgProgress { width: 100px; display: inline-block; vertical-align: middle; width: 14%; }
+  #slideText { margin-top: 25px; margin-bottom: 25px; font-size: 50px; display: inline-block; border-bottom: 2px solid black; padding-bottom: 50px; }
+  #innerText div div { margin-bottom: 7px; margin-left: 7px; margin-right: 7px; }
+  #textInImage { position: relative; top: 200px; left: 60px; font-size: 2em; background-color: blue; width: 250px; text-align: center; color: white; cursor: pointer; }
+  #textInImage2 { position: relative; font-size: 2em; background-color: rgba(0, 0, 255, 0.5); height: 50px; color: white; cursor: pointer; bottom: 70px; vertical-align: middle; position: absolute; left: -1px; top: 50%; transform: translate(0, -50%); width: 100%; }
+  #textInImage2:hover { background-color: rgba(0, 0, 255, 1); }
+  #textInImage3 { position: relative; font-size: 2em; background-color: rgba(0, 0, 255, 0.5); height: 50px; color: white; cursor: pointer; vertical-align: middle; width: 100%; margin-top: -20px; border-radius: 25px 25px 25px 25px; }
+  #textInImage3:hover { background-color: rgba(0, 0, 255, 1); }
+  #textInImage4 { position: relative; font-size: 2em; background-color: rgba(0, 0, 255, 0.5); height: 50px; color: white; cursor: pointer; vertical-align: middle; width: 100%; margin-top: -20px; border-radius: 25px 25px 25px 25px; }
+  #textInImage4:hover { background-color: rgba(0, 0, 255, 1); }
+  .bla { border: 1px solid blue; max-width: 300px; display: block; }
+  #menuItem { border: 1px solid green; position: relative; }
+  #innerImg { width:100%; cursor: pointer; }
+  .videoButton { width: 23%; height: 50px; margin-left: 1%; border: 1px solid black; display: inline-block; background-image: linear-gradient(blue, purple); color: white; }
+
+  .videoButton:hover {
+    background-image: linear-gradient(green, purple); 
+  }
+  .javaVideo { width: 50%; height: auto; padding: 1%; margin : 1%; display: block; margin: 0 auto; }
+  .aboutGeneWarning { top: 0px; }
+  .aboutGene { margin: 1%; position: absolute; top: 0px; }
+  .demo { opacity: 0.5 }; 
+  .demo:hover { opacity: 1 }
+  #secondTextInDiv { transform: translate(0, 100%); }
+  
+  .barLabel { display: inline-block; }
+  .inHiddingLink1 { display: inline-block; position: relative; bottom: 68px; }
+  .inHiddingLink2 { display: inline-block; position: relative; bottom: 60px;  }
+  #inHidding1 { display: none; border-radius: 25px 25px 25px 25px; border: 1px solid white; padding-bottom: 3px; padding-top: 3px; font-size: 20px; top: -5px; }
+  #inHidding2 { display: none; border-radius: 25px 25px 25px 25px; border: 1px solid white; padding-bottom: 3px; padding-top: 3px; font-size: 20px; top: 10px; }
+  @media only screen and (max-width: 900px) {
+    #innerText { /*width: 400px; */font-size: 15px; display: block; margin-left: 0px; margin: 0 auto; margin-bottom: 20px; }
+    #slideText { width: fit-content; }
+    #innerImgProgress { width: 40%; }
+    #inHidding1 { display: block; background-color: black; color: white; position: relative; left: 10px; bottom: 2px; }
+    #inHidding2 { display: block; background-color: black; color: white; position: relative; left: 10px; bottom: 5px; }
+    .inHiddingLink1 { background-color: black; width: 170px; display: none; position: relative; top: -2px; }
+    .inHiddingLink2 { background-color: black; width: 170px; display: none; position: relative; top: 10px; }
+    .skillDivs { position: relative; display: block; width: 100%; background-color: white; }
+    .barLabel { display: block; margin-top: 50px; }
+    #dotSlider1 { position: relative; padding-bottom: 30px; margin-bottom: 0px; margin-top: 0px; }
+    #dotSlider2 { position: relative; padding-bottom: 30px; margin-bottom: 0px; margin-top: 0px; }
+    #webSlider  { position: relative; margin-bottom: 0px; margin-top: 20px; }
+    #appSlider  { position: relative; margin-bottom: 0px; margin-top: 20px; }
+    #robotSlider  { position: relative; margin-bottom: 0px; margin-top: 20px; }
+    #portfolio { padding-left: 0px; }
+    .sliderInnerText { font-size: 10px; position: relative; max-width: 99%; } 
+    .mySlides { margin-left: 0px; }
+/*    #about2 { position: relative; padding-bottom: 750px; } */
+  }
+  @media only screen and (max-width: 600px) {
+    #innerText { font-size: 15px; }
+  }
+  @media only screen and (min-width: 901px) {
+    #innerText { display: inline-block; max-width: 80%; font-size: 2vw; position: relative; vertical-align: middle; }
+    .inHiddingLink1 { display: inline-block; }
+    .inHiddingLink2 { display: inline-block; }
+    .inHiddingLink1 { margin-top: 3px; }
+    .inHiddingLink2 { margin-top: 5px; }
+    #sliderWrapper { padding: 20px; } 
+/*    #about2 { position: relative; padding-bottom: 400px; } */
+  }
+  @media only screen and (min-width: 1500px) {
+    #innerText { display: inline-block; max-width: 80%; font-size: 2vw; position: relative; vertical-align: middle; }
+    .inHiddingLink1 { display: inline-block; }
+    .inHiddingLink2 { display: inline-block; }
+    .inHiddingLink1 { margin-top: 3px; }
+    .inHiddingLink2 { margin-top: 5px; }
+    #sliderWrapper { padding: 20px; } 
+/*    #about2 { position: relative; padding-bottom: 150px; } */
+  }
+/*
+  @media only screen and (max-width: 450px) {
+    #innerText {/* width: 350px; width: 100%;  }
+  }
+*/
+  @media only screen and (max-width: 700px) {
+    #project-cathegory-choice { width: 100%; display: none; }
+    #project-cathegory-choice-short { width: 100%; display: block; }
+    #textInImage2 { width: 100%; }
+    #menuItem { width: 100%; position: relative; }
+    #innerImg { display: none; }
+    #mySlides { padding: 50px; padding-left: 0px; }
+    #innerImgProgress { margin-bottom: 20px; }
+    .videoButton { width: 100%; margin-left: 0%; }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .inHiddingLink2 { background-color: black; width: 170px; display: none; position: relative; top: 10px; }
+  }
+  @media only screen and (max-width: 580px) {
+    #innerImgProgress { margin-bottom: 20px; }
+  }
+
+  section {
+     padding-top: 50px;
+     padding-bottom: 50px;
+  }
+  section:nth-of-type(1) {
+    padding: 0px;
+    margin: 0px;
+    max-height: 100vh;
+  }
+
+/*
+  section:nth-child(2) {
+    height: 100vh;
+  }
+*/
+
+  @media only screen and (min-width: 1501px) {
+    .aboutGene { position: absolute; display : inline-block; width : 20%; top: 0px; }
+    .aboutGene:nth-child(1) { left: 240px; transform: translate(10%, 0%); }
+    .aboutGene:nth-child(2) { left: 240px; transform: translate(130%, 0%); }
+    .aboutGene:nth-child(3) { left: 500px; transform: translate(250%, 0%); }
+    .aboutGene:nth-child(4) { left: 750px; transform: translate(370%, 0%); }
+
+    .aboutImg { position: relative; display : inline; }
+    .aboutDiv { position: relative; display : block; width : 100%; }
+    .aboutDivInner { position: relative; display : block; left : 50%; transform: translate(-50%, 0%); }
+    #portfolioMainDiv { height: 1000px; }
+    #portfolio { height: fit-content; }
+    #workInProgressContainer { height: 500px; }
+  }
+
+  .shortSubText { display: none; }
+  .longSubText { display: block; }
+  @media only screen and (max-width: 600px) {
+    #inHidding0{ height: 40px; font-size: 20px; display: relative; bottom: 5px; }
+    #inHidding1{ height: 40px; font-size: 20px; display: relative; bottom: 5px; }
+    #inHidding2{ height: 40px; font-size: 20px; display: relative; bottom: 5px; }
+    .shortSubText { display: none; }
+    .longSubText { display: block; }
+  }
+
+  @media only screen and (max-width: 1500px) {
+   @media only screen and (min-width: 801px) {
+    .aboutGene { position: absolute; width : 45%; margin-bottom: 50px; padding-bottom: 50px;  padding-top: 50px; }
+    .aboutGene:nth-child(1) { left: 240px; transform: translate(5%, 0%); }
+    .aboutGene:nth-child(2) { left: 240px; transform: translate(110%, 0%); }
+    .aboutGene:nth-child(3) { left: 500px; transform: translate(5%, 200%); border-top: 2px solid black; margin-top: 50px; }
+    .aboutGene:nth-child(4) { left: 750px; transform: translate(110%, 200%); border-top: 2px solid black; margin-top: 50px; }
+    .aboutImg { position: relative; display : inline; }
+    .aboutDiv { position: relative; display : block; width : 100%; }
+    .aboutDivInner { position: relative; display : block; left : 50%; transform: translate(-50%, 0%); }
+    #portfolioMainDiv { height: 520px; }
+    #workInProgressContainer { height: 900px; }
+   }
+  }
+
+  @media only screen and (max-width: 1500px) {
+    .hidding { width: 100%; height: auto; }
+    .javaVideo { width: 75%; height: auto; }
+    .videoHidding { display: block; width: 100%; height: auto; }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .hidding { position: relative; width: 100%; height: auto; }
+    .javaVideo { position: relative; width: 100%; height: auto; }
+    .videoHidding { position: relative; display: block; width: 100%; height: auto; }
+  }
+
+  .aboutGeneWarning .errorAbsoluteTitle { font-size: 4vw; }
+  @media only screen and (max-width: 800px) {
+    .aboutGene { position: relative; display : inline-block; width : 100%; padding-bottom: 50px;  padding-top: 50px;  }
+    .aboutGene:nth-child(1) { left: 240px; transform: translate(0%, 0%); }
+    .aboutGene:nth-child(2) { left: 240px; transform: translate(0%, 0%); border-top: 2px solid black; }
+    .aboutGene:nth-child(3) { left: 500px; transform: translate(0%, 0%); margin-top: 220px; border-top: 2px solid black; }
+    .aboutGene:nth-child(4) { left: 750px; transform: translate(0%, 0%); border-top: 2px solid black; margin-top: 30px; }
+    .aboutImg { position: relative; display : inline-block; }
+    .aboutDiv { position: relative; display : inline-block; width : 100%; }
+    .aboutDivInner { position: relative; display : block; left : 50%; transform: translate(-50%, 0%); }
+    #portfolioMainDiv { height: 650px; }
+    #workInProgressContainer { height: 1650px; }
+    .aboutGeneWarning .errorText { font-size: 15px; }
+    .aboutGeneWarning .errorAbsoluteTitle { font-size: 25px; }
+  }
+
+  @media only screen and (min-width: 600px) {
+  }
+
+  @media only screen and (min-width: 701px) {
+    #project-cathegory-choice-short { width: 100%; display: none; }
+    #project-cathegory-choice { width: 620px; }
+    #menuItem { width: 200px; }
+  }
+
+  #headerDiv { position: relative; z-index: 0; }
+  #headerVid { position: relative; z-index: 1;   }
+  #headerText { position: absolute; width: 100%; height: 100%; border: 1px solid green; top: 0px;  z-index: 2;  }
+  #headerTitle { position: relative; top: 20%;  }
+  #upTo { position: relative; top: 30%; color: black; } 
+  #nav-position { position: absolute; bottom:0px; }
+
+
+  @media only screen and (min-width: 1121px) {
+    #skillSection1 { position: relative; padding-top: 150px; };
+  }
+
+
+/*    height: calc(100vh + 50px); }	*/
+/*
+     <div id="headerDiv" style="position: relative; height: 1000px;">
+ 	<video id="headerVid" style="" controls>
+	   <source src="mobileRobot.mp4" type="video/mp4" />
+        </video>
+    
+        <div id="headerText" style="position: absolute; top: 0; z-index: 1;">
+*/
+

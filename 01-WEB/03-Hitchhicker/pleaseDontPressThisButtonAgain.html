@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+	canvas {
+    		border:1px solid #d3d3d3;
+    		background-color: #f1f1f1;
+    		background-color: green;
+	}
+
+	body {
+    		background-color: rgb(100, 0, 0);
+	}
+
+	#Butt { background-color : blue; color: white; font-size: 5vw; border-radius: 50px; padding: 2vw 3vw; position: absolute; left: 30%; top: 40%; }
+	#text { font-size: 5vw; position: absolute; left: 35%; top: 50%; color: gray; }
+	@media only screen and (min-width: 1500px) {
+		#text { top: 55%; }
+	}
+	@media only screen and (max-width: 1000px) {
+		#text { top: 25%; }
+	}
+	@media only screen and (max-width: 700px) {
+		#text { top:30%; }
+	}
+	@-moz-document url-prefix() {
+		#text { font-size: 4vw; }
+	}
+</style>
+</head>
+<body onload="startGame()">
+<script>
+	var inc=0;
+	var inc2=-1;
+	var count=0;
+	var invSpeed=2;
+	function clicked() {
+		if( inc > 4 ) {
+			inc = 0;
+		}
+		inc++;
+	}
+	function dispCheck() {
+			if(inc != inc2) {
+				inc2 = inc;
+				count = 0;
+			}
+			count++;
+	}
+	function update() {
+		if(inc == 1) {
+			dispCheck();
+			document.getElementById("text").innerText = "Please, don't press this button again.".substring(0,count / invSpeed);
+			document.getElementById("text").style.left = "13%";
+		} else if(inc == 2) {
+			dispCheck();
+			document.getElementById("text").innerText = "Ah, you have pressed it again.".substring(0,count / invSpeed);
+			document.getElementById("text").style.left = "18%";
+		} else if(inc == 3) {
+			dispCheck();
+			document.getElementById("text").innerText = "Please, Really, Stop !!!".substring(0,count / invSpeed);
+			document.getElementById("text").style.left = "26%";
+		} else if(inc == 4) {
+			dispCheck();
+			document.getElementById("text").innerText = "Alright then, forget about it.".substring(0,count / invSpeed);
+			document.getElementById("text").style.left = "20%";
+		} else {
+			dispCheck();
+			document.getElementById("text").innerText = "".substring(0,count / invSpeed);
+			document.getElementById("text").style.left = "42%";
+		}
+	}
+	
+	setInterval(update, 2);
+</script>
+<button onclick="clicked()" id="Butt" >Magic Button</button>
+<p id="text"></p>
+</body>
+</html>
+

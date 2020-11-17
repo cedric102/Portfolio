@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+</style>
+</head>
+<body onload="startGame()">
+
+<script>
+
+	var Piece;
+	var Piece1;
+
+	var angle2;
+	var inside;
+	var myObstacles = [];
+
+	var curve = [];
+	var gaussian1 = [];
+	var gaussian2 = [];
+	var center = [];
+
+	var myScore;
+	var trueStuff;
+
+	var TRIAL = 0.0;
+	var angle = 0;
+	var JUMP = false;
+	var PRESS = false;
+	var inside2 = 0;
+	var angle4 = 0.0;
+
+
+	var weight00=0.0;
+	var weight10=100;
+	var weight20=100;
+	var weight01=0.0;
+	var weight11=100;
+	var weight21=100;
+	var weight02=0.0;
+	var weight12=100;
+	var weight22=100;
+	var weight03=0.0;
+	var weight13=100;
+	var weight23=100;
+
+	var areaPoints = [];			
+
+	var sigma=1;
+	var mu=10;
+	var denom = sigma * Math.sqrt(2*3.14);
+
+
+	function startGame() {
+		
+	    			let curveMaterial;
+				let xPoint;
+				let yPoint;
+				let xRef1 = 100;
+				let yRef1 = 100;
+				let xRef2 = 400;
+				let yRef2 = 400;
+				for(let i=0; i<1300; i++) { // 15000
+					xPoint = Math.random()*550;
+					yPoint = Math.random()*550;
+					var xDiff1 = xPoint - xRef1;
+					var yDiff1 = yPoint - yRef1;
+					var xDiff2 = xPoint - xRef2;
+					var yDiff2 = yPoint - yRef2;
+				//	var color = NeuralNet( xPoint , yPoint );
+					areaPoints.push( new component_2(5, 5, NeuralNet3( xPoint , yPoint ), xPoint, yPoint))
+					
+				}
+
+	   	Area.start(window.innerWidth);
+	}
+
+
+	function NeuralNet2( x , y ) {
+		
+		var bias = 1;
+
+		var weight000 = -275.0 - 550 + weight00;
+		var weight100 = weight10 / 100;
+		var weight200 = weight20 / 100;
+
+		var weight010 = 275.0 + weight01;
+		var weight110 = -weight11 / 100;
+		var weight210 = -weight21 / 100;
+
+		var weight001 = -0.5;
+		var weight101 = 1;
+		var weight201 = 1;
+
+		hyp000 = weight000 * bias;
+		hyp100 = weight100 * x;
+		hyp200 = weight200 * y;
+
+		hyp010 = weight010 * bias;
+		hyp110 = weight110 * x;
+		hyp210 = weight210 * y;
+
+		var act01 = ( 1 / ( 1 + Math.exp( - ( hyp000 + hyp100 + hyp200 ) ) ) > 0.5 ) ? 1 : 0;
+		var act11 = ( 1 / ( 1 + Math.exp( - ( hyp010 + hyp110 + hyp210 ) ) ) > 0.5 ) ? 1 : 0;
+
+		hyp001 = weight001 * bias;
+		hyp101 = weight101 * act01;
+		hyp201 = weight201 * act11;
+
+		return act02 = ( 1 / ( 1 + Math.exp( - ( hyp001 + hyp101 + hyp201 ) ) ) > 0.5 ) ? "blue" : "red";
+
+	}
+
+	function NeuralNet3( x , y ) {
+		
+		var bias = 1;
+		var canvasSize = window.innerWidth;
+		if(window.innerWidth < 600 )
+			canvasSize = window.innerWidth - 50;
+		else
+			canvasSize = 550;
+		
+		var weight000 = - canvasSize / 2 - canvasSize + weight00;
+		var weight100 = weight10 / 100;
+		var weight200 = weight20 / 100;
+
+		var weight010 = canvasSize / 2 + weight01;
+		var weight110 = -weight11 / 100;
+		var weight210 = -weight21 / 100;
+
+		var weight020 = - canvasSize / 2 + weight02;
+		var weight120 = -weight12 / 100;
+		var weight220 = weight22 / 100;
+
+		var weight030 = - canvasSize / 2 + weight03;
+		var weight130 = weight13 / 100;
+		var weight230 = -weight23 / 100;
+
+		hyp000 = weight000 * bias;
+		hyp100 = weight100 * x;
+		hyp200 = weight200 * y;
+
+		hyp010 = weight010 * bias;
+		hyp110 = weight110 * x;
+		hyp210 = weight210 * y;
+
+		hyp020 = weight020 * bias;
+		hyp120 = weight120 * x;
+		hyp220 = weight220 * y;
+
+		hyp030 = weight030 * bias;
+		hyp130 = weight130 * x;
+		hyp230 = weight230 * y;
+
+		var act01 = ( 1 / ( 1 + Math.exp( - ( hyp000 + hyp100 + hyp200 ) ) ) > 0.5 ) ? 1 : 0;
+		var act11 = ( 1 / ( 1 + Math.exp( - ( hyp010 + hyp110 + hyp210 ) ) ) > 0.5 ) ? 1 : 0;
+		var act21 = ( 1 / ( 1 + Math.exp( - ( hyp020 + hyp120 + hyp220 ) ) ) > 0.5 ) ? 1 : 0;
+		var act31 = ( 1 / ( 1 + Math.exp( - ( hyp030 + hyp130 + hyp230 ) ) ) > 0.5 ) ? 1 : 0;
+
+
+		var weight001 = -0.5;
+		var weight101 = 1;
+		var weight201 = 1;
+		var weight301 = 1;
+		var weight401 = 1;
+
+		hyp001 = weight001 * bias;
+		hyp101 = weight101 * act01;
+		hyp201 = weight201 * act11;
+		hyp301 = weight301 * act21;
+		hyp401 = weight401 * act31;
+
+		return act02 = ( 1 / ( 1 + Math.exp( - ( hyp001 + hyp101 + hyp201 + hyp301 + hyp401 ) ) ) > 0.5 ) ? "blue" : "red";
+
+	}
+
+	var Area = {
+	    	canvas : document.createElement("canvas"),
+	    	start : function(wW) {
+			this.canvas.width = wW;
+			this.canvas.height = wW;
+			this.context = this.canvas.getContext("2d");
+			document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+			this.frameNo = 0;
+			this.interval = setInterval(updateGameArea, 20);
+		},
+	    	clear : function() {
+			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	    	}
+	}
+
+	function component_2(width, height, color, x, y, type) {
+	    	this.type = type;
+	    	this.score = 0;
+	    	this.width = width;
+	    	this.height = height;
+	    	this.speedX = 0.0;
+	    	this.speedY = 0.0;    
+	    	this.x = x;
+	    	this.y = y;
+	    	this.gravity = 0;
+	    	this.gravitySpeed = 0;
+	    	this.updatePoly = function() {
+			ctx = Area.context;
+
+			if (this.type == "text") {
+		    		ctx.font = this.width + " " + this.height;
+		    		ctx.fillStyle = color;
+		    		ctx.fillText(this.text, this.x, this.y);
+			} else {
+		    		ctx.fillStyle = color;
+		    		ctx.fillRect(this.x, this.y, this.width, this.height);
+			}
+	    	} 
+
+	}
+
+	var Area = {
+	    	canvas : document.createElement("canvas"),
+	    	start : function(wW) {
+			if( wW < 600 ) {
+				this.canvas.width = wW - 50;
+				this.canvas.height = wW -50;
+			} else {
+				this.canvas.width = 550;
+				this.canvas.height = 550;
+			}
+			updateSliders(wW)
+			this.context = this.canvas.getContext("2d");
+			document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+			this.frameNo = 0;
+			this.interval = setInterval(updateGameArea, 20);
+		},
+	    	clear : function(wW) {
+			if( wW < 600 ) {
+				this.canvas.width = wW - 50;
+				this.canvas.height = wW - 50;
+			} else {
+				this.canvas.width = 550;
+				this.canvas.height = 550;
+			}
+			updateSliders(wW)
+			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	    	}
+	}
+
+	function updateSliders(wW) {
+			if( wW < 600 ) {
+  				var doc = document.getElementsByClassName("slider");
+				for( var inner=0; inner < doc.length ; inner++ ) {
+				  doc[inner].style.left = ( inner % 3 ) * 200 + 20 + "px";
+				  doc[inner].style.top = ( wW + Math.floor( inner / 3 ) * 50 ) + "px";
+				}
+
+  				doc = document.getElementsByClassName("divInInput");
+				for( var inner=0; inner < doc.length ; inner++ ) {
+				  doc[inner].style.left = ( inner % 3 ) * 200 + 50 + "px";
+				  doc[inner].style.top = ( wW + Math.floor( inner / 3 ) * 50 ) - 20 + "px";
+				}
+			} else if( wW < 800 ) {
+  				var doc = document.getElementsByClassName("slider");
+				for( var inner=0; inner < doc.length ; inner++ ) {
+				  doc[inner].style.left = ( inner % 3 ) * 200 + 20 + "px";
+				  doc[inner].style.top = ( 610 + Math.floor( inner / 3 ) * 50 ) + "px";
+				}
+
+  				doc = document.getElementsByClassName("divInInput");
+				for( var inner=0; inner < doc.length ; inner++ ) {
+				  doc[inner].style.left = ( inner % 3 ) * 200 + 50 + "px";
+				  doc[inner].style.top = ( 610 + Math.floor( inner / 3 ) * 50 ) - 20 + "px";
+				}
+			} else if(  wW < 1200 ) {
+  				var doc = document.getElementsByClassName("slider");
+				for( var inner=0; inner < doc.length ; inner++ ) {
+				  doc[inner].style.left = Math.floor( inner / 3 ) * 200 + 20 + "px";
+				  doc[inner].style.top = ( 610 + ( inner % 3 ) * 50 ) + "px";
+				}
+
+  				doc = document.getElementsByClassName("divInInput");
+				for( var inner=0; inner < doc.length ; inner++ ) {
+				  doc[inner].style.left = Math.floor( inner / 3 ) * 200 + 50 + "px";
+				  doc[inner].style.top = ( 610 + ( inner % 3 ) * 50 ) - 20 + "px";
+				}
+			} else if (  wW < 1400 ) {
+  				var doc = document.getElementsByClassName("slider");
+				for( var inner=0; inner < doc.length ; inner++ ) {
+				  doc[inner].style.left = 570 + ( inner % 3 ) * 200 + 20 + "px";
+				  doc[inner].style.top = ( Math.floor( inner / 3 ) * 50 ) + 40 + "px";
+				}
+
+  				doc = document.getElementsByClassName("divInInput");
+				for( var inner=0; inner < doc.length ; inner++ ) {
+				  doc[inner].style.left = 570 + ( inner % 3 ) * 200 + 50 + "px";
+				  doc[inner].style.top = ( Math.floor( inner / 3 ) * 50 ) + 20 + "px";
+				}
+			} else {
+  				var doc = document.getElementsByClassName("slider");
+				for( var inner=0; inner < doc.length ; inner++ ) {
+				  doc[inner].style.left = 570 + Math.floor( inner / 3 ) * 200 + 20 + "px";
+				  doc[inner].style.top = ( ( inner % 3 ) * 50 ) + 40 + "px";
+				}
+
+  				doc = document.getElementsByClassName("divInInput");
+				for( var inner=0; inner < doc.length ; inner++ ) {
+				  doc[inner].style.left = 570 + Math.floor( inner / 3 ) * 200 + 50 + "px";
+				  doc[inner].style.top = ( ( inner % 3 ) * 50 ) + 20 + "px";
+				}
+			}
+}
+
+	function updateGameArea() {
+
+		updateRanges();
+
+	    	Area.clear( window.innerWidth );
+
+		ctx = Area.context;
+
+	    	for (i = 0; i < areaPoints.length; i += 1) {
+			areaPoints[i] = new component_2(5, 5, NeuralNet3( areaPoints[i].x , areaPoints[i].y ), areaPoints[i].x, areaPoints[i].y)
+	   		areaPoints[i].updatePoly();
+	    	}
+	}
+
+	function updateRanges() {
+
+		weight00=parseInt(document.getElementById("weight00").value);
+		weight10=parseInt(document.getElementById("weight10").value);
+		weight20=parseInt(document.getElementById("weight20").value);
+		weight01=parseInt(document.getElementById("weight01").value);
+		weight11=parseInt(document.getElementById("weight11").value);
+		weight21=parseInt(document.getElementById("weight21").value);
+		weight02=parseInt(document.getElementById("weight02").value);
+		weight12=parseInt(document.getElementById("weight12").value);
+		weight22=parseInt(document.getElementById("weight22").value);
+		weight03=parseInt(document.getElementById("weight03").value);
+		weight13=parseInt(document.getElementById("weight13").value);
+		weight23=parseInt(document.getElementById("weight23").value);
+
+		document.getElementById("weight00Div").innerHTML = "1 - bias : " + weight00 + "";
+		document.getElementById("weight10Div").innerHTML = "1 - x : " + weight10 + "";
+		document.getElementById("weight20Div").innerHTML = "1 - y : " + weight20 + "";
+		document.getElementById("weight01Div").innerHTML = "2 - bias : " + weight01 + "";
+		document.getElementById("weight11Div").innerHTML = "2 - x : " + weight11 + "";
+		document.getElementById("weight21Div").innerHTML = "2 - y : " + weight21 + "";
+		document.getElementById("weight02Div").innerHTML = "3 - bias : " + weight02 + "";
+		document.getElementById("weight12Div").innerHTML = "3 - x : " + weight12 + "";
+		document.getElementById("weight22Div").innerHTML = "3 - y : " + weight22 + "";
+		document.getElementById("weight03Div").innerHTML = "4 - bias : " + weight03 + "";
+		document.getElementById("weight13Div").innerHTML = "4 - x : " + weight13 + "";
+		document.getElementById("weight23Div").innerHTML = "4 - y : " + weight23 + "";
+	}
+
+	setInterval(updateGameArea, 0.05);
+
+</script>
+
+<input type="range" min="-240" max="240" value="0" class="slider" id="weight00" style="position: absolute;">
+  <div id="weight00Div" class="divInInput" style="position: absolute;">1</div>
+<input type="range" min="-240" max="240" value="100" class="slider" id="weight10" style="position: absolute;">
+  <div id="weight10Div" class="divInInput" style="position: absolute;">1</div>
+<input type="range" min="-240" max="240" value="100" class="slider" id="weight20" style="position: absolute;">
+  <div id="weight20Div" class="divInInput" style="position: absolute;">1</div>
+
+<input type="range" min="-240" max="240" value="0" class="slider" id="weight01" style="position: absolute;">
+  <div id="weight01Div" class="divInInput" style="position: absolute;">1</div>
+<input type="range" min="-240" max="240" value="100" class="slider" id="weight11" style="position: absolute;">
+  <div id="weight11Div" class="divInInput" style="position: absolute;">1</div>
+<input type="range" min="-240" max="240" value="100" class="slider" id="weight21" style="position: absolute;">
+  <div id="weight21Div" class="divInInput" style="position: absolute;">1</div>
+
+<input type="range" min="-240" max="240" value="0" class="slider" id="weight02" style="position: absolute;">
+  <div id="weight02Div" class="divInInput" style="position: absolute;">1</div>
+<input type="range" min="-240" max="240" value="100" class="slider" id="weight12" style="position: absolute;">
+  <div id="weight12Div" class="divInInput" style="position: absolute;">1</div>
+<input type="range" min="-240" max="240" value="100" class="slider" id="weight22" style="position: absolute;">
+  <div id="weight22Div" class="divInInput" style="position: absolute;">1</div>
+
+<input type="range" min="-240" max="240" value="0" class="slider" id="weight03" style="position: absolute;">
+  <div id="weight03Div" class="divInInput" style="position: absolute;">1</div>
+<input type="range" min="-240" max="240" value="100" class="slider" id="weight13" style="position: absolute;">
+  <div id="weight13Div" class="divInInput" style="position: absolute;">1</div>
+<input type="range" min="-240" max="240" value="100" class="slider" id="weight23" style="position: absolute;">
+  <div id="weight23Div" class="divInInput" style="position: absolute;">1</div>
+
+
+
+<style>
+  .slider {  }
+</style>
+</body>
+</html>
+

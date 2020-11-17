@@ -1,0 +1,419 @@
+
+<html>
+	<head>
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width:300px; height:300px; position: absolute; top:0px; left:20px; background: white; opacity:1;}
+			.divType {background: linear-gradient(90deg, blue,green); border-radius:10px; padding: 5px 10px 5px 10px; color: white;}
+
+			.greenZ {background: linear-gradient(180deg, green,yellow); border-radius:10px; padding: 5px 10px 5px 10px; color: white;}
+			.redZ {background: linear-gradient(180deg, red,orange); border-radius:10px; padding: 5px 10px 5px 10px; color: white;}
+			.blueZ {background: linear-gradient(180deg, blue,purple); border-radius:10px; padding: 5px 10px 5px 10px; color: white;}
+
+		</style>
+		<link rel="stylesheet" type="text/cs" media="all" href="css/reset.css" />
+		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	</head>
+	<body ontouchstart="countTouches(event)" ontouchend="countTouches(event)">
+		
+
+
+		<div>
+			<div style="color:#ff0000; position: absolute;"></div>	
+			<canvas width='200' height='200' id="canvas2" >
+				Your browser does not support canvas - go get Chrome !!!
+			</canvas>
+		</div>
+
+		<script src="https://threejs.org/build/three.js" style="width: 10px; height: 10px;"></script>		
+		
+
+
+		<table id="wideTable" position="Absolute" style="width:800px; border:1px; position: absolute; top: 80vw; display: block;">
+
+			<tr style="width:30px;" width="300px" border="1px">
+				<td class="tdClass" style="vertical-align: top; margin-bottom: 20px;"  width="500px">
+					<div style="width:250px; font-size: 2em; text-align: center;"><b>Overview</b></div>
+
+					<div id="mouse">Click State : UP</div>
+					<div id="mouseCoord" style="margin-bottom: 20px"></div>
+					<div position="Absolute" style="color: 000000;" id="window"></div>
+					<div id="arrayLength">Total Count : 0</div>
+					<div id="FPS">FPS: </div>
+				</td>
+
+				<td class="tdClass" style="vertical-align: top; margin-bottom: 20px;">
+					<div style="width:250px; font-size: 2em; text-align: center;"><b>General</b></div>
+					<table width="100px">
+						<tr>
+							<td style="vertical-align: top;"><div id="1z%" class="greenZ"></div></td>
+							<td style="vertical-align: top;"><div id="2z%" class="redZ"></div></td>
+							<td style="vertical-align: top;"><div id="3z%" class="blueZ"></div></td>
+						</tr>
+					</table>
+				</td>
+
+				<td class="tdClass" style="vertical-align: top; margin-bottom: 20px;">
+					<div style="width:250px; font-size: 2em; text-align: center;"><b>Coordinates</b></div>
+					<div style="width:400px;">
+						<table style="width:100%; horizontal-align:center; border:1px; vertical-align: top;" id="myTable">
+							<tr style="width:30px;" width="30px;">
+								<td><div id="1x" class="divType"></div></td>
+								<td><div id="1y" class="divType"></div></td>
+								<td><div id="1z" class="divType"></div></td>
+							</tr>
+							<tr style="width:30px;" width="30px;">
+								<td><div id="2x" class="divType"></div></td>
+								<td><div id="2y" class="divType"></div></td>
+								<td><div id="2z" class="divType"></div></td>
+							</tr>
+							<tr style="idth:30px;" width="30px;">
+								<td><div id="3x" class="divType"></div></td>
+								<td><div id="3y" class="divType"></div></td>
+								<td><div id="3z" class="divType"></div></td>
+							</tr>
+							<tr style="idth:30px;" width="30px;">
+								<td><div id="camX" class="divType"></div></td>
+								<td><div id="camY" class="divType"></div></td>
+								<td><div id="camZ" class="divType"></div></td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+
+	</body>
+</html>
+
+<style>
+  
+  @media only screen and (max-width: 950px) {
+    .tdClass { display: inline-block; }
+  }
+  @media only screen and (max-width: 800px) {
+    .tdClass { display: block; font-size: 1em; }
+  }
+
+</style>
+
+		<script>
+
+			var currentDate;
+			var prevDate = currentDate;
+			var diffDate;
+
+			function particle(velX, velY, velZ, posX, posY, posZ) {
+				this.velX = velX;
+				this.velY = velY;
+				this.velZ = velZ;
+				this.posX = posX;
+				this.posY = posY;
+				this.posZ = posZ;
+				this.tempX = posX;
+				this.tempY = posY;
+				this.tempZ = posZ;
+			}
+
+			var renderCount = 0;
+			var canvas = document.getElementById("canvas2");
+
+			var scene = new THREE.Scene();
+			scene.background = new THREE.Color ( 0xeeeeee );
+
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+			document.onmousedown = function(event){
+				document.getElementById("mouse").innerHTML = "Click State : DOWN";
+				addObject();
+			}
+			document.onmouseup = function(event){
+				document.getElementById("mouse").innerHTML = "Click State : UP";
+			}
+			document.onmousemove = function(event){
+
+				yCoord=event.clientY - 400;
+			    	var mouse2D = new THREE.Vector3();
+			    	var mouse3D = new THREE.Vector3();
+			    	mouse2D.x = (event.clientX / window.innerWidth) * 2 - 1;
+			    	mouse2D.y = -(event.clientY / window.innerHeight) * 2 + 1;
+			   	mouse2D.z = 0.5;
+
+				document.getElementById("mouseCoord").innerHTML = "Mouse Position => X: " + event.clientX + ", Y: " + yCoord;
+			}
+
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+
+
+			function getMousePosition(clientX, clientY) {
+			    var mouse2D = new THREE.Vector3();
+			    var mouse3D = new THREE.Vector3();
+			    mouse2D.x = (clientX / window.innerWidth) * 2 - 1;
+			    mouse2D.y = -(clientY / window.innerHeight) * 2 + 1;
+			    mouse2D.z = 0.5;
+			    mouse3D = projector.unprojectVector(mouse2D.clone(), camera);
+			    return mouse3D;
+			}
+
+			function onDocumentMouseMove(event) {
+			    	event.preventDefault();
+
+			    	var mouse3D = getMousePosition(event.clientX, event.clientY);
+				document.getElementById("mouseCanvas").innerHTML = "OK";
+			    	document.getElementById("mouseCanvas").innerHTML = mouse3D.x + ' ' + mouse3D.y + ' ' + mouse3D.z;
+				document.getElementById("mouseCanvas").innerHTML = mouse3D.x + ", " + mouse3D.y;
+			}
+
+
+			document.body.appendChild( renderer.domElement );
+
+			document.getElementById("window").innerHTML = "Scene Width => x: " + renderer.domElement.style.width + "; y: " + renderer.domElement.style.height;
+
+			var geometry = new THREE.SphereGeometry( 0.9, 0.9, 0.9 );
+			var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+			var geometry1 = new THREE.SphereGeometry( 0.9, 0.9, 0.9 );
+			var material1 = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+			var geometry2 = new THREE.SphereGeometry( 0.9, 0.9, 0.9 );
+			var material2 = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+			var geometry3 = new THREE.SphereGeometry( 0.9, 0.9, 0.9 );
+			var material3 = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+
+			var c=[];
+			c.push(new THREE.Mesh( geometry, material ));
+			c.push(new THREE.Mesh( geometry1, material1 ));
+			c.push(new THREE.Mesh( geometry2, material2 ));
+
+			scene.add( c[0] );
+			scene.add( c[1] );
+			scene.add( c[2] );
+
+			var cube = new THREE.Mesh( geometry, material );
+			var cube1 = new THREE.Mesh( geometry1, material1 );
+			var cube2 = new THREE.Mesh( geometry2, material2 );
+
+			camera.position.z = 20;
+
+			cube.position.x = 1.5;
+			cube.position.y = 2;
+			cube.position.z = 3;
+			cube2.position.x = 1;
+			cube2.position.y = 4;
+			cube2.position.z = 6;
+
+			var cubeVelX = 2;
+			var cube1VelX = 0.2;
+			var cube2VelX = 3;
+
+			var cubeVelY = 1;
+			var cube1VelY = 2;
+			var cube2VelY = 1.5;
+
+			var cubeVelZ = -6;
+			var cube1VelZ = 4;
+			var cube2VelZ = 0.5;
+			
+			var cubeForce = 0;
+			var cube1Force = 0;
+			var cube2Force = 0;
+
+			var distX = 0;
+			var distY = 0;
+			var distZ = 0;
+
+			p=[];
+			p.push(new particle(1,2,3,1,20,3));
+			p.push(new particle(2,3,1,2,30,1));
+			p.push(new particle(3,1,2,3,10,2));
+
+			p1 = new particle(1,2,3,4,5,6);
+			p2 = new particle(1,2,3,4,5,6);
+			p3 = new particle(1,2,3,4,5,6);
+
+			var count=0;
+
+			function countTouches(event) {
+			  var x = event.touches.length;
+			  if( x > 0 ) {
+			    document.getElementById("mouse").innerHTML = "Click State : DOWN";
+			  } else {
+			    document.getElementById("mouse").innerHTML = "Click State : UP";
+			  }
+			}
+
+			var addObjectManually = function() {
+				if ( document.getElementById("mouse").innerHTML == "Click State : DOWN" && Pressed == false ) {
+					Pressed = true;
+					renderCount = renderCount + 1;
+					p.push( new particle(Math.random()*4-2, Math.random()*4-2, Math.random()*4-2, Math.random()*4-2, Math.random()*4-2, Math.random()*4-2) );
+					var randomized=Math.random()*3;
+					if(randomized > 2)
+						c.push( new THREE.Mesh( geometry, material ) );
+					if(randomized > 1 && randomized < 2 )
+						c.push( new THREE.Mesh( geometry1, material1 ) );
+					if(randomized < 1 )
+						c.push( new THREE.Mesh( geometry2, material2 ) );
+					scene.add( c[c.length-1] );
+
+					var table = document.getElementById("myTable");
+					var row = table.insertRow(c.length-1);
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					var cell3 = row.insertCell(2);
+
+					var indent = c.length;
+					cell1.innerHTML = '<div id="' + indent + 'x" class="divType"></div>';
+					cell2.innerHTML = '<div id="' + indent + 'y" class="divType"></div>';
+					cell3.innerHTML = '<div id="' + indent + 'z" class="divType"></div>';
+				}
+				if ( document.getElementById("mouse").innerHTML == "Click State : UP" )
+				    Pressed = false;
+				
+				currentDate = new Date();
+				diffDate = currentDate - prevDate;
+				prevDate=currentDate;
+				document.getElementById("FPS").innerHTML = "FPS : " + diffDate;
+
+			}
+
+			var addObjectautonatically = function() {
+				renderCount = renderCount + 1;
+				document.getElementById("renderCount").innerHTML = renderCount;
+				p.push( new particle(Math.random()*4-2, Math.random()*4-2, Math.random()*4-2, Math.random()*4-2, Math.random()*4-2, Math.random()*4-2) );
+
+				var randomized=Math.random()*3;
+				if(randomized > 2)
+					c.push( new THREE.Mesh( geometry, material ) );
+				if(randomized > 1 && randomized < 2 )
+					c.push( new THREE.Mesh( geometry1, material1 ) );
+				if(randomized < 1 )
+					c.push( new THREE.Mesh( geometry2, material2 ) );
+
+				scene.add( c[renderCount+2] );
+
+				var table = document.getElementById("myTable");
+			        var row = table.insertRow(renderCount+2);
+				var cell1 = row.insertCell(0);
+				var cell2 = row.insertCell(1);
+				var cell3 = row.insertCell(2);
+
+			   	var indent = renderCount+3;
+				cell1.innerHTML = '<div id="' + indent + 'x" class="divType"></div>';
+				cell2.innerHTML = '<div id="' + indent + 'y" class="divType"></div>';
+				cell3.innerHTML = '<div id="' + indent + 'z" class="divType"></div>';
+
+				currentDate = new Date();
+				diffDate = currentDate - prevDate;
+				prevDate=currentDate;
+				document.getElementById("FPS").innerHTML = "FPS : " + diffDate;
+
+				document.getElementById("renderCount").innerHTML = "Additional Count : " + renderCount;
+
+			}
+
+			var render2 = function() {
+
+		        	var wW = window.innerWidth;
+				if ( wW > 1000 )
+					wW = 1000;
+				renderer.setSize( wW-wW*0.1 , wW*3/4 );
+
+				document.getElementById('wideTable').style.position = "absolute";
+				if( window.innerWidth > 1800 ) {
+					document.getElementById('wideTable').style.top = "20px";
+					document.getElementById('wideTable').style.left = wW-wW*0.1+50+"px";
+				} else {
+					document.getElementById('wideTable').style.top = wW*3/4+50+"px";
+					document.getElementById('wideTable').style.left = "0px";
+				}
+
+
+				document.getElementById("arrayLength").innerHTML = "Total Count : " + p.length;
+				for(var i=0; i<(p.length); i++) {
+					for(var j=0; j<(p.length); j++) {
+						if(i !== j) {
+							distX = p[i].tempX - p[j].tempX;
+							distY = p[i].tempY - p[j].tempY;
+								distZ = p[i].tempZ - p[j].tempZ;
+							cubeForce =  Math.sqrt((distX*distX)+(distY*distY)+(distZ*distZ));
+							p[i].velX += distX / (cubeForce*cubeForce);
+							p[i].velY += distY / (cubeForce*cubeForce);
+							p[i].velZ += distZ / (cubeForce*cubeForce);
+						}
+					}
+					p[i].posX -= p[i].velX/30;
+					p[i].posY -= p[i].velY/30;
+					p[i].posZ -= p[i].velZ/30;
+					p[i].posX -= p[i].velX/30;
+					p[i].posY -= p[i].velY/30;
+					p[i].posZ -= p[i].velZ/30;
+
+
+					distX = p[i].posX;
+					distY = p[i].posY;
+					distZ = p[i].posZ;
+					cubeForce =  Math.sqrt((distX*distX)+(distY*distY)+(distZ*distZ));
+					p[i].velX += distX / (cubeForce*cubeForce);
+					p[i].velY += distY / (cubeForce*cubeForce);
+					p[i].velZ += distZ / (cubeForce*cubeForce);
+
+					p[i].posX -= p[i].velX/30;
+					p[i].posY -= p[i].velY/30;
+					p[i].posZ -= p[i].velZ/30;
+					p[i].posX -= p[i].velX/30;
+					p[i].posY -= p[i].velY/30;
+					p[i].posZ -= p[i].velZ/30;
+				}
+				var xCam=0;
+				var yCam=0;
+				var zCam;
+				var count2=0;
+				for(var i=0; i<(p.length); i++) {
+					if(i===0) {
+						zCam = p[i].posZ;
+					}
+					if(zCam < p[i].tempZ) {
+						zCam = p[i].posZ;
+					}
+					xCam += p[i].posX;
+					yCam += p[i].posY;
+					count2++;
+					p[i].tempX = p[i].posX;
+					p[i].tempY = p[i].posY;
+					p[i].tempZ = p[i].posZ;
+					c[i].position.x = p[i].posX;
+					c[i].position.y = p[i].posY;
+					c[i].position.z = p[i].posZ;
+				}
+
+				camera.position.x = xCam / count2;
+				camera.position.y = yCam / count2;
+				camera.position.z = zCam + 20;
+
+				count++;
+				document.getElementById("1z%").style.height = 20 + camera.position.z - c[0].position.z;
+				document.getElementById("2z%").style.height = 20 + camera.position.z - c[1].position.z;
+				document.getElementById("3z%").style.height = 20 + camera.position.z - c[2].position.z;
+
+				for(var dat=0; dat<(p.length); dat++) {
+					var dat1 = dat + 1;
+					document.getElementById(dat1 + "x").innerHTML = dat1 + "x: " + Math.round(p[dat].posX);
+					document.getElementById(dat1 + "y").innerHTML = dat1 + "y: " + Math.round(p[dat].posY);
+					document.getElementById(dat1 + "z").innerHTML = dat1 + "z: " + Math.round(p[dat].posZ);
+				}
+
+
+				document.getElementById("camX").innerHTML = "camX: " + Math.round(camera.position.x);
+				document.getElementById("camY").innerHTML = "camY: " + Math.round(camera.position.y);
+				document.getElementById("camZ").innerHTML = "camZ: " + Math.round(camera.position.z);
+
+
+				renderer.render(scene, camera);
+
+
+			};
+
+			setInterval(render2, 20);
+			setInterval(addObjectManually, 20);
+		</script>
+

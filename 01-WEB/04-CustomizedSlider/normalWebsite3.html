@@ -1,0 +1,859 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>Journey Album</title>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="rotating-slider.css">
+<script src="html2canvas.min.js"></script>
+<script src="jquery-3.4.1.js"></script>
+<style>
+body {
+  background: #333;
+  font-family: 'Roboto Slab', sans-serif;
+  font-weight: 300;
+}
+
+.HorizontalMotion {
+width: 200px;
+height: 50px;
+display: block;
+left: 1050px;
+border: 1px solid orange;
+position: absolute;
+top: 540px;
+background-color : orange;
+color: black;
+float: center;
+}
+
+.imageSlide {
+display: block;
+max-width:100%;
+float: center;
+align: center;
+margin-left: auto;
+margin-right: auto;
+cursor: pointer;
+}
+
+.buttonStyle {
+height: 50px;
+width: 500px;
+display: inline-block;
+text-align: center;
+}
+
+
+.divSlide {
+border: 1px solid green;
+max-width: 300px;
+max-height: 300px;
+position: absolute;
+top:476px;
+left: 500px;
+display: block;
+width:300px;
+z-index: 2;
+background-color: rgba(0,0,100,255);
+text-align: center;
+border-radius: 20px;
+}
+
+.innerText {
+margin-left: auto;
+margin-right: auto;
+cursor: pointer;
+position: absolute;
+display: inline-block;
+margin: 0 auto;
+top: 50%;
+color: linear-gradient(0deg, blue,purple);
+opacity: 0.8;
+font-size: 40px;
+font-weight: bold;
+font-family: "Times New Roman", Times, serif;
+transform: translate(-50% , -50%)
+}
+
+.circle {
+width: 20px;
+height: 20px;
+border: 3px solid #000;
+position: absolute;
+border-radius: 20px;
+}
+
+#lever-handle {
+width: 20px;
+height: 20px;
+border: 1px solid red;
+background-color: red;
+position: absolute;
+border-radius: 20px;
+top: 120px;
+left: 100px;
+cursor: pointer;
+}
+
+#lever-bar {
+width: 8px;
+height: 240px;
+background-color: gray;
+position: absolute;
+border-radius: 10px;
+top: 120px;
+left: 107px;
+}
+
+#lever-socket {
+width: 10px;
+height: 500px;
+border: 5px solid #aaa;
+background-color: black;
+position: absolute;
+border-radius: 10px;
+top: 100px;
+left: 101px;
+}
+
+#lever-handle2 {
+width: 20px;
+height: 20px;
+border: 1px solid red;
+background-color: red;
+position: absolute;
+border-radius: 20px;
+top: 120px;
+left: 100px;
+cursor: pointer;
+}
+
+#lever-bar2 {
+width: 8px;
+height: 240px;
+background-color: gray;
+position: absolute;
+border-radius: 10px;
+top: 120px;
+left: 107px;
+}
+
+#lever-socket2 {
+width: 10px;
+height: 500px;
+border: 5px solid #aaa;
+background-color: black;
+position: absolute;
+border-radius: 10px;
+top: 100px;
+left: 101px;
+}
+
+#BlackHole {
+position: absolute;
+width: 150px;
+height: 150px;
+background-color: black;
+border-radius: 300px;
+}
+</style>
+
+
+</head>
+
+<body translate="no" style="width: 1750px; background-image: radial-gradient(black, blue, blue);" onresize="resize()" id="bodyId">
+
+<h1 style="text-align: center; color: #95a5a6; margin-top:20px">Gallery</h1>
+
+
+<div style="border: 1px solid green; width: 100%;">
+  <div id="imageDisplay" style="float: center; display: block; border: 1px solid yellow; height: 550px; color: orange;">
+<!--  background: linear-gradient(180deg, blue,purple); background-image: radial-gradient(black, blue, blue); -->
+    <div id="xLoc"> p </div>
+    <div id="yLoc"> l </div>
+    <div id="click"> l </div>
+    <div id="init"> l </div>
+    <div id="current"> l </div>
+    <div id="new"> l </div>
+    <div id="ySquare1"> l </div>
+
+
+    <!--	document.getElementById('Selection').onclick='window.open('threeD_1.html')'	-->
+    <!--	../../Downloads/Katathlon-20190330T170911Z-001/Katathlon/	-->
+    <!-- ------------------------------------------  -->
+    <div id="squareMotion1_1" class="divSlide" alt="BEAR !!!">
+      <img class="imageSlide" src="Bear.jpg" onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src;">
+    </div>
+    <div id="squareMotion1_2" class="divSlide" >
+      <div class="innerText" onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src;  window.open('threeD_1.html');">Gravity Game </div>
+      <img class="imageSlide" src="fish_two_o.png" onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src;  window.open('threeD_1.html'); return false;">
+    </div>
+    <div id="squareMotion1_3" class="divSlide" >
+      <div class="innerText" onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src; window.open('/home/cedric/objJavascriptProject/mainBody.html');"> Penguin Game </div>
+      <img class="imageSlide" src="0156_Penguin.png" onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src; window.open('/home/cedric/objJavascriptProject/mainBody.html');">
+    </div>
+    <div id="squareMotion1_4" class="divSlide">
+      <img class="imageSlide" src="~/Downloads/Katathlon-20190330T170911Z-001/Katathlon/threeD_1.html" onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src; window.open('thanos.html');" >
+    </div>
+    <div id="squareMotion1_5" class="divSlide">
+      <img class="imageSlide" src="Sqwidgy.apk"  onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src;" >
+    </div>
+<!--    <input id="slider1" type="range" orient="vertical" min="1" max="360" value="50" style="position:absolute; top:100px; left:800px; height: 480px; box-orient: vertical; cursor: pointer;">	-->
+    <div id="lever-socket"></div>
+    <div id="lever-bar"></div>
+    <div id="lever-handle" style="top: 100px;"></div>
+    <Button id="move1" class="HorizontalMotion">1) MOVE IT SIDEWAYS</Button>
+    <!-- ------------------------------------------  -->
+    <div id="squareMotion2_1" class="divSlide" >
+      <img class="imageSlide" src="Bear.jpg" onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src;" >
+    </div>
+    <div id="squareMotion2_2" class="divSlide" >
+      <img class="imageSlide" src="fish_two_o.png" onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src;" >
+    </div>
+    <div id="squareMotion2_3" class="divSlide" >
+      <img class="imageSlide" src="0156_Penguin.png" onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src;" >
+    </div>
+    <div id="squareMotion2_4" class="divSlide" >
+      <img class="imageSlide" src="Fish.png" onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src;" >
+    </div>
+    <div id="squareMotion2_5" class="divSlide" >
+      <img class="imageSlide" src="shark2.png" onclick="document.getElementById('Selection').src=this.src; document.getElementById('init').innerHTML=this.src;" >
+    </div>
+<!--    <input id="slider2" type="range" orient="vertical" min="1" max="360" value="50" style="position:absolute; top:100px; left:1300px; height: 480px; box-orient: vertical; cursor: pointer;">	-->
+    <div id="lever-socket2"></div>
+    <div id="lever-bar2"></div>
+    <div id="lever-handle2" style="top: 100px;"></div>
+    <Button id="move2" class="HorizontalMotion">2) MOVE IT SIDEWAYS</Button>
+    <!-- ------------------------------------------  -->
+
+  </div>
+
+  <input id="mainSlider" type="range" orient="horizontal" min="1" max="100" value="50" style="width: 100%; position: relative; bottom: 40px;">
+
+  <div id="SelectionWrapper" style="border: 1px solid blue; display: block; max-width:100%; float: center; align: center; margin-left: auto; margin-right: auto; height: 300px;">
+    <div id="BlackHole" style="left: 0px; top: 800px;" ></div>
+    <img id="Selection2" style="position: absolute; border: 5px solid black; display: block; max-width:100%; height: 300px; width: 300px; transform: skew(45deg , 20deg); left: 1200px; top:670px; float: center; align: center; margin-left: auto; margin-right: auto; border-radius: 20px;">
+    <img id="Selection" style="border: 5px solid black; display: block; max-width:100%; height: 300px; float: center; align: center; margin-left: auto; margin-right: auto; border-radius: 20px;" src="" onclick="">
+  </div>
+  <Button id="plusButton" class="buttonStyle"  style="border: 1px solid green; background-color: blue; color: black; font-size: 20px;" onmousedown="increment=increment+1;">PLUS</Button>
+  <Button id="minusButton" class="buttonStyle"  style="border: 1px solid green; background-color: blue; color: black; font-size: 20px;" onmousedown="increment=increment-1;">MINUS</Button>
+  <Button id="plusSelectionButton" class="buttonStyle" style="border: 1px solid green; background-color: red; color: black; font-size: 20px;" onmousedown="incrementSelect=incrementSelect+1;">PLUS SELECT</Button>
+  <Button id="minusSelectionButton" class="buttonStyle"  style="border: 1px solid green; background-color: red; color: black; font-size: 20px;" onmousedown="incrementSelect=incrementSelect-1;">MINUS SELECT</Button>
+  <div id="box2" class="divType"></div>
+
+</div>
+
+
+<div id="box" class="divType"></div>
+
+<Button id="testButton" style="border: 1px solid green; height: 50px; width: 500px; background-color: blue; display: inline-block; text-align: center; color: black; font-size: 20px;">DISP</Button>
+
+<script type="text/javascript">
+
+  var choice="None";
+
+  var xSquare1=document.getElementById("squareMotion1_1").style.left;
+  var init_mouse2D_x1=0;
+  var current_mouse2D_x1=0;
+
+  var ySquare1=document.getElementById("squareMotion1_1").style.top;
+  var current_mouse2D_y1=0;
+
+  var xSquare2=document.getElementById("squareMotion2_1").style.left;
+  var init_mouse2D_x2=0;
+  var current_mouse2D_x2=0;
+
+  var ySquare2=document.getElementById("squareMotion2_1").style.top;
+  var xSquareInit1;
+  var xSquareInit2;
+
+  var mouseDown="false";
+  var yMotion_New1_1;
+  var yMotion_New1_2;
+  var yMotion_New1_3;
+  var yMotion_New1_4;
+  var yMotion_New1_5;
+
+  var yMotion_New2_1;
+  var yMotion_New2_2;
+  var yMotion_New2_3;
+  var yMotion_New2_4;
+  var yMotion_New2_5;
+  var bTemp;
+
+  var ordered = [ "xSquare1" , "xSquare2" , "xSquare3" ];
+
+  var increment=0;
+  var incrementSelect=0;
+  var sliding;
+  var prevSliding;
+  var reSizeSwitch="1";
+
+  var xMouse;
+  var yMouse;
+
+  var yHandleInit;
+  var yHandleCurrent;
+  var yMouseInit;
+
+  var yHandleInit2;
+  var yHandleCurrent2;
+  var yMouseInit2;
+  
+  var generateBubbleInc = 0;
+
+  var circle=[];
+  var circleCount=[];
+  var circleMotion=[];
+
+  var xSelectVel=0;
+  var ySelectVel=0;
+
+  document.onmouseup = function(event){
+    mouseDown="false";
+    choice="None";
+  }
+
+  document.onmousedown = function(event){
+    xMouse=event.clientX;
+    yMouse=event.clientY;
+    mouseDown="true";
+  }
+
+  window.onload = function() {
+    var temporary=document.getElementById("lever-handle").style.top;
+    temporary = temporary.slice(0, temporary.lastIndexOf("p"));// document.getElementById("slider1").value*3;//*10;
+    yMotion_New1_1 = parseInt(temporary);
+    yMotion_New1_2=yMotion_New1_1-250;
+
+    document.getElementById("squareMotion1_1").style.top = parseInt(Math.cos(yMotion_New1_1*6.28/360)*80 + 200) + "px";
+    document.getElementById("squareMotion1_2").style.top = parseInt(Math.cos(yMotion_New1_2*6.28/360)*80 + 200)  + "px";
+    resize();
+  }
+
+  setInterval(function () {
+    sliding=(parseInt(document.getElementById('mainSlider').value)-50)*5;
+    if( xSquare1 < xSquare2 ) {
+      if(ordered[0]=="xSquare2") {
+	xSquare1 = window.innerWidth/2+sliding-330;
+	xSquare2 = window.innerWidth/2+sliding;
+      }
+      ordered[0]="xSquare1";
+      ordered[1]="xSquare2";
+    } else {
+      if(ordered[0]=="xSquare1") {
+	xSquare1 = window.innerWidth/2+sliding;
+	xSquare2 = window.innerWidth/2+sliding-330;
+      }
+      ordered[0]="xSquare2";
+      ordered[1]="xSquare1";
+    }
+    if(mouseDown == "false" ) {
+      if(ordered[0]=="xSquare1") {
+//      var sample = order[i].slice(7,8)
+	xSquare1 = window.innerWidth/2+sliding-330;
+	xSquare2 = window.innerWidth/2+sliding;
+      } else {
+	xSquare1 = window.innerWidth/2+sliding;
+	xSquare2 = window.innerWidth/2+sliding-330;
+      }
+    }
+
+    for(var i=0; i<(circle.length); i++) {
+      var temp1 = circle[i].style.top;
+      if( circleCount[i]++ > 500 )
+        circle[i].style.display = "none";
+      if( ( circleCount[i] % 10 ) == 1 ) {
+        if( circleMotion[i] == "Left" )
+          circleMotion[i] = "Right";
+        else
+          circleMotion[i] = "Left";
+      }
+
+      // Update X Position of the Particle;
+      var store=circle[i].style.left;
+      store = store.slice(0, store.lastIndexOf("p"));
+      if( circleMotion[i] == "Left" )
+        store = parseInt(store) - 1;
+      else
+        store = parseInt(store) + 1;
+      circle[i].style.left = store + "px";
+
+      // Update Y Position of the Particle;
+      var temp1=circle[i].style.top;
+      temp1 = temp1.slice(0, temp1.lastIndexOf("p"));
+      temp1 = parseInt(temp1) - 3;
+      circle[i].style.top = temp1 + "px";
+    }
+    var instance=document.getElementById("BlackHole").style.left;
+    instance = instance.slice(0, instance.lastIndexOf("p"));
+    instance = parseInt(instance) + 10;
+    document.getElementById("BlackHole").style.left = instance + "px";
+
+
+    var xWrapPos=document.getElementById("Selection2").style.left;
+    var xbHole=document.getElementById("BlackHole").style.left;
+
+    var yWrapPos=document.getElementById("Selection2").style.top;
+    var ybHole=document.getElementById("BlackHole").style.top;
+
+    xWrapPos = xWrapPos.slice(0, xWrapPos.lastIndexOf("p"));
+    xbHole = xbHole.slice(0, xbHole.lastIndexOf("p"));
+    xbHole = parseInt(xbHole) + 75;
+
+    yWrapPos = yWrapPos.slice(0, yWrapPos.lastIndexOf("p"));
+    ybHole = ybHole.slice(0, ybHole.lastIndexOf("p"));
+    ybHole = parseInt(ybHole) + 75;
+
+    var hyp=Math.sqrt( ( xWrapPos - xbHole ) * ( xWrapPos - xbHole ) + ( yWrapPos - ybHole ) * ( yWrapPos - ybHole ) )
+    var angle=Math.acos( ( xWrapPos - xbHole ) / hyp );
+    if( ( yWrapPos - ybHole ) < 0 )
+      angle = -angle;
+
+//    if( hyp < 1000 ) {
+        var force=50000.0/(hyp*hyp);
+	xSelectVel += Math.cos(angle)*force;
+	ySelectVel += Math.sin(angle)*force;
+	document.getElementById("Selection2").style.left = parseInt(xWrapPos) - xSelectVel + "px";
+	document.getElementById("Selection2").style.top = parseInt(yWrapPos) - ySelectVel + "px";
+//    }
+
+  } , 50);
+
+  function resize() {
+	xSquare1 = window.innerWidth/2-330;
+	xSquare2 = window.innerWidth/2;
+
+    	document.getElementById("lever-handle").style.left = parseInt(xSquare1) + 307 + "px";
+    	document.getElementById("lever-bar").style.left = parseInt(xSquare1) + 313 + "px";
+    	document.getElementById("lever-socket").style.left = parseInt(xSquare1) + 307 + "px";
+
+    	document.getElementById("lever-handle2").style.left = parseInt(xSquare2) + 307 + "px";
+    	document.getElementById("lever-bar2").style.left = parseInt(xSquare2) + 313 + "px";
+    	document.getElementById("lever-socket2").style.left = parseInt(xSquare2) + 307 + "px";
+
+//    	document.getElementById("slider1").style.left = parseInt(xSquare1) + 300 + "px";
+    	document.getElementById("move1").style.left = parseInt(xSquare1) + 50 + "px";
+//    	document.getElementById("slider2").style.left = parseInt(xSquare2) + 300 + "px";
+    	document.getElementById("move2").style.left = parseInt(xSquare2) + 50 + "px";
+
+        reset();
+  }
+
+  function reset() {
+
+      document.getElementById("bodyId").style.width=window.innerWidth-50 + "px";
+      document.getElementById("SelectionWrapper").style.width=window.innerWidth + "px";
+      document.getElementById("init").innerHTML=xSquare1;
+      yMotion_New1_1 = yHandleCurrent; //document.getElementById("slider1").value*3;//*10;
+      yMotion_New1_2=yMotion_New1_1-75;
+      yMotion_New1_3=yMotion_New1_1-150;
+      yMotion_New1_4=yMotion_New1_1-225;
+      yMotion_New1_5=yMotion_New1_1-300;
+
+      yMotion_New2_1 = yHandleCurrent2; // = document.getElementById("slider2").value*3;//*10;
+      yMotion_New2_2=yMotion_New2_1-75;
+      yMotion_New2_3=yMotion_New2_1-150;
+      yMotion_New2_4=yMotion_New2_1-225;
+      yMotion_New2_5=yMotion_New2_1-300;
+
+    sliding=(parseInt(document.getElementById('mainSlider').value)-50)*5;
+    if( xSquare1 < xSquare2 ) {
+      if(ordered[0]=="xSquare2") {
+	xSquare1 = window.innerWidth/2+sliding-330;
+	xSquare2 = window.innerWidth/2+sliding;
+      }
+      ordered[0]="xSquare1";
+      ordered[1]="xSquare2";
+    } else {
+      if(ordered[0]=="xSquare1") {
+	xSquare1 = window.innerWidth/2+sliding;
+	xSquare2 = window.innerWidth/2+sliding-330;
+      }
+      ordered[0]="xSquare2";
+      ordered[1]="xSquare1";
+    }
+    if(mouseDown == "false" ) {
+      if(ordered[0]=="xSquare1") {
+//      var sample = order[i].slice(7,8)
+	xSquare1 = window.innerWidth/2+sliding-330;
+	xSquare2 = window.innerWidth/2+sliding;
+      } else {
+	xSquare1 = window.innerWidth/2+sliding;
+	xSquare2 = window.innerWidth/2+sliding-330;
+      }
+    }
+
+	if(window.innerWidth < 500 ) {
+		xSquare1 = window.innerWidth / 2 - 150;
+		xSquare2 = xSquare1 + 350;
+//    		document.getElementById("slider2").style.display = "none";
+
+    		document.getElementById("lever-handle2").style.display = "none";
+    		document.getElementById("lever-bar2").style.display = "none";
+    		document.getElementById("lever-socket2").style.display = "none";
+
+    		document.getElementById("move2").style.display = "none";
+        	document.getElementById("squareMotion2_1").style.display = "none";
+        	document.getElementById("squareMotion2_2").style.display = "none";
+        	document.getElementById("squareMotion2_3").style.display = "none";
+        	document.getElementById("squareMotion2_4").style.display = "none";
+        	document.getElementById("squareMotion2_5").style.display = "none";
+       		document.getElementById("plusButton").style.width = document.getElementById("bodyId").style.width;
+        	document.getElementById("minusButton").style.width = document.getElementById("bodyId").style.width;
+        	document.getElementById("plusSelectionButton").style.width = document.getElementById("bodyId").style.width;
+        	document.getElementById("minusSelectionButton").style.width = document.getElementById("bodyId").style.width;
+        	document.getElementById("testButton").style.width = document.getElementById("bodyId").style.width;
+		reSizeSwitch="0";
+	} else {
+		if(reSizeSwitch == "0") {
+
+    		document.getElementById("lever-handle2").style.display = "block";
+    		document.getElementById("lever-bar2").style.display = "block";
+    		document.getElementById("lever-socket2").style.display = "block";
+
+//    		document.getElementById("slider2").style.display = "block";
+    		document.getElementById("move2").style.display = "block";
+        	document.getElementById("squareMotion2_1").style.display = "block";
+        	document.getElementById("squareMotion2_2").style.display = "block";
+        	document.getElementById("squareMotion2_3").style.display = "block";
+        	document.getElementById("squareMotion2_4").style.display = "block";
+        	document.getElementById("squareMotion2_5").style.display = "block";
+        	document.getElementById("plusButton").style.width = "500px";
+       		document.getElementById("minusButton").style.width = "500px";
+        	document.getElementById("plusSelectionButton").style.width = "500px";
+        	document.getElementById("minusSelectionButton").style.width = "500px";
+        	document.getElementById("testButton").style.width = "500px";
+		reSizeSwitch = "1";
+		}
+	}
+
+
+    		document.getElementById("lever-handle").style.left = parseInt(xSquare1) + 306 + "px";
+    		document.getElementById("lever-bar").style.left = parseInt(xSquare1) + 313 + "px";
+    		document.getElementById("lever-socket").style.left = parseInt(xSquare1) + 306 + "px";
+
+//    	document.getElementById("slider1").style.left = parseInt(xSquare1) + 300 + "px";
+    	document.getElementById("move1").style.left = parseInt(xSquare1) + 50 + "px";
+//    	document.getElementById("lever-handle").style.top = parseInt(yHandleCurrent) + 50 + "px";
+
+
+        for(var resizeInc=1; resizeInc<6; resizeInc++){
+        	document.getElementById("squareMotion1_"+resizeInc).style.left = xSquare1 + "px";
+        	document.getElementById("squareMotion2_"+resizeInc).style.left = xSquare2 + "px";
+	}
+        document.getElementById("squareMotion1_1").style.top = parseInt(-Math.cos(yMotion_New1_1*6.28/360)*80 + 200)  + "px";
+        document.getElementById("squareMotion1_2").style.top = parseInt(-Math.cos(yMotion_New1_2*6.28/360)*80 + 200)  + "px";
+        document.getElementById("squareMotion1_3").style.top = parseInt(-Math.cos(yMotion_New1_3*6.28/360)*80 + 200)  + "px";
+        document.getElementById("squareMotion1_4").style.top = parseInt(-Math.cos(yMotion_New1_4*6.28/360)*80 + 200)  + "px";
+        document.getElementById("squareMotion1_5").style.top = parseInt(-Math.cos(yMotion_New1_5*6.28/360)*80 + 200)  + "px";
+
+
+//    	document.getElementById("slider2").style.left = parseInt(xSquare2) + 300 + "px";
+    	document.getElementById("move2").style.left = parseInt(xSquare2) + 50 + "px";
+        document.getElementById("squareMotion2_1").style.top = parseInt(-Math.cos(yMotion_New2_1 *6.28/360)*80 + 200)  + "px";
+        document.getElementById("squareMotion2_2").style.top = parseInt(-Math.cos(yMotion_New2_2*6.28/360)*80 + 200)  + "px";
+        document.getElementById("squareMotion2_3").style.top = parseInt(-Math.cos(yMotion_New2_3*6.28/360)*80 + 200)  + "px";
+        document.getElementById("squareMotion2_4").style.top = parseInt(-Math.cos(yMotion_New2_4*6.28/360)*80 + 200)  + "px";
+        document.getElementById("squareMotion2_5").style.top = parseInt(-Math.cos(yMotion_New2_5*6.28/360)*80 + 200)  + "px";
+
+     for(var yInc=0; yInc<5; yInc++) {
+       if( Math.sin((yMotion_New1_1-(yInc*75))*6.28/360) > 0 ) {
+         if( Math.abs(Math.cos((yMotion_New1_1-(yInc*75))*6.28/360) ) > 0.75 ) {
+           document.getElementById("squareMotion1_"+parseInt(yInc+1)).style.opacity = 4 - ( Math.abs(Math.cos((yMotion_New1_1-(yInc*75))*6.28/360) ) * 4 );
+         } else {
+           document.getElementById("squareMotion1_"+parseInt(yInc+1)).style.opacity = 1;
+         }
+       } else {
+         document.getElementById("squareMotion1_"+parseInt(yInc+1)).style.opacity = 0;
+       }
+     }
+     for(var yInc=0; yInc<5; yInc++) {
+       if( Math.sin((yMotion_New2_1-(yInc*75))*6.28/360) > 0 ) {
+         if( Math.abs(Math.cos((yMotion_New2_1-(yInc*75))*6.28/360) ) > 0.75 ) {
+           document.getElementById("squareMotion2_"+parseInt(yInc+1)).style.opacity = 4 - ( Math.abs(Math.cos((yMotion_New2_1-(yInc*75))*6.28/360) ) * 4 );
+         } else {
+           document.getElementById("squareMotion2_"+parseInt(yInc+1)).style.opacity = 1;
+         }
+       } else {
+         document.getElementById("squareMotion2_"+parseInt(yInc+1)).style.opacity = 0;
+       }
+     }
+
+
+
+      document.getElementById("squareMotion1_1").style.zIndex = "" + Math.round(Math.sin(yMotion_New1_1*6.28/360)*360);
+      document.getElementById("squareMotion1_2").style.zIndex = "" + Math.round(Math.sin(yMotion_New1_2*6.28/360)*360);
+      document.getElementById("squareMotion1_3").style.zIndex = "" + Math.round(Math.sin(yMotion_New1_3*6.28/360)*360);
+      document.getElementById("squareMotion1_4").style.zIndex = "" + Math.round(Math.sin(yMotion_New1_4*6.28/360)*360);
+      document.getElementById("squareMotion1_5").style.zIndex = "" + Math.round(Math.sin(yMotion_New1_5*6.28/360)*360);
+
+      document.getElementById("squareMotion2_1").style.zIndex = "" + Math.round(Math.sin(yMotion_New2_1*6.28/360)*360);
+      document.getElementById("squareMotion2_2").style.zIndex = "" + Math.round(Math.sin(yMotion_New2_2*6.28/360)*360);
+      document.getElementById("squareMotion2_3").style.zIndex = "" + Math.round(Math.sin(yMotion_New2_3*6.28/360)*360);
+      document.getElementById("squareMotion2_4").style.zIndex = "" + Math.round(Math.sin(yMotion_New2_4*6.28/360)*360);
+      document.getElementById("squareMotion2_5").style.zIndex = "" + Math.round(Math.sin(yMotion_New2_5*6.28/360)*360);
+
+    if(mouseDown == "true" ) {
+//    	document.getElementById("box").innerHTML = '<div id="box" class="divType">'
+    	document.getElementById("box").innerHTML = '<div style="border: 5px solid blue; width: 500px; height: 200px; display: inline-block; position: absolute; top:' + parseInt(Math.cos(yMotion_New1_1 *6.28/360)*80 + 200) + 'px;"></div>'
+    	document.getElementById("box2").innerHTML = '<div style="border: 5px solid blue; width: 500px; height: 200px; display: inline-block; top: 0px;"></div>'
+
+	for( var incr=0 ; incr<increment ; incr++ ) {
+    		document.getElementById("box").innerHTML = document.getElementById("box").innerHTML + '<div style="border: 5px solid blue; width: 500px; height: 200px; display: inline-block; position: absolute; top:' + parseInt(Math.cos(yMotion_New1_1 * 6.28/360) * 80 + 200 + incr * 50 ) + 'px;"></div>'
+	}
+	for( var incr=0 ; incr<increment ; incr++ ) {
+    		document.getElementById("box").innerHTML = document.getElementById("box").innerHTML + '<div style="border: 5px solid red; width: 500px; height: 200px; display: inline-block; position: absolute; left: 1500px; top:' + parseInt(Math.cos(yMotion_New2_1 * 6.28/360) * 80 + 200 + incr * 50 ) + 'px;"></div>'
+	}
+	for( var incr=0 ; incr<incrementSelect ; incr++ ) {
+    		document.getElementById("box2").innerHTML = document.getElementById("box2").innerHTML + '<div style="border: 5px solid red; width: 500px; height: 200px; display: inline-block; "></div>'
+	}
+    	document.getElementById("init").innerHTML = "Increment: " + incrementSelect;
+
+   	document.getElementById("box").innerHTML = document.getElementById("box").innerHTML + '<div style="border: 5px solid green; width: 500px; height: 200px; display: inline-block;"></div>'
+    	document.getElementById("box").innerHTML = document.getElementById("box").innerHTML + '<div style="border: 5px solid red; width: 500px; height: 200px; display: inline-block;"></div>'
+//    	document.getElementById("box").innerHTML = document.getElementById("box").innerHTML + '</div>';
+/*
+	if( choice == "squareMot" ) {
+		yHandleCurrent=parseInt(yHandleInit)-yMouseInit+event.clientY;
+      		current_mouse2D_x1 = event.clientX;
+		xSquare1=parseInt(xSquareInit1)-init_mouse2D_x1+current_mouse2D_x1;
+	}
+*/
+	if( choice == "Lever1" ) {
+		yHandleCurrent=parseInt(yHandleInit)-yMouseInit+event.clientY;
+	}
+	if( choice == "Lever2" ) {
+		yHandleCurrent2=parseInt(yHandleInit2)-yMouseInit2+event.clientY;
+	}
+	if( choice == "Scroll1" ) {
+      		current_mouse2D_x1 = event.clientX;
+		xSquare1=parseInt(xSquareInit1)-init_mouse2D_x1+current_mouse2D_x1;
+	}
+	if( choice == "Scroll2" ) {
+      		current_mouse2D_x2 = event.clientX;
+		xSquare2=parseInt(xSquareInit2)-init_mouse2D_x2+current_mouse2D_x2;
+	}
+
+    } else {
+    	document.getElementById("box").innerHTML = '<div id="box" class="divType"></div>';
+    }
+
+  }
+
+  /*
+  $("#squareMotion1_5").click(function() {
+    html2canvas($("#Selection2")[0]).then(canvas => {
+      ctx = canvas.getContext("2d");
+      var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      var pixelArr = imageData.data;
+      createBlankImagData(imageData);
+
+    }
+  }
+*/
+  
+
+  document.onmousemove = function(event){
+
+    sliding=(parseInt(document.getElementById('mainSlider').value)-50)*5;
+    if(sliding != prevSliding ) {
+      if(ordered[0]=="xSquare1") {
+//      var sample = order[i].slice(7,8)
+	xSquare1 = window.innerWidth/2+sliding-330;
+	xSquare2 = window.innerWidth/2+sliding;
+      } else {
+	xSquare1 = window.innerWidth/2+sliding;
+	xSquare2 = window.innerWidth/2+sliding-330;
+      }
+    }
+    prevSliding=sliding;
+
+    document.getElementById("current").innerHTML = init_mouse2D_x1;
+    document.getElementById("new").innerHTML = document.getElementById("imageDisplay").style.width;
+    document.getElementById("init").innerHTML = "INIT: " + xSquare1;
+    document.getElementById("ySquare1").innerHTML = choice;
+
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+
+/*
+  var xDivInit;
+  var yDivInit;
+  var square1=document.getElementById('freeImg1');
+  square1.onmousedown = function() {
+    	yMouseInit = event.clientY;
+	var str=document.getElementById("lever-handle").style.top;
+    	yHandleInit = str.slice(0, str.lastIndexOf("p"));
+    	mouseDown="true";
+    	choice="squareMot";
+
+	/////////////////////////////////////////////
+
+    	init_mouse2D_x1 = event.clientX;
+    	var str=document.getElementById("squareMotion1_1").style.left;
+    	xSquareInit1 = str.slice(0, str.lastIndexOf("p"));
+  } 
+  square1.onmouseup = function() {
+    	mouseDown="false";
+    	choice="none";
+  }
+
+  var square2=document.getElementById('freeImg2');
+  square2.onmousedown = function() {
+    	xMouseInit = event.clientX;
+	var str=document.getElementById("lever-handle").style.top;
+    	yHandleInit = str.slice(0, str.lastIndexOf("p"));
+    	mouseDown="true";
+    	choice="squareMot";
+
+	/////////////////////////////////////////////
+
+    	init_mouse2D_x1 = event.clientX;
+    	var str=document.getElementById("squareMotion1_2").style.left;
+    	xSquareInit1 = str.slice(0, str.lastIndexOf("p"));
+  }  
+  square2.onmouseup = function() {
+    	mouseDown="false";
+    	choice="none";
+  }
+  */
+
+  var hand=document.getElementById('lever-handle');
+  hand.onmousedown = function() {
+    	mouseDown="true";
+    	yMouseInit = event.clientY;
+
+        document.getElementById("yLoc").innerHTML = document.getElementById("lever-handle").style.top;
+
+    	var str=document.getElementById("lever-handle").style.top;
+    	yHandleInit = str.slice(0, str.lastIndexOf("p"));
+
+    	choice="Lever1";
+  }
+  var hand2=document.getElementById('lever-handle2');
+  hand2.onmousedown = function() {
+    	mouseDown="true";
+    	yMouseInit2 = event.clientY;
+
+        document.getElementById("yLoc").innerHTML = document.getElementById("lever-handle2").style.top;
+
+    	var str=document.getElementById("lever-handle2").style.top;
+    	yHandleInit2 = str.slice(0, str.lastIndexOf("p"));
+
+    	choice="Lever2";
+  }
+
+    var something = document.getElementById('move1');
+    something.style.cursor = 'pointer';
+    something.onmousedown = function() {
+
+    	mouseDown="true";
+    	init_mouse2D_x1 = event.clientX;
+
+    	var str=document.getElementById("squareMotion1_1").style.left;
+    	xSquareInit1 = str.slice(0, str.lastIndexOf("p"));
+
+    	choice="Scroll1";
+
+    }
+
+    something = document.getElementById('move2');
+    something.style.cursor = 'pointer';
+    something.onmousedown = function() {
+
+    	mouseDown="true";
+    	init_mouse2D_x2 = event.clientX;
+
+    	var str=document.getElementById("squareMotion2_1").style.left;
+    	xSquareInit2 = str.slice(0, str.lastIndexOf("p"));
+
+    	choice="Scroll2";
+
+    }
+
+
+
+    	document.getElementById("lever-handle").style.left = parseInt(xSquare1) + 307 + "px";
+    	document.getElementById("lever-bar").style.left = parseInt(xSquare1) + 313 + "px";
+    	document.getElementById("lever-socket").style.left = parseInt(xSquare1) + 307 + "px";
+
+    	document.getElementById("lever-handle2").style.left = parseInt(xSquare2) + 307 + "px";
+    	document.getElementById("lever-bar2").style.left = parseInt(xSquare2) + 313 + "px";
+    	document.getElementById("lever-socket2").style.left = parseInt(xSquare2) + 307 + "px";
+
+//    	document.getElementById("slider1").style.left = parseInt(xSquare1) + 300 + "px";
+    	document.getElementById("move1").style.left = parseInt(xSquare1) + 50 + "px";
+        for(var resizeInc=1; resizeInc<6; resizeInc++){
+        	document.getElementById("squareMotion1_"+resizeInc).style.left = xSquare1 + "px";
+        	document.getElementById("squareMotion2_"+resizeInc).style.left = xSquare2 + "px";
+	}
+
+
+        var imgDispYPos = document.getElementById("imageDisplay").style.top;
+    	imgDispYPos = imgDispYPos.slice(0, imgDispYPos.lastIndexOf("p"));
+
+	if( choice == "Lever1" ) {
+		yHandleCurrent=parseInt(yHandleInit)-yMouseInit+event.clientY;
+//    document.getElementById("xLoc").innerHTML = xMouse;
+		if( yHandleCurrent > 100 && yHandleCurrent < 600 ) {
+    	        	document.getElementById("lever-handle").style.top = yHandleCurrent + "px";
+			if( yHandleCurrent < 350 ) {
+    	        		document.getElementById("lever-bar").style.top = yHandleCurrent + "px";
+    	        		document.getElementById("lever-bar").style.height = 350 - yHandleCurrent + "px";
+			} else {
+    	        		document.getElementById("lever-bar").style.top = "350px";
+    	        		document.getElementById("lever-bar").style.height = yHandleCurrent - 350 + "px";
+			}
+		}
+	}
+
+	if( choice == "Lever2" ) {
+		yHandleCurrent2=parseInt(yHandleInit2)-yMouseInit2+event.clientY;
+//    document.getElementById("xLoc").innerHTML = xMouse;
+		if( yHandleCurrent2 > 100 && yHandleCurrent2 < 600 ) {
+    	        	document.getElementById("lever-handle2").style.top = yHandleCurrent2 + "px";
+			if( yHandleCurrent2 < 350 ) {
+    	        		document.getElementById("lever-bar2").style.top = yHandleCurrent2 + "px";
+    	        		document.getElementById("lever-bar2").style.height = 350 - yHandleCurrent2 + "px";
+			} else {
+    	        		document.getElementById("lever-bar2").style.top = "350px";
+    	        		document.getElementById("lever-bar2").style.height = yHandleCurrent2 - 350 + "px";
+			}
+		}
+	}
+	if( choice == "Scroll1" ) {
+      		current_mouse2D_x1 = event.clientX;
+		xSquare1=parseInt(xSquareInit1)-init_mouse2D_x1+current_mouse2D_x1;
+	}
+	if( choice == "Scroll2" ) {
+      		current_mouse2D_x2 = event.clientX;
+		xSquare2=parseInt(xSquareInit2)-init_mouse2D_x2+current_mouse2D_x2;
+	}
+
+      reset();
+
+     generateBubbleInc++;
+     if( generateBubbleInc > 10 ) {
+       generateBubbleInc = 0;
+       circle.push(document.createElement("div"));
+       circleCount.push(0);
+       circleMotion.push(0);
+       circle[circle.length-1].setAttribute("class" , "circle");
+       document.body.appendChild(circle[circle.length-1]);
+     
+       circle[circle.length-1].style.zIndex = -500;
+       circle[circle.length-1].style.left = event.clientX + 'px';
+       circle[circle.length-1].style.top = event.clientY + 'px';
+     }
+
+  }
+
+  
+</script>
+
+</body>
+</html>
