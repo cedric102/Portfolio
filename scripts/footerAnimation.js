@@ -325,4 +325,3 @@ $(document).ready(function(){
     $(this).children( "div" ).children().css("color", "rgba(0 , 0 , 0 , 1)");
   });
 });
-
