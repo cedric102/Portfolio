@@ -1,4 +1,14 @@
 
+function showExtraText(n) {
+  var x = document.getElementsByClassName("extraTextDiv");
+
+  if( x[n].style.display == "block" )
+  	x[n].style.display = "none";
+  else
+  	x[n].style.display = "block";
+
+}
+
 function currentDiv(n) {
   showDivs(slideIndex = n);
 }
@@ -214,9 +224,6 @@ $(window).scroll(function() {
    if( wS > 50 ) {
      animate = true
    }
-   if( wS > 200 ) {
-     document.getElementById('fixedMenu').style.display = "block";
-   }
    if( wS > 600 ) {
      animate2 = true
    }
@@ -318,4 +325,3 @@ $(document).ready(function(){
     $(this).children( "div" ).children().css("color", "rgba(0 , 0 , 0 , 1)");
   });
 });
-
