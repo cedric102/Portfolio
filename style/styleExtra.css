@@ -9,7 +9,9 @@
   padding-top: 10px;
   cursor: pointer; }
 
-@media only screen and (max-width: 900px) {
+  .extraTextDiv { display: none; font-size: 1.8vw; color: black; line-height: 1.5em; width: fit-content; margin-left: auto; margin-right: auto; width: 70%; }
+
+@media only screen and (max-width: 800px) {
 	.container {
 	  display: inline-block;
 	  cursor: pointer;
@@ -37,8 +39,12 @@
 	  -webkit-transform: rotate(45deg) translate(-8px, -8px);
 	  transform: rotate(45deg) translate(-8px, -8px);
 	}
+  .extraTextDiv { font-size: 15px; width: 95%; }
+  .sliderClass { position: absolute; top: 0px; }
 }
-
+  .textParagraph { display: block; width: fit-content; text-align: left; }
+  .extraTextButton { display: block; font-size: 20px; margin-left: auto; margin-right: auto; border-radius: 20px; padding: 0.5vw; padding-left: 2vw; padding-right: 2vw; background-color: cyan; border: 1px solid cyan; opacity: 0.5; font-size: 1.8vw; }
+  .extraTextButton:hover{ opacity: 1; }
   #slide-text { height: 200px; font-size: 50px; display: inline-block; left: 0px; }
   #slide-text2 { font-size: 50px; display: inline-block; left: 0px; }
   #inner-text { display: inline-block; font-size: 20px; position: relative; vertical-align: middle; }
@@ -49,7 +55,7 @@
 
   #headerTitle1 { position: relative; top: 35%; }
   #headerTitle2 { position: relative; top: 40%; }
-  #innerImgProgress { width: 100px; display: inline-block; vertical-align: middle; width: 14%; }
+  #innerImgProgress { width: 100px; display: inline-block; vertical-align: middle; width: 20%; }
   #slideText { margin-top: 25px; margin-bottom: 25px; font-size: 50px; display: inline-block; border-bottom: 2px solid black; padding-bottom: 50px; }
   #innerText div div { margin-bottom: 7px; margin-left: 7px; margin-right: 7px; }
   #textInImage { position: relative; top: 200px; left: 60px; font-size: 2em; background-color: blue; width: 250px; text-align: center; color: white; cursor: pointer; }
@@ -79,7 +85,7 @@
   .inHiddingLink2 { display: inline-block; position: relative; bottom: 60px;  }
   #inHidding1 { display: none; border-radius: 25px 25px 25px 25px; border: 1px solid white; padding-bottom: 3px; padding-top: 3px; font-size: 20px; top: -5px; }
   #inHidding2 { display: none; border-radius: 25px 25px 25px 25px; border: 1px solid white; padding-bottom: 3px; padding-top: 3px; font-size: 20px; top: 10px; }
-  @media only screen and (max-width: 900px) {
+  @media only screen and (max-width: 800px) {
     #innerText { /*width: 400px; */font-size: 15px; display: block; margin-left: 0px; margin: 0 auto; margin-bottom: 20px; }
     #slideText { width: fit-content; }
     #innerImgProgress { width: 40%; }
@@ -96,19 +102,22 @@
     #robotSlider  { position: relative; margin-bottom: 0px; margin-top: 20px; }
     #portfolio { padding-left: 0px; }
     .sliderInnerText { font-size: 10px; position: relative; max-width: 99%; } 
+    .sliderClass { width: 400px; }
     .mySlides { margin-left: 0px; }
 /*    #about2 { position: relative; padding-bottom: 750px; } */
   }
   @media only screen and (max-width: 600px) {
     #innerText { font-size: 15px; }
+    .extraTextButton { font-size: 15px; }
   }
-  @media only screen and (min-width: 901px) {
+  @media only screen and (min-width: 801px) {
     #innerText { display: inline-block; max-width: 80%; font-size: 2vw; position: relative; vertical-align: middle; }
     .inHiddingLink1 { display: inline-block; }
     .inHiddingLink2 { display: inline-block; }
     .inHiddingLink1 { margin-top: 3px; }
     .inHiddingLink2 { margin-top: 5px; }
     #sliderWrapper { padding: 20px; } 
+    .sliderClass { width: 85%; }
 /*    #about2 { position: relative; padding-bottom: 400px; } */
   }
   @media only screen and (min-width: 1500px) {
@@ -258,4 +267,3 @@
     
         <div id="headerText" style="position: absolute; top: 0; z-index: 1;">
 */
-
