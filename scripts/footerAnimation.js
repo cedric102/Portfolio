@@ -1,4 +1,14 @@
 
+function showExtraText(n) {
+  var x = document.getElementsByClassName("extraTextDiv");
+
+  if( x[n].style.display == "block" )
+  	x[n].style.display = "none";
+  else
+  	x[n].style.display = "block";
+
+}
+
 function currentDiv(n) {
   showDivs(slideIndex = n);
 }
