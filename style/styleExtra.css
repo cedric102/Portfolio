@@ -76,7 +76,7 @@
   .javaVideo { width: 50%; height: auto; padding: 1%; margin : 1%; display: block; margin: 0 auto; }
   .aboutGeneWarning { top: 0px; }
   .aboutGene { margin: 1%; position: absolute; top: 0px; }
-  .demo { opacity: 0.5 }; 
+  .demo { opacity: 1 }; 
   .demo:hover { opacity: 1 }
   #secondTextInDiv { transform: translate(0, 100%); }
   
@@ -91,8 +91,8 @@
     #innerImgProgress { width: 40%; }
     #inHidding1 { display: block; background-color: black; color: white; position: relative; left: 10px; bottom: 2px; }
     #inHidding2 { display: block; background-color: black; color: white; position: relative; left: 10px; bottom: 5px; }
-    .inHiddingLink1 { background-color: black; width: 170px; display: none; position: relative; top: -2px; }
-    .inHiddingLink2 { background-color: black; width: 170px; display: none; position: relative; top: 10px; }
+    .inHiddingLink1 { background-color: black; width: 210px; display: none; position: relative; top: -2px; }
+    .inHiddingLink2 { background-color: black; width: 210px; display: none; position: relative; top: 10px; }
     .skillDivs { position: relative; display: block; width: 100%; background-color: white; }
     .barLabel { display: block; margin-top: 50px; }
     #dotSlider1 { position: relative; padding-bottom: 30px; margin-bottom: 0px; margin-top: 0px; }
@@ -146,7 +146,7 @@
   }
 
   @media only screen and (max-width: 600px) {
-    .inHiddingLink2 { background-color: black; width: 170px; display: none; position: relative; top: 10px; }
+    .inHiddingLink2 { background-color: black; display: none; position: relative; top: 10px; }
   }
   @media only screen and (max-width: 580px) {
     #innerImgProgress { margin-bottom: 20px; }

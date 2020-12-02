@@ -152,15 +152,15 @@ $('#portfolio').waypoint(function() {
         stop = true
 
       document.getElementById('webSlider').style.opacity = i;
-      document.getElementById('webSlider').style.left = -1000+j*4+"px";
+//      document.getElementById('webSlider').style.left = -1000+j*4+"px";
 
       document.getElementById('dotSlider1').style.opacity = i;
       document.getElementById('appSlider').style.opacity = i;
-      document.getElementById('appSlider').style.transform = "rotate("+j*360/250+"deg)";
+//      document.getElementById('appSlider').style.transform = "rotate("+j*360/250+"deg)";
       document.getElementById('dotSlider2').style.opacity = i;
 
       document.getElementById('robotSlider').style.opacity = i;
-      document.getElementById('robotSlider').style.left = 1000-j*4+"px";
+//      document.getElementById('robotSlider').style.left = 1000-j*4+"px";
       
     }
   }
