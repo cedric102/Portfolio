@@ -1,0 +1,1009 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PROJECTS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+  <!-- HOSTED -->
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,600italic,300italic,400italic,300,700italic,800italic,800' rel='stylesheet' type='text/css'>
+
+
+  <!-- LOCAL -->
+  <script src="scripts/personalizedAnimation.js"></script>
+  <link rel="stylesheet" href="style/styleInitial.css">
+  <link rel="stylesheet" href="style/styleExtra.css">
+  <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/ >
+
+  <!-- HOSTED -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/2.1.11/jquery.mixitup.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.0/jquery.waypoints.min.js"></script>
+
+
+</head>
+
+<style>
+
+
+div.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 10px;
+  background-color: yellow;
+  padding: 50px;
+  font-size: 20px;
+  height: 500px;
+}
+
+body {font-family: Arial, Helvetica, sans-serif;}
+
+#myImg1 { border-radius: 5px; cursor: pointer; transition: 0.3s; }
+#myImg2 { border-radius: 5px; cursor: pointer; transition: 0.3s; }
+#myImg3 { border-radius: 5px; cursor: pointer; transition: 0.3s; }
+#myImg4 { border-radius: 5px; cursor: pointer; transition: 0.3s; }
+#myImg5 { border-radius: 5px; cursor: pointer; transition: 0.3s; }
+#myImg6 { border-radius: 5px; cursor: pointer; transition: 0.3s; }
+
+#myImg1:hover {opacity: 0.7;}
+#myImg2:hover {opacity: 0.7;}
+#myImg3:hover {opacity: 0.7;}
+#myImg4:hover {opacity: 0.7;}
+#myImg5:hover {opacity: 0.7;}
+#myImg6:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal1 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+.modal2 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+</style>
+
+<style>
+  #fixedRightTab .fixedRightTabs { opacity: 0.5; }
+  #fixedRightTab .fixedRightTabs : hover { opacity: 1; }
+</style>
+
+<body style="background-color: white;">
+<div class="overflow-wwidth: 100px; display: inline-block; vertical-align: middle; width: 7%;rap" >
+
+  <!-- MENU -->
+  <div class="modal-wrap flex">
+    <div class="mask"></div>
+    <div class="modal" id="modal">
+      <div class="carousel-wrap">
+        <div class="window">
+          <div id="carousel">
+          <div class="slide"></div>
+          <div class="slide"></div>
+          <div class="slide"></div>
+          </div>
+          <i class="mdi mdi-chevron-left" id="prev"></i>
+          <i class="mdi mdi-chevron-right" id="next"></i>
+        </div>
+
+      </div>
+      <div class="info-box">
+        <div class="title"></div>
+        <div class="tag"></div>
+        <div class="detail"></div>
+      </div>
+      <i class="close mdi mdi-close"></i>
+    </div>
+  </div>
+
+          <nav style="position: fixed; top: 0px; z-index: 251; padding-top: 10px; padding-bottom: 10px; background-color: black;" >
+		<div class="container" onclick="showMenu1(this)" >
+  			<div class="bar1" style="background-color: grey;"></div>
+  			<div class="bar2" style="background-color: grey;"></div>
+ 			<div class="bar3" style="background-color: grey;"></div>
+		</div>
+
+            <div class="link-wrap fixedMenu" style="margin-top: -2px;">
+              <a href="#headerID" class="inHiddingLink1"><div dest="home" href="#home">HOME</div></a>
+              <a href="#skillSection1" class="inHiddingLink1"><div dest="home" href="#skillSection1">TOPICS</div></a>
+              <a href="#portfolio" class="inHiddingLink1"><div class="page-link" dest="portfolio">PROJECTS</div></a>
+              <a href="#JavaApp" class="inHiddingLink1"><div class="page-link" dest="JavaApp">JAVA APP</div></a>
+              <a href="#about2" class="inHiddingLink1" ><div class="page-link" dest="about2" style="line-height: 1.5;">WORK IN PROGRESS</div></a>
+              <a href="#contact" class="inHiddingLink1"><div class="page-link" dest="contact">CONTACT</div></a>
+            </div>
+            <i class="mdi mdi-menu"></i>
+          </nav>
+
+  <!-- HOME -->
+  <section id="headerID" style="height: fit-content; position: relative; z-index: 253; max-height: 90vh;">
+
+     <div id="headerDiv" style="border: 1px solid green">
+
+    	<img id="headerVid" style="max-height: 95vh; width: 100vw; max-width: 300vh;" src="transferFolder/websiteHeader.png"></img> <!--  src="websiteHeader.png fish_two_o.png" -->
+<!--
+        <div class="text" id="headerText">
+
+          <div id="headerTitle1" style="color: white; left: 0px; font-size: 6vw; margin-bottom: 3vw;">
+            Cedric Carteron
+          </div>
+          <div id="headerTitle2" style="color: white; left: 0px; font-size: 6vw;">
+            My Portfolio
+          </div>
+
+        </div>
+-->
+        <div style="height: 65px;">
+        </div>
+        <div class="text" id="headerText">
+
+          <nav style="position: absolute; bottom: 0; padding-top: 0px; padding-bottom: 60px; height: 50px; background-color: black; left: 0px">
+
+		<div class="container" style="top: 10px; left: 0px;" onclick="showMenu2(this)" >
+  			<div class="bar1" style="background-color: grey;"></div>
+  			<div class="bar2" style="background-color: grey;"></div>
+ 			<div class="bar3" style="background-color: grey;"></div>
+		</div>
+
+            <div class="link-wrap" style="margin-left: -3px; width: 100%">
+              <a href="#headerID" class="inHiddingLink2"><div dest="home" href="#home">HOME</div></a>
+              <a href="#skillSection1" class="inHiddingLink2"><div dest="home" href="#skillSection1">TOPICS</div></a>
+              <a href="#portfolio" class="inHiddingLink2"><div class="page-link" dest="#portfolio">PROJECTS</div></a>
+              <a href="#JavaApp" class="inHiddingLink2"><div class="page-link" dest="#JavaApp">JAVA APP</div></a>
+              <a href="#about2" class="inHiddingLink2"><div class="page-link" dest="#about2" style="line-height: 1.5;">WORK IN PROGRESS</div></a>
+              <a href="#contact" class="inHiddingLink2"><div class="page-link" dest="contact">CONTACT</div></a>
+            </div>
+            <i class="mdi mdi-menu"></i>
+          </nav>
+
+       </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SLIDER -->
+
+  <section id="test" style="height: auto; margin-bottom: 50px; position: relative; background-color: cyan; height: 0px;">
+
+  </section>
+
+  <!-- SLIDER -->
+  <section class="w3-animate-top" id="skillSection1" style="height: auto; margin-top: 10px; position: relative; background-color: rgba(0 , 0 , 0 , 0.1);">
+      <div style="font-size: 50px; line-height: 2; color: black;">TOPICS</div>
+      <div style="line-height: 2; margin-bottom: 50px; border-bottom: 1px solid black; width: 170px; height: 4px; background-color: black; margin: auto;"></div>
+      <div style="position: relative; top: 10px; margin-bottom: 50px;" >
+        <a class="topicLink" href="#webId"><div id="webSlider" class="barLabel" style="position: relative; font-size: 3em; opacity: 0.01;"><b>Website Design</b></div></a>
+        <a class="topicLink" href="#webId"><div id="dotSlider1" class="barLabel" style="position: relative; font-size: 10em; margin-left: 10px; margin-right: 10px; bottom: 2px; opacity: 0.01;"><b>.</b></div></a>
+        <a class="topicLink" href="#appId"><div id="appSlider" class="barLabel" style="position: relative; font-size: 3em; opacity: 0.01;"><b>App Development</b></div></a>
+        <a class="topicLink" href="#appId"><div id="dotSlider2" class="barLabel" style="position: relative; font-size: 10em; margin-left: 10px; margin-right: 10px; bottom: 2px; opacity: 0.01;"><b>.</b></div></a>
+        <a class="topicLink" href="#robId"><div id="robotSlider" class="barLabel" style="position: relative; font-size: 3em; opacity: 0.01;"><b>Robot Application</b></div></a>
+      <div>
+  </section>
+
+<!-- PORTFOLIO -->
+
+  <section id="portfolio2" style="background-color: rgba(0 , 0 , 0 , 0.2); display: none;">
+
+      <div style="font-size: 50px; line-height: 1.2; margin: 30px 0px 30px 0px;">PROJECS</div>
+      <div style="line-height: 1; margin-bottom: 10px; border-bottom: 1px solid gray; width: 170px; height: 4px; background-color: black; margin: auto;"></div>
+
+<div class="w3-content" id="sliderWrapper" style="max-width: 5000px; margin-top: 40px;">
+
+  <div id="project-cathegory-choice" class="slideChoice3" style="margin: 0 auto; top: -50px; margin-top: 10px; width: 50%; height: auto;" > 
+    <div style="min-width: 100px; position: relative;">
+       <!-- #1261A0 -->
+       <div class="choicing" id="menuItem" style="background-color: #1261A0; border: 1px solid #1261A0; display: inline-block; border-radius: 25px 25px 0px 0px; width: 32%; height: auto; top: 0px;" >
+         <img class="demo" id="innerImg" src="transferFolder/SliderMainImages/Web_DeleteTwoCircles.png" onclick="currentDiv(1)">
+         <div id="textInImage2" onclick="currentDiv(1)"><p style="width: 100%; vertical-align: middle; top: 50%; transform: translate(0, -20%)"><b>WEB</b></p></div>
+       </div>
+       <!-- #3895D3 -->
+       <div class="choicing" id="menuItem" style="background-color: #3895D3; border: 1px solid #3895D3; boder: 1px solid rgba( 155 , 155 , 155 , 55 ); display: inline-block; border-radius: 25px 25px 0px 0px; width: 32%; height: auto;" >
+         <img class="demo" id="innerImg" src="transferFolder/SliderMainImages/App_Slider.png" onclick="currentDiv(2)">
+         <div id="textInImage2" style="opacity: 1;" onclick="currentDiv(2)"><p  class="sliderMenuText" style="top: 40%; transform: translate(0, -20%)"><b>APP</b></p></div>
+       </div>
+       <!-- #58CCED -->
+       <div class="choicing" id="menuItem" style="background-color: #58CCED; border: 1px solid #58CCED; display: inline-block; border-radius: 25px 25px 0px 0px; width: 32%; height: auto;" >
+         <img class="demo" id="innerImg" src="transferFolder/SliderMainImages/Rob_Slider.png" onclick="currentDiv(3)">
+         <div id="textInImage2" onclick="currentDiv(3)"><p style="top: 50%; transform: translate(0, -20%)"><b>ROBOT</b></p></div>
+       </div>
+     </div> 
+   </div>
+   <div id="project-cathegory-choice-short" class="slideChoice" >
+         <div id="textInImage3" onclick="currentDiv(1)"><p id="secondTextInDiv" ><b>WEB</b></p></div>
+         <div id="textInImage3" style="opacity: 1;" onclick="currentDiv(2)"><p id="secondTextInDiv" ><b>APP</b></p></div>
+         <div id="textInImage3" onclick="currentDiv(3)"><p id="secondTextInDiv" ><b>ROBOT</b></p></div>
+   </div>
+
+  <div class="mySlides" style="width:100%; display: none; background-color: #1261A0; border-radius: 25px 25px 25px 25px; padding-bottom: 50px; margin-left: 0px;">
+      <div id="slideText" class="sliderClass" style="margin-top: 4%; position: relative; opacity: 0.01;">
+             <div class="shortSubText">
+                <div style="position: relative;">
+		  <a href="01-WEB/01-GravityWebsite/threeD.html"><img src="transferFolder/3D_GravityIcon.png" id="innerImgProgress" style="width: 100vw; height: auto;"></a>
+                  <a href="01-WEB/01-GravityWebsite/threeD.html">
+                    <div style="position: absolute; top: 0px; left: 0px; font-size: 10px; height: 100%; width: 100%; background-color: rgba( 255 , 255 , 255 , 0.5 ); vertical-align: center;">
+            	      <div style="margin-bottom: 20px; font-size: 1.5em;"><b>3D Gravity</b></div>
+            	      <div style="margin-bottom: 20px;"><b>WEB: Dynamic 3D Gravity Website</b></div>
+                      <div class="textParagraph">- <b>Project:</b> 3D Gravity Representation.</div>
+                      <div class="textParagraph">- <b>Platform:</b> Browser.</div>
+                      <div class="textParagraph">- <b>Language:</b> HTML / CSS / JS.</div>
+                    </div>
+                  </a>
+                          <button class="extraTextButton" onclick="showExtraText(1)"></button>
+                          <div class="extraTextDiv" style="color: white;">
+            	            <div class="textParagraph">- A website involing a 3D interface in which spheres are attracted to each other.</div>
+            	            <div class="textParagraph">- The spheres velocity is preserved.</div>
+            	            <div class="textParagraph">- More objects can be added if the mouse key is being pressed.</div>
+            	            <div class="textParagraph">- The location of all the points are logged and updated in a table.</div>
+                          </div>
+                </div>
+              </div>
+              <div class="longSubText">
+                <div style="position: relative;">
+		  <a href="01-WEB/01-GravityWebsite/threeD.html"><img src="transferFolder/3D_GravityIcon.png" id="innerImgProgress"></a>
+          	  <a href="01-WEB/01-GravityWebsite/threeD.html">
+			<div id="innerText" class="sliderInnerText" style="color: white; line-height: 1.2; position: relative;">
+            			<div style="margin-bottom: 20px; font-size: 1.5em;"><b>3D Gravity</b></div>
+            			<div style="margin-bottom: 20px;"><b>WEB: Dynamic 3D Gravity Website</b></div>
+                                <div style="margin-left: auto;margin-right: auto;">
+                                  <div class="textParagraph">- <b>Project:</b> 3D Gravity Representation.</div>
+                                  <div class="textParagraph">- <b>Platform:</b> Browser.</div>
+                                  <div class="textParagraph">- <b>Language:</b> HTML / CSS / JS.</div>
+                                </div>
+          		</div>
+          	  </a>
+                          <button class="extraTextButton" onclick="showExtraText(1)">Read Mode</button>
+                          <div class="extraTextDiv" style="color: white;">
+            	            <div class="textParagraph">- A website involing a 3D interface in which spheres are attracted to each other.</div>
+            	            <div class="textParagraph">- The spheres velocity is preserved.</div>
+            	            <div class="textParagraph">- More objects can be added if the mouse key is being pressed.</div>
+            	            <div class="textParagraph">- The location of all the points are logged and updated in a table.</div>
+                          </div>
+                </div>
+              </div>
+      </div>
+
+      <div id="slideText" class="sliderClass" style="margin-top: 4%; position: relative; opacity: 0.01;">
+		<a href="https://cedric102.github.io/QuaternionToEuler/QuaternionToEuler.html"><img src="transferFolder/GaussianIcon.png" id="innerImgProgress"></a>
+          	<arobId href="https://cedric102.github.io/QuaternionToEuler/QuaternionToEuler.html">
+          		<div id="innerText" class="sliderInnerText" style="color: white; line-height: 1.2; width: fit-content;">
+            			<div style="margin-bottom: 20px; font-size: 1.5em;"><b>Quaternions</b></div>
+            			<div style="margin-bottom: 20px;"><b>WEB:</b> Quaternion To Euler.</div>
+                                <div style="width: fit-content; margin-left: auto; margin-right: auto;">
+                                  <div class="textParagraph">- <b>Project:</b> Quaternion To Euler Visualizer.</div>
+                                  <div class="textParagraph">- <b>Platform:</b> Browser.</div>
+                                  <div class="textParagraph">- <b>Language:</b> HTML / CSS / JS.</div>
+                                </div>
+          		</div>
+		</a>
+                                <button class="extraTextButton" onclick="showExtraText(2)">Read Mode</button>
+                                <div class="extraTextDiv" style="color: white;">
+                                  <div class="textParagraph">- Upload the Quaternion list as a CSV format.</div>
+                                  <div class="textParagraph">- Visualize the resulting Euler Angle Output.</div>
+                                  <div class="textParagraph">- Perform a Rotation from the last Recorded Quaternion.</div>
+                                </div>
+      </div>
+      <div id="slideText" class="sliderClass" style="margin-top: 4%; position: relative; opacity: 0.01;">
+		<a href="01-WEB/03-Hitchhicker/pleaseDontPressThisButtonAgain.html"><img src="transferFolder/HitchHickerIcon.png" id="innerImgProgress"></a>
+          	<a href="01-WEB/03-Hitchhicker/pleaseDontPressThisButtonAgain.html">
+          		<div id="innerText" class="sliderInnerText" style="color: white; line-height: 1.2; width: fit-content;">
+            			<div style="margin-bottom: 20px; font-size: 1.5em;"><b>Hitchhiker Button</b></div>
+            			<div style="margin-bottom: 20px;"><b>WEB:</b> "The Hitchhiker's Guide to the Galaxy" Button.</div>
+                                <div style="width: fit-content; margin-left: auto; margin-right: auto;">
+                                  <div class="textParagraph">- <b>Project:</b> Refer to Page 40 of The Hitchhiker's Guide to the Galaxy.</div>
+                                  <div class="textParagraph">- <b>Platform:</b> Browser.</div>
+                                  <div class="textParagraph">- <b>Language:</b> HTML / CSS / JS.</div>
+                                </div>
+          		</div>
+		</a>
+                                <button class="extraTextButton" onclick="showExtraText(3)">Read Mode</button>
+                                <div class="extraTextDiv" style="color: white;">
+                                  <div class="textParagraph">- Refer to Page 40 of The Hitchhiker's Guide to the Galaxy.</div>
+                                  <div class="textParagraph">- Press the button to see what is happening.</div>
+                                </div>
+      </div>
+
+  </div>
+
+  <div class="mySlides" style="width:100%; display: block; z-index: 200; background-color: #3895D3; border-radius: 25px 25px 25px 25px; line-height: 1.2; padding-bottom: 50px">
+      <div id="slideText" class="sliderClass" style="margin-top: 4%; position: relative; opacity: 0.01;">
+		<a href="https://www.youtube.com/watch?v=GG_o2Irxa-k&t=2s"><img src="transferFolder/2D_GravityIcon.png" id="innerImgProgress"></a>
+          	<a href="https://www.youtube.com/watch?v=GG_o2Irxa-k&t=2s">
+          		<div id="innerText" class="sliderInnerText" style="color: black; position: relative; width: fit-content;">
+            			<div style="margin-bottom: 20px; font-size: 1.5em;"><b>2D Gravity</b></div>
+            			<div style="margin-bottom: 20px;"><b>APP:</b> Gravity in 2D ( Orbit Observation ).</div>
+                                <div style="width: fit-content; margin-left: auto; margin-right: auto;">
+                                  <div style="display: block; width: fit-content; text-align: left;">- <b>Project:</b> Implement a 2D Gravity Graphical Application.</div>
+                                  <div style="display: block; width: fit-content; text-align: left;">- <b>Platform:</b> Android Studio.</div>
+                                  <div style="display: block; width: fit-content; text-align: left;">- <b>Language:</b> Java.</div>
+                                </div>
+          		</div>
+		</a>
+                                <button class="extraTextButton" onclick="showExtraText(4)">Read Mode</button>
+                                <div class="extraTextDiv">
+                                  <div class="textParagraph">- Particles are generated and are in orbit around one gravity point.</div>
+                                  <div class="textParagraph">- Each particles have their own initial Velocity and initial Angle.</div>
+                                  <div class="textParagraph">- The particles do not interact with each other.</div>
+                                  <div class="textParagraph">- There is no Colision nor mutual attraction.</div>
+                                </div>
+      </div>
+      <div id="slideText" class="sliderClass" style="margin-top: 4%; position: relative; opacity: 0.01;">
+		<a href="02-APP/iosShooting1.mp4"><img src="transferFolder/FireAndIce.png" id="innerImgProgress"></a>
+          	<a href="02-APP/iosShooting1.mp4">
+          		<div id="innerText" class="sliderInnerText" style="color: black; position : relative; width: fit-content;">
+            			<div style="margin-bottom: 20px; font-size: 1.5em;"><b>IOS FIE / ICE</b></div>
+		    		<div style="margin-bottom: 20px;"><b>APP:</b> Ice Shield.</div>
+                                <div style="width: fit-content; margin-left: auto; margin-right: auto;">
+                                  <div class="textParagraph">- <b>Project:</b> Block Fire Balls with Blocks of Ice.</div>
+                                  <div class="textParagraph">- <b>Platform:</b> XCode.</div>
+                                  <div class="textParagraph">- <b>Language:</b> Swift.</div>
+                                </div>
+          		</div>
+		</a>
+                                <button class="extraTextButton" onclick="showExtraText(5)">Read Mode</button>
+                                <div class="extraTextDiv">
+                                  <div class="textParagraph">- Fireballs are falling from the sky.</div>
+                                  <div class="textParagraph">- You can block the fireballs using blocks of ice.</div>
+                                  <div class="textParagraph">- The blocks of Ice can be generated using a Glass Canon.</div>
+                                </div>
+      </div>
+
+  </div>
+
+  <!--
+	PathPlanning: https://www.youtube.com/watch?v=NBcDmAq6ouQ&feature=youtu.be
+	RobotLocalisation: https://www.youtube.com/watch?v=WLFCFHb-2zc
+	RobotLeg1: https://www.youtube.com/watch?v=UlIkLIRhSBo
+	RobotLeg2: https://www.youtube.com/watch?v=hKfwd3hCKAA
+	Gravity: https://www.youtube.com/watch?v=GG_o2Irxa-k&t=2s
+	Quaternion: https://www.youtube.com/watch?v=mxtNutEjm7c
+	BlenderBluid: https://www.youtube.com/watch?v=PUxx6FwgikQ
+	ChickenKing: https://www.youtube.com/watch?v=QgVwhxxi0lQ&t=3s
+  -->
+
+  <!-- #58CCED -->
+  <div class="mySlides" style="width:100%; display: none; background-color: #58CCED; border-radius: 25px 25px 25px 25px;  line-height: 1.2; padding-bottom: 50px">
+      <div id="slideText" class="sliderClass" style="margin-top: 4%; position: relative; opacity: 0.01;">
+		<a href="https://www.youtube.com/watch?v=NBcDmAq6ouQ"><img src="transferFolder/PathFinderIcon.png" id="innerImgProgress"></a>
+          	<a href="https://www.youtube.com/watch?v=NBcDmAq6ouQ">
+          		<div id="innerText" class="sliderInnerText">
+            			<div style="margin-bottom: 20px; font-size: 1.5em;"><b>Path Planning</b></div>
+                                <div style="margin-bottom: 20px;"><b>Robotics:</b> Path-Planning Algorithm.</div>
+                                <div style="width: fit-content; margin-left: auto; margin-right: auto;">
+                                  <div class="textParagraph">- <b>Project:</b> Perform Pathplanning Algorithm.</div>
+                                  <div class="textParagraph">- <b>Platform:</b> Android Studio.</div>
+                                  <div class="textParagraph">- <b>Language:</b> Java.</div>
+                                </div>
+          		</div>
+		</a>
+                                <button class="extraTextButton" onclick="showExtraText(6)">Read Mode</button>
+                                <div class="extraTextDiv">
+                                  <div class="textParagraph">- Demonstrate Pathplanning Algorithm.</div>
+                                  <div class="textParagraph">- Implemented in Java.</div>
+                                  <div class="textParagraph">- Adapted from Coding Challenge Javascript implemetation , and "Autonomous Mobile Robotics".</div>
+                                </div>
+      </div>
+      <div id="slideText" class="sliderClass" style="position: relative; opacity: 0.01;">
+		<a href="https://www.youtube.com/watch?v=WLFCFHb-2zc"><img src="transferFolder/RobotLocalisationIcon.png" id="innerImgProgress"></a>
+          	<a href="https://www.youtube.com/watch?v=WLFCFHb-2zc">
+          		<div id="innerText" class="sliderInnerText">
+            			<div style="margin-bottom: 20px; font-size: 1.5em;"><b>Localisation Robot</b></div>
+            			<div style="margin-bottom: 20px;"><b>Robotics:</b> Robot Localisation.</div>
+                                <div style="width: fit-content; margin-left: auto; margin-right: auto;">
+                                  <div class="textParagraph">- <b>Project:</b> Perform Robot Localisation Algorithm.</div>
+                                  <div class="textParagraph">- <b>Platform:</b> Android Studio.</div>
+                                  <div class="textParagraph">- <b>Language:</b> Java.</div>
+                                </div>
+          		</div>
+		</a>
+                                <button class="extraTextButton" onclick="showExtraText(7)">Read Mode</button>
+                                <div class="extraTextDiv">
+                                  <div class="textParagraph">- Demonstrate Robot Localisation Algorithm.</div>
+                                  <div class="textParagraph">- The blue robot needs to know its location in a given map.</div>
+                                  <div class="textParagraph">- Particles are being generated with random angle / position.</div>
+                                  <div class="textParagraph">- Simulated Light sensor is used as a way to determine the localisation on a map with markup on the floor.</div>
+                                  <div class="textParagraph">- The blue robot's measurements are compared with the measurement of all the particles ( The red particles ).</div>
+                                  <div class="textParagraph">- Then a particle selection of the closest match is performed.</div>
+                                </div>
+      </div>
+
+      <div id="slideText" class="sliderClass" style="position: relative; opacity: 0.01;">
+		<a href="https://www.youtube.com/watch?v=UlIkLIRhSBo"><img src="transferFolder/tripodIcon.png" id="innerImgProgress"></a>
+          	<a href="https://www.youtube.com/watch?v=AZpyUnYyfmQ">
+          		<div id="innerText" class="sliderInnerText">
+            			<div style="margin-bottom: 20px; font-size: 1.5em;"><b>Delta Robot</b></div>
+            			<div style="margin-bottom: 20px;"><b>Robotics:</b> Implement a Delta Robot.</div>
+                                <div style="width: fit-content; margin-left: auto; margin-right: auto;">
+                                  <div class="textParagraph">- <b>Project:</b> Implement a Delta Robot Inverse Kynematis.</div>
+                                  <div class="textParagraph">- <b>Platform:</b> Arduino.</div>
+                                  <div class="textParagraph">- <b>Language:</b> C++.</div>
+                                </div>
+          		</div>
+		</a>
+                                <button class="extraTextButton" onclick="showExtraText(8)">Read Mode</button>
+                                <div class="extraTextDiv">
+                                  <div class="textParagraph">Delta Robot is mostly used as a Robotic Arm which works as follows:</div>
+                                  <div class="textParagraph">- The objective is to control the position of a point 'A'.</div>
+                                  <div class="textParagraph">- Three servo motors ( Or other motors if required ) are staticly mounted to a frame.</div>
+                                  <div class="textParagraph">- Each motors are connected in a similar way to point 'A', refer to Icon.</div>
+                                  <div class="textParagraph">- The combination of motor angles control the position point 'A'.</div>
+                                </div>
+      </div>
+  </div>
+
+  <div id="project-cathegory-choice" class="slideChoice2" style="margin: 0 auto; top: -50px; margin-bottom: 10px; width: 50%; height: auto;" > 
+    <div style="min-width: 200px; position: relative;">
+       <div class="choicing" id="menuItem" style="background-color: #1261A0; border: 1px solid #1261A0; display: inline-block; border-radius: 0px 0px 25px 25px; width: 32%; height: auto; top: 0px;" >
+         <img class="demo" id="innerImg" src="transferFolder/SliderMainImages/Web_DeleteTwoCircles.png" onclick="currentDiv(1)">
+         <div id="textInImage2" onclick="currentDiv(1)"><p style="width: 100%; vertical-align: middle; top: 50%; transform: translate(0, -20%)"><b>WEB</b></p></div>
+       </div>
+       <div class="choicing" id="menuItem" style="background-color: #3895D3; border: 1px solid #3895D3; boder: 1px solid #3895D3; display: inline-block; border-radius: 0px 0px 25px 25px; width: 32%; height: auto;" >
+         <img class="demo" id="innerImg" src="transferFolder/SliderMainImages/App_Slider.png" onclick="currentDiv(2)">
+         <div id="textInImage2" style="opacity: 1;" onclick="currentDiv(2)"><p  class="sliderMenuText" style="top: 40%; transform: translate(0, -20%)"><b>APP</b></p></div>
+       </div>
+       <div class="choicing" id="menuItem" style="background-color: #58CCED; border: 1px solid #58CCED; display: inline-block; border-radius: 0px 0px 25px 25px; width: 32%; height: auto;" >
+         <img class="demo" id="innerImg" src="transferFolder/SliderMainImages/Rob_Slider.png" onclick="currentDiv(3)">
+         <div id="textInImage2" onclick="currentDiv(3)"><p style="top: 50%; transform: translate(0, -20%)"><b>ROBOT</b></p></div>
+       </div>
+     </div> 
+   </div>
+   <div id="project-cathegory-choice-short" class="slideChoice" style="margin-bottom: 100px;">
+         <div id="textInImage4" onclick="currentDiv(1)"><p id="secondTextInDiv" ><b>WEB</b></p></div>
+         <div id="textInImage4" style="opacity: 1;" onclick="currentDiv(2)"><p id="secondTextInDiv" ><b>APP</b></p></div>
+         <div id="textInImage4" onclick="currentDiv(3)"><p id="secondTextInDiv" ><b>ROBOT</b></p></div>
+   </div>
+  </div>
+  </section>
+
+  <section id="portfolio" style="background-color: rgba(0 , 0 , 0 , 0.2); padding-top: 50px;">
+
+    <div style="font-size: 50px; line-height: 1.2; margin: 30px 0px 30px 0px; color: black;">PORTFOLIO</div>
+    <div style="line-height: 1; margin-bottom: 10px; border-bottom: 1px solid gray; width: 170px; height: 4px; background-color: black; margin: auto;"></div>
+
+    <div class="w3-content" id="sliderWrapper" style="max-width: 5000px; margin-top: 40px;">
+
+      <div id="webId" style="color: black; margin-bottom: 50px; font-size: 50px; background-color: rgba(0,0,0,0.3); height: 60px; padding-top: 25px;">WEB</div>
+      <div id="slideText" class="sliderClass" style="margin-top: 4%; position: relative; opacity: 0.01;">
+        <div class="shortSubText">
+          <div style="position: relative;">
+	    <a href="01-WEB/01-GravityWebsite/threeD.html"><img src="transferFolder/3D_GravityIcon.png" id="innerImgProgress" style="width: 100vw; height: auto;"></a>
+            <a href="01-WEB/01-GravityWebsite/threeD.html">
+              <div style="position: absolute; top: 0px; left: 0px; font-size: 10px; height: 100%; width: 100%; background-color: rgba( 255 , 255 , 255 , 0.5 ); vertical-align: center;">
+                <div style="margin-bottom: 20px; font-size: 1.5em;"><b>3D Gravity</b></div>
+            	<div style="margin-bottom: 20px;"><b>WEB: Dynamic 3D Gravity Website</b></div>
+                <div class="textParagraph">- <b>Project:</b> 3D Gravity Representation.</div>
+                <div class="textParagraph">- <b>Platform:</b> Browser.</div>
+                <div class="textParagraph">- <b>Language:</b> HTML / CSS / JS.</div>
+              </div>
+            </a>
+            <button class="extraTextButton" onclick="showExtraText(9)"></button>
+            <div class="extraTextDiv" style="color: black;">
+              <div class="textParagraph">- A website involing a 3D interface in which spheres are attracted to each other.</div>
+              <div class="textParagraph">- The spheres velocity is preserved.</div>
+              <div class="textParagraph">- More objects can be added if the mouse key is being pressed.</div>
+              <div class="textParagraph">- The location of all the points are logged and updated in a table.</div>
+            </div>
+          </div>
+        </div>
+        <div class="longSubText">
+          <div style="position: relative;">
+	    <a href="01-WEB/01-GravityWebsite/threeD.html"><img src="transferFolder/3D_GravityIcon.png" id="innerImgProgress"></a>
+            <a href="01-WEB/01-GravityWebsite/threeD.html">
+	      <div id="innerText" class="sliderInnerText" style="color: black; line-height: 1.2; position: relative;">
+                <div style="margin-bottom: 20px; font-size: 1.5em;"><b>3D Gravity</b></div>
+            	<div style="margin-bottom: 20px;"><b>WEB: Dynamic 3D Gravity Website</b></div>
+                <div style="margin-left: auto; margin-right: auto;">
+                  <div class="textParagraph">- <b>Project:</b> 3D Gravity Representation.</div>
+                  <div class="textParagraph">- <b>Platform:</b> Browser.</div>
+                  <div class="textParagraph">- <b>Language:</b> HTML / CSS / JS.</div>
+                </div>
+              </div>
+            </a>
+            <button class="extraTextButton" onclick="showExtraText(10)">Read Mode</button>
+            <div class="extraTextDiv" style="color: black;">
+              <div class="textParagraph">- A website involing a 3D interface in which spheres are attracted to each other.</div>
+              <div class="textParagraph">- The spheres velocity is preserved.</div>
+              <div class="textParagraph">- More objects can be added if the mouse key is being pressed.</div>
+              <div class="textParagraph">- The location of all the points are logged and updated in a table.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="slideText" class="sliderClass" style="margin-top: 4%; position: relative; opacity: 0.01;">
+        <a href="https://cedric102.github.io/QuaternionToEuler/QuaternionToEuler.html"><img src="transferFolder/GaussianIcon.png" id="innerImgProgress"></a>
+        <a href="https://cedric102.github.io/QuaternionToEuler/QuaternionToEuler.html">
+          <div id="innerText" class="sliderInnerText" style="color: black; line-height: 1.2; width: fit-content;">
+            <div style="margin-bottom: 20px; font-size: 1.5em;"><b>Quaternions</b></div>
+            <div style="margin-bottom: 20px;"><b>WEB:</b> Quaternion To Euler</div>
+            <div style="width: fit-content; margin-left: auto; margin-right: auto;">
+              <div class="textParagraph">- <b>Project:</b> Quaternion To Euler Visualizer.</div>
+              <div class="textParagraph">- <b>Platform:</b> Browser.</div>
+              <div class="textParagraph">- <b>Language:</b> HTML / CSS / JS.</div>
+            </div>
+          </div>
+	</a>
+        <button class="extraTextButton" onclick="showExtraText(11)">Read Mode</button>
+        <div class="extraTextDiv" style="color: black;">
+          <div class="textParagraph">- Upload the Quaternion list as a CSV format.</div>
+          <div class="textParagraph">- Visualize the resulting Euler Angle Output.</div>
+          <div class="textParagraph">- Perform a Rotation from the last Recorded Quaternion.</div>
+        </div>
+      </div>
+
+      <div id="slideText" class="sliderClass" style="margin-top: 4%; position: relative; opacity: 0.01; border: none;">
+        <a href="01-WEB/03-Hitchhicker/pleaseDontPressThisButtonAgain.html"><img src="transferFolder/HitchHickerIcon.png" id="innerImgProgress"></a>
+        <a href="01-WEB/03-Hitchhicker/pleaseDontPressThisButtonAgain.html">
+          <div id="innerText" class="sliderInnerText" style="color: black; line-height: 1.2; width: fit-content;">
+            <div style="margin-bottom: 20px; font-size: 1.5em;"><b>Hitchhiker Button</b></div>
+            <div style="width: fit-content; margin-left: auto; margin-right: auto;">
+              <div class="textParagraph">- <b>Project:</b> Refer to Page 40 of The Hitchhiker's Guide to the Galaxy.</div>
+              <div class="textParagraph">- <b>Platform:</b> Browser.</div>
+              <div class="textParagraph">- <b>Language:</b> HTML / CSS / JS.</div>
+            </div>
+          </div>
+        </a>
+        <button class="extraTextButton" onclick="showExtraText(12)">Read Mode</button>
+        <div class="extraTextDiv" style="color: black;">
+          <div class="textParagraph">- Refer to Page 40 of The Hitchhiker's Guide to the Galaxy.</div>
+          <div class="textParagraph">- Press the button to see what is happening.</div>
+        </div>
+      </div>
+
+      <div id="appId" style="color: black; margin-bottom: 50px; font-size: 50px; background-color: rgba(0,0,0,0.3); height: 60px; padding-top: 25px;">APP</div>
+      <div id="slideText" class="sliderClass" style="margin-top: 4%; position: relative; opacity: 0.01;">
+        <a href="https://www.youtube.com/watch?v=GG_o2Irxa-k&t=2s"><img src="transferFolder/2D_GravityIcon.png" id="innerImgProgress"></a>
+        <a href="https://www.youtube.com/watch?v=GG_o2Irxa-k&t=2s">
+          <div id="innerText" class="sliderInnerText" style="color: black; position: relative; width: fit-content;">
+            <div style="margin-bottom: 50px; font-size: 1.5em;"><b>2D Gravity</b></div>
+            <div style="margin-bottom: 20px;"><b>APP:</b> Gravity in 2D ( Orbit Observation ).</div>
+            <div style="width: fit-content; margin-left: auto; margin-right: auto; line-height: 1.3em;">
+              <div class="textParagraph">- <b>Project:</b> Implement a 2D Gravity Graphical Application.</div>
+              <div class="textParagraph">- <b>Platform:</b> Android Studio.</div>
+              <div class="textParagraph">- <b>Language:</b> Java.</div>
+            </div>
+          </div>
+        </a>
+        <button class="extraTextButton" onclick="showExtraText(13)">Read Mode</button>
+        <div class="extraTextDiv" style="color: black;">
+          <div class="textParagraph">- Particles are generated and are in orbit around one gravity point.</div>
+          <div class="textParagraph">- Each particles have their own initial Velocity and initial Angle.</div>
+          <div class="textParagraph">- The particles do not interact with each other.</div>
+          <div class="textParagraph">- There is no Colision nor mutual attraction.</div>
+        </div>
+      </div>
+      <div id="slideText" class="sliderClass" style="margin-top: 4%; position: relative; opacity: 0.01; border: none;">
+        <a href="02-APP/iosShooting1.mp4"><img src="transferFolder/FireAndIce.png" id="innerImgProgress"></a>
+        <a href="02-APP/iosShooting1.mp4">
+          <div id="innerText" class="sliderInnerText" style="color: black; position : relative; width: fit-content;">
+            <div style="margin-bottom: 50px; font-size: 1.5em;"><b>IOS FIE / ICE</b></div>
+	    <div style="margin-bottom: 20px;"><b>APP:</b> Ice Shield.</div>
+            <div style="width: fit-content; margin-left: auto; margin-right: auto; line-height: 1.3em;">
+              <div class="textParagraph">- <b>Project:</b> Block Fire Balls with Blocks of Ice.</div>
+              <div class="textParagraph">- <b>Platform:</b> XCode.</div>
+              <div class="textParagraph">- <b>Language:</b> Swift.</div>
+            </div>
+          </div>
+        </a>
+        <button class="extraTextButton" onclick="showExtraText(14)">Read Mode</button>
+        <div class="extraTextDiv" style="color: black;">
+          <div class="textParagraph">- Fireballs are falling from the sky.</div>
+          <div class="textParagraph">- You can block the fireballs using blocks of ice.</div>
+          <div class="textParagraph">- The blocks of Ice can be generated using a Glass Canon.</div>
+        </div>
+      </div>
+
+  <!--
+	PathPlanning: https://www.youtube.com/watch?v=NBcDmAq6ouQ&feature=youtu.be
+	RobotLocalisation: https://www.youtube.com/watch?v=WLFCFHb-2zc
+	RobotLeg1: https://www.youtube.com/watch?v=UlIkLIRhSBo
+	RobotLeg2: https://www.youtube.com/watch?v=hKfwd3hCKAA
+	Gravity: https://www.youtube.com/watch?v=GG_o2Irxa-k&t=2s
+	Quaternion: https://www.youtube.com/watch?v=mxtNutEjm7c
+	BlenderBluid: https://www.youtube.com/watch?v=PUxx6FwgikQ
+	ChickenKing: https://www.youtube.com/watch?v=QgVwhxxi0lQ&t=3s
+  -->
+
+  <!-- #58CCED -->
+      <div id="robId" style="color: black; margin-bottom: 50px; font-size: 50px; background-color: rgba(0,0,0,0.3); height: 60px; padding-top: 25px;">ROBOT</div>
+      <div id="slideText" class="sliderClass" style="margin-top: 4%; position: relative; opacity: 0.01;">
+        <a href="https://www.youtube.com/watch?v=NBcDmAq6ouQ"><img src="transferFolder/PathFinderIcon.png" id="innerImgProgress"></a>
+        <a href="https://www.youtube.com/watch?v=NBcDmAq6ouQ">
+          <div id="innerText" class="sliderInnerText" style="color: black;">
+            <div style="margin-bottom: 50px; font-size: 1.5em;"><b>Path Planning</b></div>
+            <div style="margin-bottom: 20px;"><b>Robotics:</b> Path-Planning Algorithm.</div>
+            <div style="width: fit-content; margin-left: auto; margin-right: auto; line-height: 1.3em;">
+              <div class="textParagraph">- <b>Project:</b> Perform Pathplanning Algorithm.</div>
+              <div class="textParagraph">- <b>Platform:</b> Android Studio.</div>
+              <div class="textParagraph">- <b>Language:</b> Java.</div>
+            </div>
+          </div>
+        </a>
+        <button class="extraTextButton" onclick="showExtraText(15)">Read Mode</button>
+        <div class="extraTextDiv" style="color: black;">
+          <div class="textParagraph">- Demonstrate Pathplanning Algorithm.</div>
+          <div class="textParagraph">- Implemented in Java.</div>
+          <div class="textParagraph">- Adapted from Coding Challenge Javascript implemetation , and "Autonomous Mobile Robotics".</div>
+        </div>
+      </div>
+      <div id="slideText" class="sliderClass" style="position: relative; opacity: 0.01;">
+        <a href="https://www.youtube.com/watch?v=WLFCFHb-2zc"><img src="transferFolder/RobotLocalisationIcon.png" id="innerImgProgress"></a>
+        <a href="https://www.youtube.com/watch?v=WLFCFHb-2zc">
+          <div id="innerText" class="sliderInnerText" style="color: black;">
+            <div style="margin-bottom: 50px; font-size: 1.5em;"><b>Localisation Robot</b></div>
+            <div style="margin-bottom: 20px;"><b>Robotics:</b> Robot Localisation.</div>
+            <div style="width: fit-content; margin-left: auto; margin-right: auto; line-height: 1.3em;">
+              <div class="textParagraph">- <b>Project:</b> Perform Robot Localisation Algorithm.</div>
+              <div class="textParagraph">- <b>Platform:</b> Android Studio.</div>
+              <div class="textParagraph">- <b>Language:</b> Java.</div>
+            </div>
+          </div>
+        </a>
+        <button class="extraTextButton" onclick="showExtraText(16)">Read Mode</button>
+        <div class="extraTextDiv" style="color: black;">
+          <div class="textParagraph">- Demonstrate Robot Localisation Algorithm.</div>
+          <div class="textParagraph">- The blue robot needs to know its location in a given map.</div>
+          <div class="textParagraph">- Particles are being generated with random angle / position.</div>
+          <div class="textParagraph">- Simulated Light sensor is used as a way to determine the localisation on a map with markup on the floor.</div>
+          <div class="textParagraph">- The blue robot's measurements are compared with the measurement of all the particles ( The red particles ).</div>
+          <div class="textParagraph">- Then a particle selection of the closest match is performed.</div>
+        </div>
+      </div>
+
+      <div id="slideText" class="sliderClass" style="position: relative; opacity: 0.01; border: none; margin-bottom: 0px;">
+        <a href="https://www.youtube.com/watch?v=UlIkLIRhSBo"><img src="transferFolder/tripodIcon.png" id="innerImgProgress"></a>
+        <a href="https://www.youtube.com/watch?v=AZpyUnYyfmQ">
+          <div id="innerText" class="sliderInnerText" style="color: black;">
+            <div style="margin-bottom: 50px; font-size: 1.5em;"><b>Delta Robot</b></div>
+            <div style="margin-bottom: 20px;"><b>Robotics:</b> Implement a Delta Robot.</div>
+            <div style="width: fit-content; margin-left: auto; margin-right: auto; line-height: 1.3em;">
+              <div class="textParagraph">- <b>Project:</b> Implement a Delta Robot Inverse Kynematis.</div>
+              <div class="textParagraph">- <b>Platform:</b> Arduino.</div>
+              <div class="textParagraph">- <b>Language:</b> C++.</div>
+            </div>
+          </div>
+	</a>
+        <button class="extraTextButton" onclick="showExtraText(17)">Read Mode</button>
+        <div class="extraTextDiv" style="color: black;">
+          <div class="textParagraph">Delta Robot is mostly used as a Robotic Arm which works as follows:</div>
+          <div class="textParagraph">- The objective is to control the position of a point 'A'.</div>
+          <div class="textParagraph">- Three servo motors ( Or other motors if required ) are staticly mounted to a frame.</div>
+          <div class="textParagraph">- Each motors are connected in a similar way to point 'A', refer to Icon.</div>
+          <div class="textParagraph">- The combination of motor angles control the position point 'A'.</div>
+        </div>
+      </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="JavaApp" style="position: relative; height: fit-content; background-color: rgba(0 , 0 , 0 , 0.1); padding-top: 50px; ">
+    <div style="position: relative;" >
+
+      <div id="javaTitle" style="font-size: 50px; line-height: 1.2; color: black; position: relative; margin-bottom: 30px; margin-top: 30px;">JAVA APP</div>
+      <div style="line-height: 2; margin-bottom: 50px; width: 170px; height: 4px; margin: auto;"></div>
+
+      <div style="position: relative; margin-top: 40px;">
+        <button class="videoButton" onclick="currentDiv2(1)"><b>MOBILE ROBOT</b></button>
+        <button class="videoButton" onclick="currentDiv2(2)"><b>BRACELET</b></button>
+        <button class="videoButton" onclick="currentDiv2(3)"><b>MEMORY</b></button>
+        <button class="videoButton" onclick="currentDiv2(4)"><b>MAPPING</b></button>
+      </div>
+
+      <div class="videoHidding">
+        <div class="hidding" style="height: fit-content; display: block;">
+          <video id="mySlide2" class="javaVideo" controls>
+	    <source src="mobileRobot.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="hidding" style="height: fit-content; display: none;">
+          <video id="mySlide2" class="javaVideo" controls>
+	    <source src="Lightning.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="hidding" style="height: fit-content; display: none;">
+          <video id="mySlide2" class="javaVideo" controls>
+	    <source src="Dashboard.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="hidding" style="height: fit-content; display: none;">
+          <video id="mySlide2" class="javaVideo" controls>
+	    <source src="Mapping.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+    <div class="canvas2"></div>
+
+  <!-- ABOUT -->
+  <section id="about2" style="padding-top: 0px; background-color: rgba(0 , 0 , 0 , 0.2);">
+    <div id="workInProgressContainer" style="padding-top: 50px; margin-top: 0px;" > <!-- background-image: linear-gradient( to bottom, white, blue ); -->
+
+      <div style="font-size: 50px; line-height: 1.2; color: black;">WORK IN PROGRESS</div>
+      <div id="portfolioMainDiv" style="position: relative; height: 250px;" >
+      <div class="aboutGene" id="slide-text2" >
+          	<div class="aboutDiv" style="display: inline-block; font-size: 20px; position: relative; vertical-align: middle;">
+            	  <div class="label bold" style="line-height: 1.5em; font-size: 30px; margin-bottom: 20px;">Neural Style Transfer</div>
+		  <img class="aboutImg" onclick="currentDiv3(1)" src="transferFolder/Didi/didiGauguin.png" style="width: 50px; display: inline-block; vertical-align: middle;">
+		  <img class="aboutImg" onclick="currentDiv3(2)" src="transferFolder/Didi/didiInWaves.png" style="width: 50px; display: inline-block; vertical-align: middle;">
+                  <img class="aboutImg" onclick="currentDiv3(3)" src="transferFolder/Didi/didiPillarsOfCreation.png" style="width: 50px; display: inline-block; vertical-align: middle;">
+		  <img class="aboutImg" onclick="currentDiv3(4)" src="transferFolder/Didi/didiRenoir.png" style="width: 50px; display: inline-block; vertical-align: middle;">
+		  <img class="aboutImg" onclick="currentDiv3(5)" src="transferFolder/Didi/didiVanGoth.png" style="width: 50px; display: inline-block; vertical-align: middle;">
+          	</div>
+
+              <div style="position: relative;">
+		<div class="imageHiddingBlock" style="max-height: 200px; max-width: 200px; margin-bottom: 50px; position: relative; margin-left: auto; margin-right: auto;">
+		  <div class="imageHidding" style="height: fit-content;display: block;">
+		    <img class="aboutImg" id="myImg1" src="transferFolder/Didi/didiGauguin.png" style="height: 250px; display: inline-block; vertical-align: middle;">
+		  </div>
+		  <div class="imageHidding" style="height: fit-content; display: none;">
+		    <img class="aboutImg" id="myImg2" src="transferFolder/Didi/didiInWaves.png" style="height: 250px; display: inline-block; vertical-align: middle;">
+		  </div>
+		  <div class="imageHidding" style="height: fit-content; display: none;">
+                    <img class="aboutImg" id="myImg3" src="transferFolder/Didi/didiPillarsOfCreation.png" style="height: 250px; display: inline-block; vertical-align: middle;">
+		  </div>
+		  <div class="imageHidding" style="height: fit-content; display: none;">
+                    <img class="aboutImg" id="myImg4" src="transferFolder/Didi/didiRenoir.png" style="height: 250px; display: inline-block; vertical-align: middle;">
+		  </div>
+		  <div class="imageHidding" style="height: fit-content; display: none;">
+                    <img class="aboutImg" id="myImg5" src="transferFolder/Didi/didiVanGoth.png" style="height: 250px; display: inline-block; vertical-align: middle;">
+		  </div>
+		</div>
+              </div>
+
+
+      </div>
+
+      <div class="aboutGene" id="slide-text">
+            <div id="myImg6" style="height: fit-content;">
+          	<div class="aboutDiv"src="waveDetection.mp4" style="display: inline-block; font-size: 20px; position: relative; vertical-align: middle;">
+            		<div class="label bold" style="line-height: 1.5em; font-size: 30px; margin-bottom: 20px;">Feature Detection</div>
+                        <video id="mySlide2" class="javaVideo" controls>
+	                    <source src="waveDetection.mp4" type="video/mp4">
+                        </video>
+            		<div class="aboutDivInner"  style="line-height: 1.2em;"><b>Wave Detector:</b> Training Yolo to recognise waves in a video.</div>
+          	</div>
+           </div>
+      </div>
+      <div class="aboutGene" id="slide-text">
+            	<div class="label bold" style="line-height: 1.5em; font-size: 30px; margin-bottom: 20px;">Object Detection</div>
+		<img class="aboutImg" src="Fish.png" style="width: 100px; display: inline-block; vertical-align: middle;">
+          	<div class="aboutDiv" style="display: inline-block; font-size: 20px; position: relative; vertical-align: middle;">
+            		<div class="aboutDivInner" style="line-height: 1.2em;"><b>Spacecraft Detector:</b> Spacecrafts will be modeled in Blender and make use of Deep Learning to detect them.</div>
+          	</div>
+      </div>
+      <div class="aboutGene" id="slide-text">
+            	<div class="label bold" style="line-height: 1.5em; font-size: 30px; margin-bottom: 20px;">Squidgy</div>
+		<img class="aboutImg" src="Fish.png" style="width: 100px; display: inline-block; vertical-align: middle;">
+          	<div class="aboutDiv" style="display: inline-block; font-size: 20px; position: relative; vertical-align: middle;">
+            		<div class="aboutDivInner" style="line-height: 1.2em;"><b>APP:</b> Dodge the walls with Squidgy.</div>
+          	</div>
+      </div>
+     </div>
+
+    </div>
+  </section>
+
+
+<!-- The Modal -->
+<div id="myModal1" class="modal1" style="z-index: 1000; max-height: vw;">
+  <span class="close" style="z-index: 1001;">&times;</span>
+  <img class="modal-content" id="img01" style="height: 90%; max-width: 100%; max-height: 200vw; width: auto;">
+  <div id="caption"></div>
+</div>
+
+<div id="myModal2" class="modal2" style="z-index: 1000; max-height: vw;">
+  <span class="close" style="z-index: 1001;">&times;</span>
+  <video style="height: 90%; max-width: 100%; max-height: 50vw; width: auto;" controls>
+      <source src="waveDetection.mp4" type="video/mp4">
+  </video>
+  <div id="caption"></div>
+</div>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contactSection">
+    <div class="container flex">
+      <div class="header waypoint" data-animation="slide-in-left" style="font-size: 30px; margin-top: 20px;">CONTACT</div>
+      <div style="font-size: 20px; margin-top: 20px;">Email: carteroncedric@gmail.com</div>
+      <a href="https://www.linkedin.com/in/cedric-carteron-62814166"><div style="font-size: 20px; margin-top: 20px; color: blue;">LinkedIn: Cedric Carteron</div></a>
+      <div style="font-size: 20px; margin-top: 20px;">GitHub: cedric102</div>
+    </div>
+  </section>
+
+</div>
+
+<!--
+<div id="fixedRightTab" style="height: 50px; display: none; width: 70px; position: fixed; right: 40px; top: 100px; z-index: 500;"> 
+  <div class="fixedRightTabs" id="fixedRightTabsID" style="opacity: 0.5;" onclick="currentDiv(1)"><b>WEB</b></div>
+  <div class="fixedRightTabs" id="fixedRightTabsID" style="background-color: green; opacity: 0.5;" onclick="currentDiv(2)"><b>APP</b></div>
+  <div class="fixedRightTabs" id="fixedRightTabsID" style="opacity: 0.5;" onclick="currentDiv(3)"><b>ROBOT</b></div>
+</div>
+-->
+
+<noscript>
+<div id="jsEnableWarning" class="aboutGeneWarning" style="position: fixed; height: 100%; width: 100%; background-color: rgba(0 , 0 , 0 , 0.5); top: 0px; left: 0px; z-index: 1500;">
+  <div style="position: absolute; vertical-align: middle; width: 100%; font-size: 2em; top: 5%; color: white;">
+    <div class="errorAbsoluteTitle" style="margin-bottom: 10px;"><b>JAVASCRIPT ENABLING</b></div>
+    <div class="errorText">Please, enable Javascript to use this website.</div>
+    <div class="errorText">Most informations would be hidden without it.</div>
+
+    <div class="errorTitle" style="font-size: 25px;"><b>Safari:</b></div>
+             <div class="errorText">Go to "Preferences".<br>
+             <b>Toggle</b> to the <b>"Secrity"</b> Tab.<br>
+             <b>Check</b> the box next to <b>"Enable Javascript"</b>.</div>
+    <!-- Browser > Preferences > Toggle "Security" > Check the box "Enable Javascript" -->
+    <div class="errorTitle" style="font-size: 25px;"><b>Firefox:</b> </div>
+             <div class="errorText">Type <b>"about:config"</b> in the address bar.<br>
+             Click <b>"I'll be careful, I promise"</b>.<br>
+             Search for <b>"javascript. enabled"</b> > Toggle <b>"javascript. enabled"</b> to <b>"True"</b>.</div>
+
+    <div class="errorTitle" style="font-size: 25px;"><b>Chrome:</b> </div>
+             <div class="errorText">Browser > Settings > Advanced<br>
+             Under "Privacy and Security" > Content Setitngs > Javascript<br>
+             Turn on "Allowed"</div>
+
+    <div class="errorTitle" style="font-size: 25px;"><b>Safety Concern ?</b> </div>
+             <div class="errorText">Instead, you can use the following <a href="" style="color: blue; background-color: rgba( 255 , 255 , 255 , 0.8 );">Link</a><br>
+             in which the information would not be hidden,<br>
+             but animations would be absent.<br></div>
+
+  </div>
+</div>
+</noscript>
+
+</body>
+</html>
+
+<script>
+	// https://www.w3schools.com/howto/howto_css_modal_images.asp
+	// Get the modal
+	var modal1 = document.getElementById("myModal1");
+	var modal2 = document.getElementById("myModal2");
+
+	// Get the image and insert it inside the modal - use its "alt" text as a caption
+	var img1 = document.getElementById("myImg1");
+	var img2 = document.getElementById("myImg2");
+	var img3 = document.getElementById("myImg3");
+	var img4 = document.getElementById("myImg4");
+	var img5 = document.getElementById("myImg5");
+	var img6 = document.getElementById("myImg6");
+	var modalImg = document.getElementById("img01");
+	var captionText = document.getElementById("caption");
+        dispModal = false
+	img1.onclick = function(){
+	  modal1.style.display = "block";
+	  modalImg.src = this.src;
+	  captionText.innerHTML = this.alt;
+          dispModal = true
+	}
+	img2.onclick = function(){
+	  modal1.style.display = "block";
+	  modalImg.src = this.src;
+	  captionText.innerHTML = this.alt;
+          dispModal = true
+	}
+	img3.onclick = function(){
+	  modal1.style.display = "block";
+	  modalImg.src = this.src;
+	  captionText.innerHTML = this.alt;
+          dispModal = true
+	}
+	img4.onclick = function(){
+	  modal1.style.display = "block";
+	  modalImg.src = this.src;
+	  captionText.innerHTML = this.alt;
+          dispModal = true
+	}
+	img5.onclick = function(){
+	  modal1.style.display = "block";
+	  modalImg.src = this.src;
+	  captionText.innerHTML = this.alt;
+          dispModal = true
+	}
+	img6.onclick = function(){
+	  modal2.style.display = "block";
+          dispModal = true
+	}
+
+	// Get the <span> element that closes the modal
+
+	var span = document.getElementsByClassName("close");
+
+	// When the user clicks on <span> (x), close the modal
+	window.onclick = function() {
+          if( dispModal == true )
+            dispModal = false
+          else {
+              console.log("bla")
+	      modal1.style.display = "none";
+	      modal2.style.display = "none";
+          }
+	}
+</script>
+<script src="scripts/footerAnimation.js"></script>
