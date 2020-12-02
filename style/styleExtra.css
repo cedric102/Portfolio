@@ -7,7 +7,7 @@
   border: 1px solid black;
   font-size: 2em;
   padding-top: 10px;
-  cursor: pointer; }
+  f }
 
   .extraTextDiv { display: none; font-size: 1.8vw; color: black; line-height: 1.5em; width: fit-content; margin-left: auto; margin-right: auto; width: 70%; }
 
@@ -81,6 +81,10 @@
   #secondTextInDiv { transform: translate(0, 100%); }
   
   .barLabel { display: inline-block; }
+  .topicLink { cursor: pointer; }
+  #webSlider:hover { color: blue; }
+  #appSlider:hover { cursor: pointer; color: blue; }
+  #robotSlider:hover { color: blue; }
   .inHiddingLink1 { display: inline-block; position: relative; bottom: 68px; }
   .inHiddingLink2 { display: inline-block; position: relative; bottom: 60px;  }
   #inHidding1 { display: none; border-radius: 25px 25px 25px 25px; border: 1px solid white; padding-bottom: 3px; padding-top: 3px; font-size: 20px; top: -5px; }
@@ -94,7 +98,6 @@
     .inHiddingLink1 { background-color: black; width: 210px; display: none; position: relative; top: -2px; }
     .inHiddingLink2 { background-color: black; width: 210px; display: none; position: relative; top: 10px; }
     .skillDivs { position: relative; display: block; width: 100%; background-color: white; }
-    .barLabel { display: block; margin-top: 50px; }
     #dotSlider1 { position: relative; padding-bottom: 30px; margin-bottom: 0px; margin-top: 0px; }
     #dotSlider2 { position: relative; padding-bottom: 30px; margin-bottom: 0px; margin-top: 0px; }
     #webSlider  { position: relative; margin-bottom: 0px; margin-top: 20px; }
@@ -218,6 +221,10 @@
     .hidding { position: relative; width: 100%; height: auto; }
     .javaVideo { position: relative; width: 100%; height: auto; }
     .videoHidding { position: relative; display: block; width: 100%; height: auto; }
+  }
+
+  @media only screen and (max-width: 1050px) {
+    .barLabel { display: block; margin-top: 50px; }
   }
 
   .aboutGeneWarning .errorAbsoluteTitle { font-size: 4vw; }
