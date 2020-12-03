@@ -7,7 +7,7 @@
   border: 1px solid black;
   font-size: 2em;
   padding-top: 10px;
-  f }
+ }
 
   .extraTextDiv { display: none; font-size: 1.8vw; color: black; line-height: 1.5em; width: fit-content; margin-left: auto; margin-right: auto; width: 70%; }
 
@@ -76,12 +76,18 @@
   .javaVideo { width: 50%; height: auto; padding: 1%; margin : 1%; display: block; margin: 0 auto; }
   .aboutGeneWarning { top: 0px; }
   .aboutGene { margin: 1%; position: absolute; top: 0px; }
-  .demo { opacity: 1 }; 
+  .demo { opacity: 0.5 }; 
   .demo:hover { opacity: 1 }
   #secondTextInDiv { transform: translate(0, 100%); }
   
   .barLabel { display: inline-block; }
   .topicLink { cursor: pointer; }
+  .choicing { opacity: 0.5; }
+  .choicing:nth-child(2) { opacity: 1; }
+  .choicing:nth-child(5) { opacity: 1; }
+  #webSlider { cursor: pointer; font-size: 3em; opacity: 0.01; position: relative; }
+  #appSlider { cursor: pointer; font-size: 3em; opacity: 0.01; position: relative; }
+  #robotSlider { cursor: pointer; font-size: 3em; opacity: 0.01; position: relative; }
   #webSlider:hover { color: blue; }
   #appSlider:hover { cursor: pointer; color: blue; }
   #robotSlider:hover { color: blue; }

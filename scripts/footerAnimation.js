@@ -215,7 +215,7 @@ $(window).scroll(function() {
 */
    var hT = $('#portfolio').offset().top,
        hH = $('#portfolio').outerHeight(),
-       wH = $(window).height()
+       wH = $(window).height(),
        wW = $(window).width(),
        wS = $(this).scrollTop();
 //   window.scrollTo(0, $('#portfolio').offset().top);
@@ -234,8 +234,8 @@ $(window).scroll(function() {
 //   console.log(wS);
 
 // document.getElementById("headerTitle").style.position = "relative";
-document.getElementById("headerTitle1").style.left = wS+"px";
-document.getElementById("headerTitle2").style.left = -wS+"px";
+//   document.getElementById("headerTitle1").style.left = wS+"px";
+//   document.getElementById("headerTitle2").style.left = -wS+"px";
 
 /*
 for(var els = document.getElementsByTagName ('section'), i = els.length; i--;) {
@@ -248,6 +248,7 @@ for(var els = document.getElementsByTagName ('section'), i = els.length; i--;) {
 // if( hH > wH + 250 ) {
 
    if (wS > hT + 200 && wS < hT + hH - 600 ){ // wS > (hT+hH-wH)
+//   if (wS > 200 ){ // wS > (hT+hH-wH)
        document.getElementById("fixedRightTab").style.display="block";
 //       showTabFunction();
    } else {
