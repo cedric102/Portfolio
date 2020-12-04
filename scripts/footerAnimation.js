@@ -227,84 +227,53 @@ $(window).scroll(function() {
    if( wS > 600 ) {
      animate2 = true
    }
-//   $('#test').style.top = wS+"px";
-//   $('#test').style.top = wS;
-//   $('#test').offset().top = wS+"px";
-//   $('#test').offset().top = wS;
-//   console.log(wS);
-
-// document.getElementById("headerTitle").style.position = "relative";
-//   document.getElementById("headerTitle1").style.left = wS+"px";
-//   document.getElementById("headerTitle2").style.left = -wS+"px";
-
-/*
-for(var els = document.getElementsByTagName ('section'), i = els.length; i--;) {
-//    els[i].style.position = "relative";
-    if( els[i].id !== "portfolio" )
-      els[i].style.left = "100px";
-} 
-*/
-
-// if( hH > wH + 250 ) {
 
    if (wS > hT + 200 && wS < hT + hH - 600 ){ // wS > (hT+hH-wH)
-//   if (wS > 200 ){ // wS > (hT+hH-wH)
        document.getElementById("fixedRightTab").style.display="block";
-//       showTabFunction();
    } else {
        document.getElementById("fixedRightTab").style.display="none";
    }
 
    // SlideMotionDiv
    var slideTop1 = $('#about').offset(); // .splice(0 , -2);
-//   console.log(slideTop1)
-// if( hH > wH + 250 ) {
 
    if ( wS > slideTop1 + 300 ){ // wS > (hT+hH-wH)
        document.getElementByClassName("text1").style.left="500px";
    }
-/*
-   if (wS > hT+ 100 && wSb < ( hT + 100 + hH ) ){ // wS > (hT+hH-wH)
-       console.log('H1 on the view!');
-       document.getElementById("fixedRightTab").style.display="block";
-       showTabFunction();
-   } else {
-       document.getElementById("fixedRightTab").style.display="none";
-       console.log('H1 out of the view!');
+
+   presentationMotion = document.getElementsByClassName("presentationParagraph");
+   for( var i=0; i<presentationMotion.length ; i++) {
+	presentationMotion[i].style.position = "relative";
+	presentationMotion[i].style.left = "0px";
+   	presentationMotion[i].style.opacity = 0;
    }
-*/
-/*
-} else {
-   document.getElementById("fixedRightTab").style.display="none";
-}
-*/
+   var presentation = $('#skillSection1').offset().top
+   if ( wS > presentation - wW - 500 ){ // wS > (hT+hH-wH)
+
+      	presentationBar = document.getElementsByClassName("presentBar");
+      	presentationMotion = document.getElementsByClassName("presentationParagraph");
+	presentOffset = presentation + 100 - wS;
+	presentOffset=presentOffset-500
+	if( wS > presentation + 100-500 )
+		presentOffset = 0
+	for( var i=0; i<presentationMotion.length ; i++) {
+		presentationMotion[i].style.left = presentOffset+"px";
+	   	presentationMotion[i].style.opacity = (wS-presentation+100+500)/300 + 0.1;
+		presentOffset = -presentOffset;
+	}
+	for( var i=0; i<presentationBar.length ; i++) {
+	   	presentationBar[i].style.opacity = (wS-presentation+100+500)/300 + 0.1;
+	}
+   }
 });
 
 
 $('#portfolio').scroll( function() {
   alert('On Section;');
-// console.log("in'")
 });
 function myFunction(x) {
   x.classList.toggle("change");
 }
-
-/*
-$('.imageDisplay').hover(function(){
-  $( this ).style.color = white;
-  console.log("BLA");
-  });
-*/
-
-
-/*
-  $('.imageDisplay').mouseover(function(){
-    console.log("BLA");
- //   $(this).css("color", "red");
-    }, function(){
- //   $(this).css("color", "black");
-  });
-*/
 
 $(document).ready(function(){
   $('.shortSubText').hover(function(){

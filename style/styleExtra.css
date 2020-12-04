@@ -7,6 +7,8 @@
   border: 1px solid black;
   font-size: 2em;
   padding-top: 10px;
+  cursor: pointer;
+  font-weight: bold;
  }
 
   .extraTextDiv { display: none; font-size: 1.8vw; color: black; line-height: 1.5em; width: fit-content; margin-left: auto; margin-right: auto; width: 70%; }
@@ -42,8 +44,13 @@
   .extraTextDiv { font-size: 15px; width: 95%; }
   .sliderClass { position: absolute; top: 0px; }
 }
-  .textParagraph { display: block; width: fit-content; text-align: left; }
-  .extraTextButton { display: block; font-size: 20px; margin-left: auto; margin-right: auto; border-radius: 20px; padding: 0.5vw; padding-left: 2vw; padding-right: 2vw; background-color: cyan; border: 1px solid cyan; opacity: 0.5; font-size: 1.8vw; }
+  .presentationParagraph { font-size: 3vw; line-height: 1.5em; opacity: 0; }
+  .presentBar { line-height: 2; margin-bottom: 50px; border-bottom: 1px solid black; width: 170px; height: 4px; background-color: black; margin: auto; margin-top: 30px; margin-bottom: 30px; opacity: 0; }
+  .presentationParagraph:nth-child(1) { font-size: 5vw; }
+  .presentationParagraph:nth-child(6) a { background-color: rgba( 0 , 0 , 0 , 0.5); color: white; border: 1px solid black; border-radius: 10px; padding: 1vw 3vw 1vw 3vw; position: relative; top: 10px; }
+  .presentationParagraph:nth-child(6) a:hover { background-color: rgba( 0 , 0 , 0 , 0.7); }
+  .textParagraph { display: block; width: fit-content; text-align: left; font-family: Baskerville,Times,'Times New Roman',serif; }
+  .extraTextButton { display: block; font-size: 20px; margin-left: auto; margin-right: auto; border-radius: 10px; padding: 0.5vw; padding-left: 2vw; padding-right: 2vw; background-color: cyan; border: 1px solid cyan; opacity: 0.7; font-size: 1.7vw; cursor: pointer; font-weight: bold; }
   .extraTextButton:hover{ opacity: 1; }
   #slide-text { height: 200px; font-size: 50px; display: inline-block; left: 0px; }
   #slide-text2 { font-size: 50px; display: inline-block; left: 0px; }
@@ -68,10 +75,16 @@
   .bla { border: 1px solid blue; max-width: 300px; display: block; }
   #menuItem { border: 1px solid green; position: relative; }
   #innerImg { width:100%; cursor: pointer; }
-  .videoButton { width: 23%; height: 50px; margin-left: 1%; border: 1px solid black; display: inline-block; background-image: linear-gradient(blue, purple); color: white; }
+  .videoButton { cursor: pointer; width: 23%; height: 50px; margin-left: 1%; border: 1px solid black; display: inline-block; background-image: linear-gradient(blue, purple); color: white; 
+  font-weight: bold; font-size: 1.5em;
+  background: -webkit-linear-gradient(#1d00ff, #030447);
+  background:    -moz-linear-gradient(#1d00ff, #030447);
+  background:         linear-gradient(#1d00ff, #030447); /* https://cssgradient.io/ */}
 
   .videoButton:hover {
-    background-image: linear-gradient(green, purple); 
+  background: -webkit-linear-gradient(#17bd00, #012803);
+  background:    -moz-linear-gradient(#17bd00, #012803);
+  background:         linear-gradient(#17bd00, #012803); 
   }
   .javaVideo { width: 50%; height: auto; padding: 1%; margin : 1%; display: block; margin: 0 auto; }
   .aboutGeneWarning { top: 0px; }
