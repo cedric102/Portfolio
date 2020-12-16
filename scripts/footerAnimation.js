@@ -19,6 +19,7 @@ function showDivs(n) {
   var x = document.getElementsByClassName("mySlides");
   var Tabs = document.getElementsByClassName("fixedRightTabs");
   var dots = document.getElementsByClassName("demo");
+  var dotsDiv = document.getElementsByClassName("demoDiv");
   var ch = document.getElementsByClassName("choicing");
 //  var ch2 = document.getElementsByClassName("choicing2");
   if (n > x.length) {slideIndex = 1}
@@ -27,20 +28,26 @@ function showDivs(n) {
     x[i].style.display = "none";
   }
   for (i = 0; i < Tabs.length; i++) {
-    Tabs[i].style.backgroundColor = "blue";
+    Tabs[i].style.backgroundColor = "grey";
+    Tabs[i].style.color = "black";
+//    Tabs[i].style.opacity = 0.5;
   }
-  for (i = 0; i < dots.length; i++) {
+  for (i = 0; i < ch.length; i++) {
 //    dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
 //    ch[i].style.backgroundColor = "white";
     ch[i].style.opacity = 0.5;
+    dotsDiv[i].style.opacity = 0.5;
 //    ch2[i].style.opacity = 0.5;
   }
-  Tabs[slideIndex-1].style.backgroundColor = "green";
+  Tabs[slideIndex-1].style.backgroundColor = "#C06014";
+//  Tabs[slideIndex-1].style.opacity = 0.8;
   x[slideIndex-1].style.display = "block";
 //  dots[slideIndex-1].className += " w3-opacity-off";
 //  ch[slideIndex-1].style.backgroundColor = "green";
   ch[slideIndex-1].style.opacity = 1;
   ch[slideIndex+3-1].style.opacity = 1;
+  dotsDiv[slideIndex-1].style.opacity = 0.7;
+  dotsDiv[slideIndex+3-1].style.opacity = 0.7;
 //  ch2[slideIndex-1].style.opacity = 1;
 /*
   if( n == 1 ) {
