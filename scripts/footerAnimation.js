@@ -12,7 +12,7 @@ function showExtraText(n) {
 function currentDiv(n) {
   showDivs(slideIndex = n);
 }
-
+var selectedElem=2;
 function showDivs(n) {
   var i;
   n = n % 3
@@ -39,6 +39,7 @@ function showDivs(n) {
     dotsDiv[i].style.opacity = 0.5;
 //    ch2[i].style.opacity = 0.5;
   }
+  selectedElem=slideIndex;
   Tabs[slideIndex-1].style.backgroundColor = "#8B4513";
 //  Tabs[slideIndex-1].style.opacity = 0.8;
   x[slideIndex-1].style.display = "block";
@@ -288,6 +289,7 @@ $(document).ready(function(){
   }, function(){
     $(this).children( "div" ).children( "a" ).children( "div" ).css("opacity", "0");
   });
+
 
   $('.imageDisplay').hover(function(){
     console.log("BLA");
