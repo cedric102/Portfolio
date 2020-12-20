@@ -40,7 +40,7 @@ function showDivs(n) {
 //    ch2[i].style.opacity = 0.5;
   }
   selectedElem=slideIndex;
-  Tabs[slideIndex-1].style.backgroundColor = "#8B4513";
+  Tabs[slideIndex-1].style.backgroundColor = "#67C173"; // 8B4513
 //  Tabs[slideIndex-1].style.opacity = 0.8;
   x[slideIndex-1].style.display = "block";
 //  dots[slideIndex-1].className += " w3-opacity-off";
@@ -292,7 +292,6 @@ $(document).ready(function(){
 
 
   $('.imageDisplay').hover(function(){
-    console.log("BLA");
     $(this).css("opacity", "1");
     $(this).children( "div" ).css("background-color", "rgba(255 , 255 , 255 , 0.7)");
     $(this).children( "div" ).css("height", "210px");
