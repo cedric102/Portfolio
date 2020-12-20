@@ -1,0 +1,52 @@
+<!-- https://www.youtube.com/watch?v=Hyx6OEqtlVg -->
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+	<title>Real Time Stock Chart</title>
+	<script type="text/javascript" src="common/jquery.min.js"></script>
+    <script type="text/javascript" src="common/jquery-ui.min.js"></script> 
+	<script type="text/javascript" src="Scripts/config.js"></script>
+	<script data-main="RealTimeStockChart" src="Scripts/require.js"></script>
+	
+<style>
+	.percentText { display: inline-block; position: absolute; top: 120px; margin-left: 50px; background-color: cyan; width: 240px; }
+</style>
+
+</head>
+<body>
+<div style="display:block;"> Note: This API is only limited to 5 calls per minutes and 500 calls per day.
+<br> Sympol 1 and Symbol 2 perform one call each<br>
+<b> Caution:</b> It is not responsive yet, please try it on a wide screen.</div>
+<div style="position: relative; top: 10px">
+    <div style="position: relative;">
+    	<canvas width="1000px" height="300px" id="stockChart1" style="display: inline-block;">
+	</canvas><div id="firstPercentage" class="percentText"></div>
+	
+	<div style="display: inline-block; left: 40px; bottom: 100px; position: relative;">
+		<input type="text" name="filename1" id="filename1">
+		<button id="upload1" style="display: block;">UPDATE</button>
+	</div>
+    <div>
+    <div style="position: relative;">
+    	<canvas width="1000px" height="300px" id="stockChart2" style="display: inline-block;"></canvas>
+	<div id="secondPercentage" class="percentText"></div>
+
+	<div style="display: inline-block; left: 40px; bottom: 100px; position: relative;">
+		<input type="text" name="filename2" id="filename2">
+		<button id="upload2" style="display: block;">UPDATE</button>
+	</div>
+
+    <div>
+    <div style="position: relative;">
+    	<canvas width="1000px" height="300px" id="stockChart3" style="display: inline-block;"></canvas>
+	<div id="thirdPercentage" class="percentText"></div>
+	
+	<div style="display: inline-block; left: 40px; bottom: 100px; position: relative;">
+		<button id="upload3" style="display: block;">COMPARE</button>
+	</div>
+
+    <div>
+</div> 
+</body>
+</html>

@@ -626,7 +626,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     <div class="canvas2"></div>
 
   <!-- ABOUT -->
-  <section id="about2" style="padding-top: 0px; background-color: rgba(0 , 0 , 0 , 0.2);">
+  <section id="about2" style="padding-top: 0px; padding-bottom: 150px; background-color: rgba(0 , 0 , 0 , 0.2);">
     <div id="workInProgressContainer" style="padding-top: 50px; margin-top: 0px;" > <!-- background-image: linear-gradient( to bottom, white, blue ); -->
 
       <div style="font-size: 50px; line-height: 1.2; color: black;">WORK IN PROGRESS</div>
@@ -676,18 +676,24 @@ body {font-family: Arial, Helvetica, sans-serif;}
            </div>
       </div>
       <div class="aboutGene" id="slide-text">
+            	<div class="label bold" style="line-height: 1.5em; font-size: 30px; margin-bottom: 20px;">Stock Comparator</div>
+		<img class="aboutImg" src="transferFolder/stockCompare.jpg" style="width: 100px; display: inline-block; vertical-align: middle; margin-bottom: 10px;">
+		<div style="display: block"></div>
+		<button class="extraTextButton" style="display: inline-block; font-size: 0.4em; padding-left: 15px; padding-right: 15px;" onclick="showExtraText(10)">Read Mode</button>
+		<a href="RealTimeStockChart/RealTimeStockChart.html" target="_blank" rel="noopener noreferrer" style="display: inline-block;"><button class="extraTextButton" style="font-family:Georgia,serif; display: inline-block; font-size: 0.4em; padding-left: 15px; padding-right: 15px; margin-bottom: 10px;">See Projects</button></a>
+		<div class="aboutDivInner" style="line-height: 1.2em; font-size: 0.3em; padding-left: 2px;"><b>API Processor:</b> Analyze "Alpha Advantage Finance Charts"</div>
+		<div class="extraTextDiv">
+		  	<div class="aboutDivInner" style="display: inline-block; line-height: 1em; font-size: 15px; position: relative; vertical-align: middle; color: rgba(0, 0, 0, 0.5); margin-top: 10px; margin-bottom: 10px;">
+				<b>User Interaction:</b> Plot stocks relative to one another in order to estimate the best "Shorts" and "Longs"<br><br>
+				<b>Caution:</b> It is not responsive yet, please try it on a wide screen.
+		  	</div>
+		</div>
+      </div>
+      <div class="aboutGene" id="slide-text">
             	<div class="label bold" style="line-height: 1.5em; font-size: 30px; margin-bottom: 20px;">Object Detection</div>
 		<img class="aboutImg" src="Fish.png" style="width: 100px; display: inline-block; vertical-align: middle;">
           	<div class="aboutDiv" style="display: inline-block; font-size: 20px; position: relative; vertical-align: middle;">
             		<div class="aboutDivInner" style="line-height: 1.2em;"><b>Spacecraft Detector:</b> Spacecrafts will be modeled in Blender and make use of Deep Learning to detect them.</div>
-          	</div>
-      </div>
-      <div class="aboutGene" id="slide-text">
-            	<div class="label bold" style="line-height: 1.5em; font-size: 30px; margin-bottom: 20px;">Stock Comparator</div>
-		<img class="aboutImg" src="Fish.png" style="width: 100px; display: inline-block; vertical-align: middle;">
-          	<div class="aboutDiv" style="display: inline-block; font-size: 20px; position: relative; vertical-align: middle;">
-            		<div class="aboutDivInner" style="line-height: 1.2em;"><b>API Processor:</b> Analyze "Google Finance" or "Yahoo Finance"<br><br>
-<b>User Interaction:</b> Plot the evolution of various stocks relative to one another in order to highlight the best "Shorts" and the best "Longs"</div>
           	</div>
       </div>
      </div>
