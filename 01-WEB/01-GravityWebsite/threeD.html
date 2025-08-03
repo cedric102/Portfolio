@@ -26,7 +26,8 @@
 			</canvas>
 		</div>
 
-		<script src="https://threejs.org/build/three.js" style="width: 10px; height: 10px;"></script>		
+		<script src="https://threejs.org/build/three.js" style="width: 10px; height: 10px;"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>		
 		
 
 
@@ -155,6 +156,7 @@
 			    mouse3D = projector.unprojectVector(mouse2D.clone(), camera);
 			    return mouse3D;
 			}
+			console.log("1");
 
 			function onDocumentMouseMove(event) {
 			    	event.preventDefault();
